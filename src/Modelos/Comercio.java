@@ -1,12 +1,49 @@
-public class Comercio {
+package Modelos;
+
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="Comercio")
+public class Comercio implements Serializable {
+    @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
+    private long id;
+    
+    private int estado;
+    
     private String nombre;
     private String correoElectronico;
     private String contraseña;
     private String direccionCompleta;
     private String coordenadas;
+    @OneToOne (targetEntity = Rubro.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Rubro rubro;
-    private Categoria categoria;
+    @OneToOne (targetEntity = Calificacion.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    private Calificacion calificacion;
+    @ManyToOne (targetEntity = Productos.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Productos producto;
+    
+    //////Set & get ////// ID
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+    //////Set & get ////// ESTADO
+    public int getEstado() {
+        return estado;
+    }
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
     //////Set & get ////// NOMBRE
     public String getNombre() {
         return nombre;
@@ -50,11 +87,11 @@ public class Comercio {
         this.rubro = rubro;
     }
     //////Set & get ////// CATEGORIA
-    public Categoria getCategoria() {
-        return categoria;
+    public Calificacion getCalificacion() {
+        return calificacion;
     }
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoria(Calificacion categoria) {
+        this.calificacion = categoria;
     }
     //////Set & get ////// PRODUCTO
     public Productos getProducto() {

@@ -1,7 +1,19 @@
-public class Usuario {
-    //@Entity
-    //@Table (name="tipo_proyecto") 
-    
+package Modelos;
+
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="Usuario") 
+public class Usuario implements Serializable{
+
+    @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     
     private int estado;
@@ -13,6 +25,7 @@ public class Usuario {
     private String direccionCompleta;
     private int telefono;
     private String fechaNacimiento;
+    @OneToOne (targetEntity = Rol.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Rol rol;
     //////Set & get ////// ID
     public long getId(){
