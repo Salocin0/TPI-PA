@@ -27,8 +27,8 @@ public class Comercio implements Serializable {
     private Rubro rubro;
     @OneToOne (targetEntity = Calificacion.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Calificacion calificacion;
-    @ManyToOne (targetEntity = Productos.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    private Productos producto;
+    @ManyToOne (targetEntity = Producto.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    private Producto producto;
     
     //////Set & get ////// ID
     public long getId() {
