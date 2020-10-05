@@ -94,10 +94,10 @@ public class Comercio implements Serializable {
         this.calificacion = categoria;
     }
     //////Set & get ////// PRODUCTO
-    public Productos getProducto() {
+    public Producto getProducto() {
         return producto;
     }
-    public void setProducto(Productos producto) {
+    public void setProducto(Producto producto) {
         this.producto = producto;
     }
 }
