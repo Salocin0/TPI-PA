@@ -17,11 +17,15 @@ public class Pedido implements Serializable {
     private long id;
     
     private int estado;
-    
+    //cambiar manytoone
     @OneToOne (targetEntity = Usuario.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Usuario usuario;
     @OneToOne (targetEntity = Comercio.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Comercio comercio;
+    
+    /*@OneToMany(targetEntity = ItemLiquidacionClienteCorrectivaRepuestos.class, cascade= CascadeType.ALL, fetch=FetchType.LAZY )
+    private Set<ItemLiquidacionClienteCorrectivaRepuestos> detalleCorrectivaRepuestos = new HashSet();*/
+    
     @OneToMany (targetEntity = DetallePedido.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private DetallePedido detallePedido;
     private int subtotal;
