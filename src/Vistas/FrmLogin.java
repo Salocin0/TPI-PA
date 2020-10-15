@@ -98,15 +98,18 @@ public class FrmLogin extends javax.swing.JFrame {
                     .addComponent(TbContraseña)
                     .addComponent(TbCorreo)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnCrearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnCrearCuenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jButton1))
-                    .addComponent(LbCorreo)
-                    .addComponent(LbContraseña)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LbCorreo)
+                            .addComponent(LbContraseña)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BtnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -147,7 +150,8 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_TbCorreoActionPerformed
 
     private void BtnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearCuentaActionPerformed
-        // TODO add your handling code here:
+        FrmRegistroUsuario u = new FrmRegistroUsuario();
+        u.setVisible(true);
     }//GEN-LAST:event_BtnCrearCuentaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
