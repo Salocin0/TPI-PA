@@ -9,12 +9,12 @@ package Vistas;
  *
  * @author nicol
  */
-public class FrmCambiarEstadoPedidoComercio extends javax.swing.JFrame {
+public class CambiarEstadoPedidoComercio extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCambiarEstadoPedidoComercio
      */
-    public FrmCambiarEstadoPedidoComercio() {
+    public CambiarEstadoPedidoComercio() {
         initComponents();
     }
 
@@ -56,6 +56,11 @@ public class FrmCambiarEstadoPedidoComercio extends javax.swing.JFrame {
         jButton1.setText("Guardar");
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,6 +102,10 @@ public class FrmCambiarEstadoPedidoComercio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -114,20 +123,21 @@ public class FrmCambiarEstadoPedidoComercio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CambiarEstadoPedidoComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCambiarEstadoPedidoComercio().setVisible(true);
+                new CambiarEstadoPedidoComercio().setVisible(true);
             }
         });
     }
