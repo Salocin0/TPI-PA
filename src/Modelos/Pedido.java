@@ -1,14 +1,17 @@
 package Modelos;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
 @Table (name="Pedido")
@@ -17,16 +20,25 @@ public class Pedido implements Serializable {
     private long id;
     
     private int estado;
+    
+    public Pedido(){
+        //-TO-DO
+    }
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date hora;
     //cambiar manytoone
-    @OneToOne (targetEntity = Usuario.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    private Usuario usuario;
-    @OneToOne (targetEntity = Comercio.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToOne (targetEntity = Cliente.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    private Cliente cliente;
+    @ManyToOne (targetEntity = Comercio.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY) 
     private Comercio comercio;
     
     /*@OneToMany(targetEntity = ItemLiquidacionClienteCorrectivaRepuestos.class, cascade= CascadeType.ALL, fetch=FetchType.LAZY )
     private Set<ItemLiquidacionClienteCorrectivaRepuestos> detalleCorrectivaRepuestos = new HashSet();*/
     
-    @OneToMany (targetEntity = DetallePedido.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany (targetEntity = Pedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private DetallePedido detallePedido;
     private int subtotal;
     private int total;
@@ -45,12 +57,12 @@ public class Pedido implements Serializable {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    //////Set & get ////// USUARIO
-    public Usuario getUsuario() {
-        return usuario;
+    //////Set & get ////// CLIENTE
+    public Usuario getCliente() {
+        return cliente;
     }
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     //////Set & get ////// COMERCIO
     public Comercio getComercio() {
@@ -60,12 +72,12 @@ public class Pedido implements Serializable {
         this.comercio = comercio;
     }
     //////Set & get ////// DETALLE PEDIDO
-    public DetallePedido getDetallePedido() {
+    /*public DetallePedido getDetallePedido() {
         return detallePedido;
     }
     public void setDetallePedido(DetallePedido detallePedido) {
         this.detallePedido = detallePedido;
-    }
+    }*/
     //////Set & get ////// SUBTOTAL
     public int getSubtotal() {
         return subtotal;

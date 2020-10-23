@@ -1,12 +1,9 @@
 package Modelos;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,14 +16,21 @@ public class Usuario implements Serializable{
     private int estado;
     
     private String nombre;
-    private String apellido;
-    private String correElectronico;
+    private String correoElectronico;
     private String contraseña;
-    private String direccionCompleta;
+    private String direccion;
     private int telefono;
-    private String fechaNacimiento;
-    @OneToOne (targetEntity = Rol.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    private Rol rol;
+    private String codigo;
+    
+    /*public Usuario(String nombre, String correoElectronico,String contraseña,String direccion, int telefono, String codigo){
+        this.nombre=nombre;
+        this.correoElectronico=correoElectronico;
+        this.contraseña=contraseña;
+        this.direccion=direccion;
+        this.telefono=telefono;
+        this.codigo=codigo;
+    }*/
+    
     //////Set & get ////// ID
     public long getId(){
         return id;
@@ -49,18 +53,18 @@ public class Usuario implements Serializable{
        this.nombre = nombre;
     }
     //////Set & get ////// APELLIDO
-    public String getApellido() {
-        return apellido;
+    public String getCodigo() {
+        return codigo;
     }
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setCodigo(String codigo) {
+        this.codigo= codigo;
     }
     //////Set & get ////// CORREO ELECTRONICO
-    public String getCorreElectronico() {
-        return correElectronico;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
-    public void setCorreElectronico(String correElectronico) {
-        this.correElectronico = correElectronico;
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
     //////Set & get ////// CONTRASEÑA
     public String getContraseña() {
@@ -70,11 +74,11 @@ public class Usuario implements Serializable{
         this.contraseña = contraseña;
     }
     //////Set & get ////// DIRECCION COMPLETA
-    public String getDireccionCompleta() {
-        return direccionCompleta;
+    public String getDireccion() {
+        return direccion;
     }
-    public void setDireccionCompleta(String direccionCompleta) {
-        this.direccionCompleta = direccionCompleta;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     //////Set & get ////// TELEFONO
     public int getTelefono() {
@@ -82,19 +86,5 @@ public class Usuario implements Serializable{
     }
     public void setTelefono(int telefono) {
         this.telefono = telefono;
-    }
-    //////Set & get ////// FECHA NACIMIENTO
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    //////Set & get ////// ROL
-    public Rol getRol() {
-        return rol;
-    }
-    public void setRol(Rol rol) {
-        this.rol = rol;
     }
 }
