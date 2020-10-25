@@ -42,7 +42,7 @@ public class Pedido implements Serializable {
     private Set<ItemLiquidacionClienteCorrectivaRepuestos> detalleCorrectivaRepuestos = new HashSet();*/
     
     @OneToMany (targetEntity = DetallePedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-     private Set<DetallePedido> detallePedido = new HashSet();
+    private Set<DetallePedido> detallePedido = new HashSet();
       
     //   @Column(name="centro2", columnDefinition="Integer default '0'")
 //    private int centro2;
