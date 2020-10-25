@@ -2,32 +2,31 @@
 package Modelos;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
-@Table (name="DetallePedido")
+@Table (name="detalle_pedido")
 public class DetallePedido implements Serializable {
     @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
     private long id;
     
     private int estado;
+    
     @ManyToOne (targetEntity = Producto.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Producto producto;
+    
     private int cantidad;
     private float subtotal;
     
-    @OneToMany (targetEntity = Pedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY) 
+    @OneToOne (targetEntity = Pedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY) 
     private Pedido pedido;
     
     public DetallePedido(){

@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,9 +24,11 @@ public class Producto implements Serializable{
     private String nombre;
     private String descripcion;
     private float precio;
+    
     //private ----- imagen;
-    @ManyToMany (targetEntity = CategoriaProducto.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY) 
+    @ManyToOne (targetEntity = CategoriaProducto.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY) 
     private CategoriaProducto categoria;
+    
     @OneToMany(mappedBy = "producto")
     private List<Comercio> comercios;
     

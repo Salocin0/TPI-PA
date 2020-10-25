@@ -2,8 +2,10 @@ package Modelos;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,18 +34,54 @@ public class Pedido implements Serializable {
     //cambiar manytoone
     @ManyToOne (targetEntity = Cliente.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Cliente cliente;
+   
     @ManyToOne (targetEntity = Comercio.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY) 
     private Comercio comercio;
     
     /*@OneToMany(targetEntity = ItemLiquidacionClienteCorrectivaRepuestos.class, cascade= CascadeType.ALL, fetch=FetchType.LAZY )
     private Set<ItemLiquidacionClienteCorrectivaRepuestos> detalleCorrectivaRepuestos = new HashSet();*/
     
-    @OneToMany (targetEntity = Pedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private DetallePedido detallePedido;
-    private int subtotal;
-    private int total;
+    @OneToMany (targetEntity = DetallePedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+     private Set<DetallePedido> detallePedido = new HashSet();
+      
+    //   @Column(name="centro2", columnDefinition="Integer default '0'")
+//    private int centro2;
+    
+    
+//    
+//     @Column(name = "obligatorioAsignacionFactura", columnDefinition = "Boolean default 'false'")
+//    private boolean obligatorioAsignacionFactura;
+
+    @Column(name="subTotal", columnDefinition="Decimal(13,2) default '0.00'") 
+    private double subtotal;
+  
+    private double total;
+    
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
+
+    public Set<DetallePedido> getDetallePedido() {
+        return detallePedido;
+    }
 
     //////Set & get ////// ID
+    public void setDetallePedido(Set<DetallePedido> detallePedido) {    
+        this.detallePedido = detallePedido;
+    }
+
     public long getId() {
         return id;
     }
@@ -78,18 +116,5 @@ public class Pedido implements Serializable {
     public void setDetallePedido(DetallePedido detallePedido) {
         this.detallePedido = detallePedido;
     }*/
-    //////Set & get ////// SUBTOTAL
-    public int getSubtotal() {
-        return subtotal;
-    }
-    public void setSubtotal(int subtotal) {
-        this.subtotal = subtotal;
-    }
-    //////Set & get ////// TOTAL
-    public int getTotal() {
-        return total;
-    }
-    public void setTotal(int total) {
-        this.total = total;
-    }
+ 
 }
