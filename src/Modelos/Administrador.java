@@ -9,12 +9,10 @@ import javax.persistence.Table;
 public class Administrador extends Usuario{
     private String rango;
 
-    /*public Administrador(String nombre, String correoElectronico,String contraseña,String direccion, int telefono, String codigo) {
+    public Administrador(String nombre, String correoElectronico,String contraseña,String direccion, int telefono, String rango){
+        super(nombre, correoElectronico,contraseña,direccion, telefono);
+        this.rango=rango;
     }
-
-    public Administrador(String nombre, String correoElectronico,String contraseña,String direccion, int telefono, String codigo, String rango){
-        //TO-DO
-    }*/
     
     public String getRango() {
         return rango;

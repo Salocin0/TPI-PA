@@ -9,22 +9,36 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
 @Table (name="Pedido")
 public class Pedido implements Serializable {
-    @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
+    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
     private long id;
     
     private int estado;
+
+    public Pedido() {
+        //TO-DO??
+        //this.estado=0;
+    }
     
-    public Pedido(){
-        //-TO-DO
+    public Pedido(int estado,Date fecha, Date hora, Cliente cliente,Comercio comercio,DetallePedido detallePedido){
+        this.estado=estado;
+        this.fecha=fecha;
+        this.hora=hora;
+        this.cliente=cliente;
+        this.comercio=comercio;
+        this.detallePedido=(Set<DetallePedido>) detallePedido;
     }
     
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -51,10 +65,10 @@ public class Pedido implements Serializable {
 //    
 //     @Column(name = "obligatorioAsignacionFactura", columnDefinition = "Boolean default 'false'")
 //    private boolean obligatorioAsignacionFactura;
-
+    //CALCULAR O GUARDAR??
     @Column(name="subTotal", columnDefinition="Decimal(13,2) default '0.00'") 
     private double subtotal;
-  
+    @Column(name="total", columnDefinition="Decimal(13,2) default '0.00'")
     private double total;
     
     public Date getFecha() {

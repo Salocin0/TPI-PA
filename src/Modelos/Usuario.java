@@ -3,16 +3,18 @@ package Modelos;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="Usuario") 
 public class Usuario implements Serializable{
-
-    @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
+    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
     private long id;
-    
     private int estado;
     
     private String nombre;
@@ -20,16 +22,14 @@ public class Usuario implements Serializable{
     private String contraseña;
     private String direccion;
     private int telefono;
-    private String codigo;
     
-    /*public Usuario(String nombre, String correoElectronico,String contraseña,String direccion, int telefono, String codigo){
+    public Usuario(String nombre, String correoElectronico,String contraseña,String direccion, int telefono){
         this.nombre=nombre;
         this.correoElectronico=correoElectronico;
         this.contraseña=contraseña;
         this.direccion=direccion;
         this.telefono=telefono;
-        this.codigo=codigo;
-    }*/
+    }
     
     //////Set & get ////// ID
     public long getId(){
@@ -51,13 +51,6 @@ public class Usuario implements Serializable{
     }
     public void setNombre(String nombre){
        this.nombre = nombre;
-    }
-    //////Set & get ////// APELLIDO
-    public String getCodigo() {
-        return codigo;
-    }
-    public void setCodigo(String codigo) {
-        this.codigo= codigo;
     }
     //////Set & get ////// CORREO ELECTRONICO
     public String getCorreoElectronico() {

@@ -13,12 +13,11 @@ public class Cliente extends Usuario{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
 
-    /*public Cliente() {
+    public Cliente(String nombre, String correoElectronico,String contraseña,String direccion, int telefono, String apellido,Date fechaNacimiento){
+        super(nombre, correoElectronico,contraseña,direccion, telefono);
+        this.apellido=apellido;
+        this.fechaNacimiento=fechaNacimiento;
     }
-
-    public Cliente(String apellido,Date fechaNacimiento){
-        //TO-DO
-    }*/
     
     public String getApellido() {
         return apellido;

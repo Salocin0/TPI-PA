@@ -18,9 +18,12 @@ public class Comercio extends Usuario{
     
     private Double calificacion;
     
-    /*public Comercio(){
-        //TO-DO
-    }*/
+    public Comercio(String nombre, String correoElectronico,String contraseña,String direccion, int telefono,Rubro rubro,Producto producto,double calificacion){
+        super(nombre, correoElectronico,contraseña,direccion, telefono);
+        this.rubro=rubro;
+        this.producto=producto;
+        this.calificacion=calificacion;
+    }
     //////Set & get ////// RUBRO
     public Rubro getRubro() {
         return rubro;

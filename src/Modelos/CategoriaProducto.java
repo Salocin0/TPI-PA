@@ -11,20 +11,28 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name="categoria_producto")
-public class CategoriaProducto implements Serializable {
-//    @Id @GeneratedValue(strategy=javax.persistence.GenerationType.AUTO)
-//    private long id;
-    
-    
-    
-      
+public class CategoriaProducto implements Serializable {  
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
     @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
     private long id;
+    
+    private int estado;
 
+    
     private String nombre;
     private String descripcion;
+    
+    public CategoriaProducto(){
+        this.nombre="Nombre_por_Defecto";
+        this.descripcion="Descripcion_por_Defecto";
+        this.estado=0;
+    }
+    public CategoriaProducto(int estado,String nombre, String descripcion){
+        this.nombre=nombre;
+        this.descripcion=descripcion;
+        this.estado=estado;
+    }
 
     public long getId() {
         return id;
@@ -34,9 +42,6 @@ public class CategoriaProducto implements Serializable {
         this.id = id;
     }
 
-       public CategoriaProducto(){
-           //to-do
-       }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -51,5 +56,12 @@ public class CategoriaProducto implements Serializable {
 
     public String getDescripcion() {
         return descripcion;
+    }
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }
