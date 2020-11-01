@@ -130,5 +130,21 @@ public class Pedido implements Serializable {
     public void setDetallePedido(DetallePedido detallePedido) {
         this.detallePedido = detallePedido;
     }*/
- 
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+    
 }

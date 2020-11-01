@@ -51,5 +51,13 @@ public class Rubro implements Serializable {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     
 }
