@@ -5,24 +5,39 @@
  */
 package Vistas;
 
+import GUtilr.UtilJtable;
 import Modelos.GestorRubro;
-import Modelos.Rubro;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.Date;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
  * @author nicol
  */
 public class ABMCRubro extends javax.swing.JFrame {
-    /**
-     * Creates new form FrmRegistroRol
-     */
-    
+    GestorABMCRubro gABM = new GestorABMCRubro();
+    public void initializeTable() {
+        GestorRubro gr = new GestorRubro();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        gABM.listarDatos(modelo);
+        this.TableRubro.setModel(modelo);
+    }
+    /*public void initializeTable2(JTable tbl) {
+        String[] titulo = {"ID", "Nombre", "Descripcion"};
+        String[] ancho ={"150","150","150"};
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        this.newModelTable(tbl, titulo,ancho,UtilJtable.noEditable );
+    }*/
+  
     public ABMCRubro() {
         initComponents();
+        initializeTable();
     }
 
     /**
@@ -226,7 +241,7 @@ public class ABMCRubro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ABMCRubro().setVisible(true);
-                Rubro r = new Rubro(1,"a","as");
+                
                 
             }
         });
@@ -249,4 +264,8 @@ public class ABMCRubro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    Object getTbl() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

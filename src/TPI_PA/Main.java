@@ -12,10 +12,6 @@ public class Main {
         HibernateUtil.inicializar();
         ABMCRubro a = new ABMCRubro();
         a.show(true);
-        
-        
-        Query query = HibernateUtil.getSession().createQuery("FROM Rubro");
-        System.out.print(query);
 
     }
     

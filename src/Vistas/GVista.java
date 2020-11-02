@@ -1,7 +1,7 @@
 package Vistas;
 
 
-public interface FuncionesABMC {
+public interface GVista {
    
     void guardar();
     void eliminar();
