@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class GestorRubro extends  GestorHibernate{
     public List <Rubro> listar(){   
-        return this.listarClase(Rubro.class,"estado",1);
+        return this.listarClase(Rubro.class,"id",1);
     }
     
     /*public List listarClase(Class clase,String atributoOrden, int estado){
