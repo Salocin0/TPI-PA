@@ -73,8 +73,8 @@ public class Rubro implements Serializable, Comparable {
         Rubro p=(Rubro) o;
         return this.getNombre().compareTo(p.getNombre());
     }
-    @Override
+    /*@Override
     public String toString() {
         return (String.valueOf(id));
-    }
+    }*/
 }

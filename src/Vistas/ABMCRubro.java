@@ -6,7 +6,9 @@
 package Vistas;
 
 import GUtilr.UtilJtable;
+import Hibernate.GestorHibernate;
 import Modelos.GestorRubro;
+import Modelos.Rubro;
 import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,14 +21,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ABMCRubro extends javax.swing.JFrame {
     GestorABMCRubro gABM = new GestorABMCRubro();
+    DefaultTableModel modelo = new DefaultTableModel();
+    GestorRubro gr = new GestorRubro();
     public void initializeTable() {
-        GestorRubro gr = new GestorRubro();
-        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Objeto");
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripcion");
+        TraerDatos();
+    }
+    public void TraerDatos(){
+        limpiarTabla();
         gABM.listarDatos(modelo);
         this.TableRubro.setModel(modelo);
+    }
+    public void limpiarTabla(){
+        while(modelo.getRowCount()>=1){
+            modelo.removeRow(modelo.getRowCount()-1);
+        } 
+
     }
     /*public void initializeTable2(JTable tbl) {
         String[] titulo = {"ID", "Nombre", "Descripcion"};
@@ -88,6 +101,11 @@ public class ABMCRubro extends javax.swing.JFrame {
         BTNEliminar.setMaximumSize(new java.awt.Dimension(70, 23));
         BTNEliminar.setMinimumSize(new java.awt.Dimension(70, 23));
         BTNEliminar.setName("BTNEliminar"); // NOI18N
+        BTNEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNEliminarActionPerformed(evt);
+            }
+        });
 
         BTNAgregar.setText("Agregar");
         BTNAgregar.setMaximumSize(new java.awt.Dimension(70, 23));
@@ -113,11 +131,7 @@ public class ABMCRubro extends javax.swing.JFrame {
 
         TableRubro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Nombre", "Descripcion"
@@ -201,8 +215,21 @@ public class ABMCRubro extends javax.swing.JFrame {
 
     private void BTNAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAgregarActionPerformed
         GestorABMCRubro gr=new GestorABMCRubro();
-        gr.guardar(TBNombre.getText(), TADescripcion.getText());
+        gr.guardar(1,TBNombre.getText(), TADescripcion.getText());
+        TBNombre.setText("");
+        TADescripcion.setText("");
+        TraerDatos();
     }//GEN-LAST:event_BTNAgregarActionPerformed
+
+    private void BTNEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminarActionPerformed
+        GestorABMCRubro gr = new GestorABMCRubro();
+        GestorHibernate gh = new GestorHibernate();
+        Rubro r;
+        r = (Rubro) modelo.getValueAt(TableRubro.getSelectedRow(), 0);
+        r.setEstado(0);
+        gh.actualizarObjeto(r);
+        TraerDatos();
+    }//GEN-LAST:event_BTNEliminarActionPerformed
 
     /**
      * @param args the command line arguments

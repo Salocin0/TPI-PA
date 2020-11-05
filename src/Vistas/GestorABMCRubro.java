@@ -59,8 +59,8 @@ public class GestorABMCRubro extends GestorVista{
         this.gestor = gestor;
     }
     
-    public void guardar(String nombre,String descripcion) {
-        Rubro r = new Rubro(0,nombre,descripcion);
+    public void guardar(int estado,String nombre,String descripcion) {
+        Rubro r = new Rubro(estado,nombre,descripcion);
         gh.guardarObjeto(r);
     }
      public DefaultTableModel listarDatos(DefaultTableModel modelTabla) {
@@ -76,7 +76,7 @@ public class GestorABMCRubro extends GestorVista{
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext())  {
             auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getNombre(),auxModel.getDescripcion()};
+            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
             modelTabla.addRow(fila);
            
         }
