@@ -8,8 +8,10 @@ package Vistas;
 import Modelos.GestorRubro;
 import Modelos.Rubro;
 import Hibernate.GestorHibernate;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,7 +76,7 @@ public class GestorABMCRubro extends GestorVista{
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext())  {
             auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
+            Object[] fila = {auxModel,auxModel.getNombre(),auxModel.getDescripcion()};
             modelTabla.addRow(fila);
            
         }

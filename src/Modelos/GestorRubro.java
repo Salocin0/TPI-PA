@@ -9,10 +9,10 @@ import org.hibernate.criterion.Restrictions;
 
 public class GestorRubro extends  GestorHibernate{
     public List <Rubro> listar(){   
-        return this.listarClase(Rubro.class,"estado",2);
+        return this.listarClase(Rubro.class,"estado",1);
     }
     
-    public List listarClase(Class clase,String atributoOrden, int estado){
+    /*public List listarClase(Class clase,String atributoOrden, int estado){
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.asc(atributoOrden))
                         .add (Restrictions.eq("estado",estado));
         return crit.list();
@@ -21,5 +21,5 @@ public class GestorRubro extends  GestorHibernate{
     public List listarClase(int estado){
         Criteria crit = getSession().createCriteria(Rubro.class).add(Restrictions.eq("estado",estado));;
         return crit.list();
-    }
+    }*/
 }

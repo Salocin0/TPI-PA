@@ -22,6 +22,7 @@ public class ABMCRubro extends javax.swing.JFrame {
     public void initializeTable() {
         GestorRubro gr = new GestorRubro();
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripcion");
         gABM.listarDatos(modelo);

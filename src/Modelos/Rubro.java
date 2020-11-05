@@ -16,7 +16,7 @@ import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table (name="Rubro")
-public class Rubro implements Serializable {
+public class Rubro implements Serializable, Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
     @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
@@ -27,6 +27,9 @@ public class Rubro implements Serializable {
     private String nombre;
     @Column
     private String descripcion;
+
+    public Rubro() {
+    }
 
     public Rubro(int estado,String nombre,String descripcion){
         this.estado= estado;
@@ -64,5 +67,14 @@ public class Rubro implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-    
+
+    @Override
+    public int compareTo(Object o) {
+        Rubro p=(Rubro) o;
+        return this.getNombre().compareTo(p.getNombre());
+    }
+    @Override
+    public String toString() {
+        return (String.valueOf(id));
+    }
 }
