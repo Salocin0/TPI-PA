@@ -1,5 +1,5 @@
 package Modelos;
-import AuxReportes.AuxGenerico;
+import AuxReporte.AuxGenerico;
 import Hibernate.GestorHibernate;
 import Vistas.ABMCRubro;
 import Vistas.GestorVista;
@@ -61,7 +61,6 @@ public class GestorRubro extends GestorHibernate{
         Rubro r = rubro;
         r.setEstado(false);
         this.actualizarObjeto(r);        
-        //cartel de seguridad antes de borrar
     }
     
     public void CargarDatos(Rubro rubro){
@@ -74,7 +73,7 @@ public class GestorRubro extends GestorHibernate{
     
     public List <Rubro> listar(String dato){   
        Criteria crit = getSession().createCriteria(Rubro.class).addOrder(Order.asc("nombre"))
-            .add (Restrictions.eq("estado",1));
+            .add (Restrictions.eq("estado",true));
             if (!dato.contentEquals("")) {
 //                   crit.add (Restrictions.like("nombre","%"+dato+"%"));
                    crit.add (Restrictions.like("nombre",dato+"%"));
@@ -103,11 +102,11 @@ public class GestorRubro extends GestorHibernate{
     }
     public DefaultTableModel listarDatos2(DefaultTableModel modelTabla) {
         TreeSet<Rubro> lista= new TreeSet();
-         Rubro auxModel;
+        Rubro auxModel;
         String nombre ="";
-         if (!form.getTxtBuscar().getText().contentEquals("")) {
-            nombre= form.getTxtBuscar().getText();
-         }
+        if (!form.getTxtBuscar().getText().contentEquals("")) {
+           nombre= form.getTxtBuscar().getText();
+        }
         
         List<Rubro> list = this.listar(nombre);    
         Iterator it = (Iterator) list.iterator();
@@ -127,7 +126,7 @@ public class GestorRubro extends GestorHibernate{
     }
     
     public void imprimir() {
-        this.abrirListado("C:/Users/nicol/Documents/NetBeansProjects/tpi-pa/src/Ireport/Rubro.jasper");
+        this.abrirListado("Rubro.jasper");
         this.agregarParametroListado("titulo", "Listado de rubros");
 //        this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
         this.agregarDatosListado(this.convertTo(this.getForm().getTableRubro()));

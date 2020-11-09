@@ -17,6 +17,7 @@ public class ABMCRubro extends ABMGn {
         if (gr == null) {
            synchronized (GestorRubro.class) {
                 gr = new GestorRubro();
+                gr.setForm(this);
            }
         }
         return gr;
