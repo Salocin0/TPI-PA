@@ -17,7 +17,7 @@ public class Rubro implements Serializable, Comparable {
     @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
     private long id;
     @Column
-    private int estado;
+    private boolean estado;
     @Column
     private String nombre;
     @Column
@@ -26,7 +26,7 @@ public class Rubro implements Serializable, Comparable {
     public Rubro() {
     }
 
-    public Rubro(int estado,String nombre,String descripcion){
+    public Rubro(boolean estado,String nombre,String descripcion){
         this.estado= estado;
         this.nombre=nombre;
         this.descripcion=descripcion;
@@ -47,11 +47,11 @@ public class Rubro implements Serializable, Comparable {
         this.descripcion = descripcion;
     }
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
