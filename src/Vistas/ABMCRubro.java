@@ -2,6 +2,7 @@ package Vistas;
 
 import Modelos.GestorRubro;
 import Modelos.Rubro;
+import java.awt.HeadlessException;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -12,7 +13,8 @@ import javax.swing.table.DefaultTableModel;
 public class ABMCRubro extends ABMGn {
     DefaultTableModel modelo = new DefaultTableModel();
     private GestorRubro gr;
-
+    
+    //Metodos de seteo
     public GestorRubro getGestorRubro() {
         if (gr == null) {
            synchronized (GestorRubro.class) {
@@ -31,8 +33,6 @@ public class ABMCRubro extends ABMGn {
         this.tableRubro = tableRubro;
     }
 
-    
-    
     public JTextField getTxtBuscar() {
         return txtBuscar;
     }
@@ -49,14 +49,6 @@ public class ABMCRubro extends ABMGn {
         this.txtId = txtId;
     }
     
-    public JCheckBox getCbEstado() {
-        return cbEstado;
-    }
-
-    public void setCbEstado(JCheckBox cbEstado) {
-        this.cbEstado = cbEstado;
-    }
-
     public JTextArea getTxtDescripcion() {
         return txtDescripcion;
     }
@@ -72,67 +64,78 @@ public class ABMCRubro extends ABMGn {
     public void setTxtNombre(JTextField TBNombre) {
         this.txtNombre = TBNombre;
     }
-    
-    public void traerDatos2(){
-        limpiarTabla(modelo);
-        getGestorRubro().listarDatos2(modelo);
-        this.tableRubro.setModel(modelo);
-    }
-    
-    public void CambiarEstadoPantalla(int num){
-        if(num==1){
-            //estado inicial
-            btnAgregar.setEnabled(true);
-            btnEliminar.setEnabled(true);
-            btnModificar.setEnabled(true);
-            btnReporte.setEnabled(true);
-            btnGuardar.setEnabled(false);
-            btnCancelar.setEnabled(false);
-            txtId.setEnabled(false);
-            tableRubro.setEnabled(true);
-            cbCantidad.setEnabled(true);
-            btnActualizar.setEnabled(true);
-        }
-        if(num==2){
-            //en modificacion
-            btnAgregar.setEnabled(false);
-            btnEliminar.setEnabled(false);
-            btnModificar.setEnabled(false);
-            btnReporte.setEnabled(false);
-            btnGuardar.setEnabled(true);
-            btnCancelar.setEnabled(true);
-            txtId.setEnabled(false);
-            tableRubro.setEnabled(false);
-            cbCantidad.setEnabled(false);
-            btnActualizar.setEnabled(false); 
+
+    public void cambiarEstadoPantalla(int num){
+        switch(num){
+            case 1:{ //estado inicial
+                habilitacionBotones(true);
+                habilitacionExtras(true);
+                break;
+            }
+            case 2:{ //en modificacion
+                habilitacionBotones(false);
+                habilitacionExtras(false);
+                break;
+            } 
         }
     }
+    
+    public void habilitacionBotones(boolean valor){
+         btnAgregar.setEnabled(valor);
+         btnEliminar.setEnabled(valor);
+         btnModificar.setEnabled(valor);
+         btnReporte.setEnabled(valor);
+         btnGuardar.setEnabled(!valor);
+         btnCancelar.setEnabled(!valor);
+    }
+     
+    public void habilitacionExtras(boolean valor){
+        txtId.setEnabled(false);
+        tableRubro.setEnabled(valor);
+        cbCantidad.setEnabled(valor);
+    }
+     
     public void initializeTable() {
         modelo.addColumn("Objeto");
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripcion");
-        TraerDatos(cbCantidad.getSelectedIndex());
-        CambiarEstadoPantalla(1);
+        traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+        cambiarEstadoPantalla(1);
     }
-  
-    public void TraerDatos(int max){
+    
+    public int cantidad(String str){
+        if(str == "Todos"){
+            return -1;
+        }else {
+            return Integer.parseInt(str);
+        }
+    }
+    
+    public void traerDatos(int max){
         limpiarTabla(modelo);
-        getGestorRubro().listarDatos(modelo,max);
+        getGestorRubro().listarDatos(modelo,txtBuscar.getText(),max);
         this.tableRubro.setModel(modelo);
     }
-
-    public void LimpiarPantalla(){
+    
+    public void limpiarPantalla(){
         txtId.setText("");
         txtNombre.setText("");
         txtDescripcion.setText("");
-        cbEstado.setSelected(false);
     }
+    
     public ABMCRubro() {
         initComponents();
         initializeTable();
     }
-
+//levar funcion al padre
+    public boolean cuadrosVacios(){
+        if(txtNombre.getText()=="" || txtDescripcion.getText()==""/*mejorar condicion*/){
+            return false;
+        }else{
+            return true;
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -154,11 +157,7 @@ public class ABMCRubro extends ABMGn {
         lbId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         cbCantidad = new javax.swing.JComboBox<>();
-        btnActualizar = new javax.swing.JButton();
-        lbEstado = new javax.swing.JLabel();
-        cbEstado = new javax.swing.JCheckBox();
         btnReporte = new javax.swing.JButton();
-        cbBuscar = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
 
@@ -251,17 +250,11 @@ public class ABMCRubro extends ABMGn {
         lbId.setText("ID");
 
         cbCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "100", "Todos" }));
-
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        cbCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                cbCantidadActionPerformed(evt);
             }
         });
-
-        lbEstado.setText("Estado");
-
-        cbEstado.setText("Habilitado");
 
         btnReporte.setText("Reporte");
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -269,8 +262,6 @@ public class ABMCRubro extends ABMGn {
                 btnReporteActionPerformed(evt);
             }
         });
-
-        cbBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nombre", "Descripcion" }));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -286,85 +277,65 @@ public class ABMCRubro extends ABMGn {
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE,
+ javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbId))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbEstado)
-                                            .addComponent(cbEstado)))
-                                    .addComponent(lbNombre))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbDescripcion)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnGuardar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnCancelar))
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbDescripcion)
+                            .addComponent(lbNombre)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtNombre)
+                            .addComponent(lbId)
+                            .addComponent(txtId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnReporte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbId)
-                            .addComponent(lbEstado))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbEstado))
+                        .addComponent(lbId)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbDescripcion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,7 +347,6 @@ public class ABMCRubro extends ABMGn {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(7, 7, 7)
@@ -384,8 +354,7 @@ public class ABMCRubro extends ABMGn {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
-                    .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar))
+                    .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -394,17 +363,19 @@ public class ABMCRubro extends ABMGn {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try {
-            getGestorRubro().setForm(this);
-            getGestorRubro().Guardar();
-            LimpiarPantalla();
-            TraerDatos(cbCantidad.getSelectedIndex());            
+            if (cuadrosVacios()==false){
+                getGestorRubro().setForm(this);
+                getGestorRubro().guardar();
+                limpiarPantalla();
+                traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+            }else{
+                JOptionPane.showMessageDialog(null, "Existen cuadros vacios, completelos para continuar");
+            }
         }
         catch(Exception e) {
             System.out.println("Error al guardar:"+ e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al guardar");
-        }
-        
-        
+        } 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -413,22 +384,22 @@ public class ABMCRubro extends ABMGn {
             if(JOptionPane.showConfirmDialog(null, "Se eliminara la fila seleccionada, esta seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)==1){
                     
             }else{ 
-            getGestorRubro().Eliminar((Rubro)modelo.getValueAt(tableRubro.getSelectedRow(), 0));
-            TraerDatos(cbCantidad.getSelectedIndex());
+            getGestorRubro().eliminar((Rubro)modelo.getValueAt(tableRubro.getSelectedRow(), 0));
+            traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
             };
         }
-        catch(Exception e) {
+        catch(HeadlessException e) {
             System.out.println("Error al intentar eliminar la fila"+ e.getMessage());
             JOptionPane.showMessageDialog(null, "no selecciono una fila de la tabla");
         }  
-        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
             getGestorRubro().setForm(this);
-            getGestorRubro().CargarDatos((Rubro) modelo.getValueAt(tableRubro.getSelectedRow(), 0));
-            CambiarEstadoPantalla(2);
+            getGestorRubro().cargarDatos((Rubro) modelo.getValueAt(tableRubro.getSelectedRow(), 0));
+            cambiarEstadoPantalla(2);
+
         }
         catch(Exception e) {
             System.out.println("Error al cargar los datos de la tabla a los cuadros de texto"+ e.getMessage());
@@ -440,10 +411,10 @@ public class ABMCRubro extends ABMGn {
         try {
             //GUARDAR DESPUES DE HABER MODIFICADO
             getGestorRubro().setForm(this);
-            getGestorRubro().Modificar((Rubro) modelo.getValueAt(tableRubro.getSelectedRow(), 0));
-            LimpiarPantalla();
-            TraerDatos(cbCantidad.getSelectedIndex());
-            CambiarEstadoPantalla(1);
+            getGestorRubro().guardar(/*(Rubro) modelo.getValueAt(tableRubro.getSelectedRow(), 0)*/);
+            limpiarPantalla();
+            traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+            cambiarEstadoPantalla(1);
         }
         catch(Exception e) {
             System.out.println("Error al guardar los datos modificados:"+ e.getMessage());
@@ -452,13 +423,10 @@ public class ABMCRubro extends ABMGn {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        LimpiarPantalla();
-        CambiarEstadoPantalla(1);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        TraerDatos(cbCantidad.getSelectedIndex());
-    }//GEN-LAST:event_btnActualizarActionPerformed
+        limpiarPantalla();
+        cambiarEstadoPantalla(1);
+ 
+   }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
@@ -469,8 +437,12 @@ public class ABMCRubro extends ABMGn {
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        traerDatos2();
+        traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void cbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCantidadActionPerformed
+        traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+    }//GEN-LAST:event_cbCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,16 +481,11 @@ public class ABMCRubro extends ABMGn {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-            public void run() {
-                
-                
-                
-            }
+            public void run() {}
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
@@ -527,14 +494,11 @@ public class ABMCRubro extends ABMGn {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbBuscar;
     public javax.swing.JComboBox<String> cbCantidad;
-    private javax.swing.JCheckBox cbEstado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbDescripcion;
-    private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JTable tableRubro;
@@ -543,8 +507,6 @@ public class ABMCRubro extends ABMGn {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-
-    Object getTbl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
+
+

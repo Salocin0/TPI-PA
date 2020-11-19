@@ -2,6 +2,7 @@ package ireport;
 
 
 import java.awt.print.PrinterJob;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 import javax.print.PrintService;
@@ -32,7 +33,6 @@ import net.sf.jasperreports.view.*;
  */
 
 public class GestorDeReportes  extends Thread {
-
     private String archivo;
     private Map parametros = new HashMap();
     private FuenteDeDatosCollection fuenteDeDatos=new  FuenteDeDatosCollection();  
@@ -47,6 +47,10 @@ public class GestorDeReportes  extends Thread {
     
     public GestorDeReportes(String archivo) {
         this.archivo=archivo;
+    }
+
+    public GestorDeReportes() {
+       
     }
 
 
@@ -79,7 +83,7 @@ public class GestorDeReportes  extends Thread {
    * Lanza un hilo con el metodo run() donde arma el reporte con los parametros, el archivo jasper seleccionado 
    * en el constructor y la fuente de datos mencionada anteriormente. Una vez listo el reporte instancia un visor y lo muestra.
    */
-    public void imprimir(){
+  public void imprimir(){
         try{
             this.run();
         }catch(Exception e){System.out.println(" "+e);}
@@ -88,11 +92,9 @@ public class GestorDeReportes  extends Thread {
 
     @Override
     public void run(){       
-          
         try{ 
-             JRDataSource jrd=null;
+            JRDataSource jrd=null;
             if (jasperPrint==null){
-//                URL url=this.getClass().getClassLoader().getResource(this.archivo);
                 setMasterReport((JasperReport) JRLoader.loadObject(this.archivo));
                 try{
                   jrd= fuenteDeDatos.createBeanCollectionDatasource();
@@ -112,7 +114,6 @@ public class GestorDeReportes  extends Thread {
             System.out.println("error 2");  
             ek.printStackTrace();
         }
-           
     }
 
       public void generarImpresion(){
