@@ -1,15 +1,16 @@
 package TPI_PA;
 
 import Hibernate.HibernateUtil;
-import Vistas.ABMCRubro; 
+import Modelos.GestorRubro;
 
 public class Main {
-
    public static void main(String[] args) {
         HibernateUtil.inicializar();
-        ABMCRubro a = new ABMCRubro();
-        a.show(true);
-
+        ///////////////////////Rubro/////////////////////////
+        GestorRubro gr = new GestorRubro();
+        gr.open();
+        ///////////////////////CategoriaProducto/////////////
+        //GestorCategoriaProducto gr = new GestorCategoriaProducto();
+        //gr.open();
     }
-    
 }

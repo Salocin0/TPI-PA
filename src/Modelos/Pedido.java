@@ -17,55 +17,34 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+
+
 @Entity
-@Table (name="Pedido")
+@Table (name="pedido")
 public class Pedido implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
-    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_id_seq")
+    @SequenceGenerator(name = "pedido_id_seq", sequenceName = "pedido_id_seq", allocationSize = 1) 
     private long id;
     
-    private int estado;
+    private boolean estado;
 
-    public Pedido() {
-        //TO-DO??
-        //this.estado=0;
-    }
-    
-    public Pedido(int estado,Date fecha, Date hora, Cliente cliente,Comercio comercio,DetallePedido detallePedido){
-        this.estado=estado;
-        this.fecha=fecha;
-        this.hora=hora;
-        this.cliente=cliente;
-        this.comercio=comercio;
-        this.detallePedido=(Set<DetallePedido>) detallePedido;
-    }
-    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date hora;
-    //cambiar manytoone
+    
     @ManyToOne (targetEntity = Cliente.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Cliente cliente;
    
     @ManyToOne (targetEntity = Comercio.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY) 
     private Comercio comercio;
     
-    /*@OneToMany(targetEntity = ItemLiquidacionClienteCorrectivaRepuestos.class, cascade= CascadeType.ALL, fetch=FetchType.LAZY )
-    private Set<ItemLiquidacionClienteCorrectivaRepuestos> detalleCorrectivaRepuestos = new HashSet();*/
     
     @OneToMany (targetEntity = DetallePedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<DetallePedido> detallePedido = new HashSet();
       
-    //   @Column(name="centro2", columnDefinition="Integer default '0'")
-//    private int centro2;
     
-    
-//    
-//     @Column(name = "obligatorioAsignacionFactura", columnDefinition = "Boolean default 'false'")
-//    private boolean obligatorioAsignacionFactura;
-    //CALCULAR O GUARDAR??
     @Column(name="subTotal", columnDefinition="Decimal(13,2) default '0.00'") 
     private double subtotal;
     @Column(name="total", columnDefinition="Decimal(13,2) default '0.00'")
@@ -103,10 +82,10 @@ public class Pedido implements Serializable {
         this.id = id;
     }
     //////Set & get ////// ESTADO
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
     //////Set & get ////// CLIENTE
@@ -124,12 +103,6 @@ public class Pedido implements Serializable {
         this.comercio = comercio;
     }
     //////Set & get ////// DETALLE PEDIDO
-    /*public DetallePedido getDetallePedido() {
-        return detallePedido;
-    }
-    public void setDetallePedido(DetallePedido detallePedido) {
-        this.detallePedido = detallePedido;
-    }*/
 
     public double getSubtotal() {
         return subtotal;
@@ -146,5 +119,24 @@ public class Pedido implements Serializable {
     public void setTotal(double total) {
         this.total = total;
     }
-    
+
+ 
+    public Pedido() {
+    }
+//    public static class DetallePedido {
+//
+//        public DetallePedido() {
+//        }
+//    }
+//    
 }
+//   @Column(name="centro2", columnDefinition="Integer default '0'")
+//    private int centro2;
+    /*@OneToMany(targetEntity = ItemLiquidacionClienteCorrectivaRepuestos.class, cascade= CascadeType.ALL, fetch=FetchType.LAZY )
+    private Set<ItemLiquidacionClienteCorrectivaRepuestos> detalleCorrectivaRepuestos = new HashSet();*/
+    
+    
+//    
+//     @Column(name = "obligatorioAsignacionFactura", columnDefinition = "Boolean default 'false'")
+//    private boolean obligatorioAsignacionFactura;
+    //CALCULAR O GUARDAR??

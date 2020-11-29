@@ -9,11 +9,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="Usuario") 
+@Table (name="usuario") 
 public class Usuario implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
-    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_seq")
+    @SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq", allocationSize = 1) 
     private long id;
     private int estado;
     

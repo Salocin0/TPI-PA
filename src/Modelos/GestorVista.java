@@ -1,5 +1,7 @@
-package Vistas;
+package Modelos;
 
+import Vistas.FrmGenerica;
+import Vistas.GVista;
 import GUtilr.mdi.MDIForm;
 import GUtilr.UtilJtable;
 import ireport.GestorDeReportes;

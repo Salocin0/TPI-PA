@@ -1,66 +1,19 @@
-
 package Modelos;
-import java.io.Serializable;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="Rubro")
-public class Rubro implements Serializable, Comparable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
-    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
-    private long id;
-    @Column
-    private boolean estado;
-    @Column
-    private String nombre;
-    @Column
-    private String descripcion;
-
+public class Rubro extends TipoObjeto {
+    
     public Rubro() {
+        super();
     }
 
     public Rubro(boolean estado,String nombre,String descripcion){
-        this.estado= estado;
-        this.nombre=nombre;
-        this.descripcion=descripcion;
-    }
-    public String getNombre() {
-        return nombre;
-    }
+        super(estado,nombre,descripcion);
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override
@@ -68,8 +21,4 @@ public class Rubro implements Serializable, Comparable {
         Rubro p=(Rubro) o;
         return this.getNombre().compareTo(p.getNombre());
     }
-    /*@Override
-    public String toString() {
-        return (String.valueOf(id));
-    }*/
 }

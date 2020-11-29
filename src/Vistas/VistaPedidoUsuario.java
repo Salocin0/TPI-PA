@@ -5,16 +5,20 @@
  */
 package Vistas;
 
+import Vistas.ModPedidoU;
+import Vistas.VistaCalificacion;
+import Vistas.VerPedidoU;
+
 /**
  *
  * @author nicol
  */
-public class PedidoUsuario extends javax.swing.JFrame {
+public class VistaPedidoUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmPedidoUsuario
      */
-    public PedidoUsuario() {
+    public VistaPedidoUsuario() {
         initComponents();
     }
 
@@ -166,7 +170,7 @@ public class PedidoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Calificacion cal = new Calificacion();
+        VistaCalificacion cal = new VistaCalificacion();
         cal.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -193,21 +197,23 @@ public class PedidoUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaPedidoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PedidoUsuario().setVisible(true);
+                new VistaPedidoUsuario().setVisible(true);
             }
         });
     }

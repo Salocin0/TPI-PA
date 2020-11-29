@@ -5,6 +5,10 @@
  */
 package Vistas;
 
+import Vistas.PedidoComercio;
+import Vistas.RegComercio;
+import Vistas.RegUsuario;
+import Vistas.VistaPedidoUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -230,7 +234,7 @@ public class Login extends javax.swing.JFrame {
         } 
         if (item == "Usuario"){
         
-            PedidoUsuario u =new PedidoUsuario();
+            VistaPedidoUsuario u =new VistaPedidoUsuario();
             u.setVisible(true);
             dispose();    
         }

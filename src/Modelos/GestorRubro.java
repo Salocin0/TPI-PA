@@ -1,24 +1,17 @@
 package Modelos;
+
 import AuxReporte.AuxGenerico;
-import Hibernate.GestorHibernate;
-import Vistas.ABMCRubro;
-import ireport.GestorDeReportes;
-import java.util.HashSet;
+import Vistas.GestorGn;
+import Vistas.VistaRubro;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
-public class GestorRubro extends GestorHibernate{
-    private ABMCRubro form;
-    private GestorDeReportes gestorReportes = new GestorDeReportes();
-   private  Rubro model;
+public class GestorRubro extends GestorGn{
+    private VistaRubro form;
+    private Rubro model;
 
     public Rubro getModel() {
         return model;
@@ -28,42 +21,39 @@ public class GestorRubro extends GestorHibernate{
         this.model = model;
     }
   
-    public ABMCRubro getForm() {
+    public VistaRubro getForm() {
         return form;
     }
     
-    public void setForm(ABMCRubro form) {
+    public void setForm(VistaRubro form) {
         this.form = form;
     }
     
     public void guardar(){
-         if (this.getModel()== null){
-             this.setModel(new Rubro());
-         }
-         setValores(this.getModel());
-         this.guardarModelo();   
+        if (this.getModel()== null){
+            this.setModel(new Rubro());
+        }
+        setValores();
+        this.guardarModelo();   
     }   
     
-    public void setValores(Rubro r){
-        r.setDescripcion(this.getForm().getTxtDescripcion().getText());
-        r.setNombre(this.getForm().getTxtNombre().getText());
-        r.setEstado(true);
+     public void setValores(){
+        this.getModel().setDescripcion(this.getForm().getTxtDescripcion().getText());
+        this.getModel().setNombre(this.getForm().getTxtNombre().getText());
+        this.getModel().setEstado(true);
     }
-    
+     
     private void guardarModelo() {
-        if (this.getModel().getId()==0) {
+        if (this.getModel().isNuevo()) {
            this.guardarObjeto(this.getModel());
-        }
-        else{
+        }else{
             this.actualizarObjeto(this.getModel()); 
         }
-
     }
-    
-    public void eliminar(Rubro rubro){
-        Rubro r = rubro;
-        r.setEstado(false);
-        this.actualizarObjeto(r);        
+        
+    public void eliminar(){
+        this.getModel().asEliminado();
+        this.actualizarObjeto(this.getModel());        
     }
     
     public void cargarDatos(Rubro rubro){
@@ -74,18 +64,9 @@ public class GestorRubro extends GestorHibernate{
         this.getForm().getTxtDescripcion().setText(r.getDescripcion());
     }
     
-    public List <Rubro> listar(String cadena,int max){   
-       Criteria crit = getSession().createCriteria(Rubro.class).addOrder(Order.asc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max);
-            if (!cadena.contentEquals("")) {
-                crit.add (Restrictions.like("nombre",cadena+"%"));
-            }   
-        return crit.list();
-    }
-
-     public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
+    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
         TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(cadena, max);
+        List<Rubro> list = listar(Rubro.class,cadena, max);
         Rubro auxModel;
         Iterator it = (Iterator) list.iterator();
         while (it.hasNext())  {
@@ -97,21 +78,39 @@ public class GestorRubro extends GestorHibernate{
         while (it2.hasNext())  {
             auxModel =(Rubro) it2.next();
             Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
-            modelTabla.addRow(fila);
-           
+            modelTabla.addRow(fila);  
         }
         return modelTabla;
     }
-    
+    //revisar, no funcion remplazo del de arriba
+    public DefaultTableModel listarDatos() {
+        DefaultTableModel modelTabla = (DefaultTableModel) this.getForm().getTableRubro().getModel();
+        TreeSet<Rubro> lista= new TreeSet();
+        List<Rubro> list = listar(Class.class,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
+        Rubro auxModel;
+        Iterator it = (Iterator) list.iterator();
+        while (it.hasNext())  {
+            auxModel =(Rubro) it.next();
+            lista.add(auxModel);
+         }
+       
+        Iterator it2 = (Iterator) lista.iterator();
+        while (it2.hasNext())  {
+            auxModel =(Rubro) it2.next();
+            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
+            modelTabla.addRow(fila);  
+        }
+        return modelTabla;
+    }
+     
     public void imprimir() {
-        this.abrirListado("./Reportes/Rubro.jasper");
+        this.abrirListado("./Reportes/prueba.jasper");
         this.agregarParametroListado("titulo", "Listado de rubros");
-//        this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
+//      this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
         this.agregarDatosListado(this.convertTo(this.getForm().getTableRubro()));
         this.imprimirListado();
     }
     
-
     private TreeSet convertTo(JTable tbl) {
         TreeSet<AuxGenerico> lista = new TreeSet();
         DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
@@ -120,45 +119,9 @@ public class GestorRubro extends GestorHibernate{
         }
         return lista;
     }
-    public void abrirListado(String archivo){
-        try{
-            gestorReportes= new GestorDeReportes(archivo);
-            gestorReportes.agregarParametro("tituloMembrete", "");
-            gestorReportes.agregarParametro("tituloMembrete2", "");
-            gestorReportes.agregarParametro("frase", "");
-            gestorReportes.agregarParametro("pieMembrete", "");
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
 
-    public void imprimirListado() {
-        try{
-            gestorReportes.imprimir();
-//             gestorReportes.imprimirDirecto();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+    public void open() {
+        setForm(new VistaRubro());
+        getForm().setVisible(true); 
     }
-    public void agregarDatosListado(HashSet lista) {
-        gestorReportes.setColeccionDeDatos(lista);
-    }
-
-    public void agregarDatosListado(Set lista) {
-        gestorReportes.setColeccionDeDatos(lista);
-    }
-  
-    public void agregarDatosListado(TreeSet listaDatosOrdenada){
-        gestorReportes.setColeccionDeDatos(listaDatosOrdenada);
-    }
-
-    public void agregarDatosListado(List listaDatosOrdenada){
-        gestorReportes.setColeccionDeDatos(listaDatosOrdenada);
-    }
-
-    public void agregarParametroListado(String nombre,Object objeto){
-        gestorReportes.agregarParametro(nombre, objeto);
-    }
-   
 }

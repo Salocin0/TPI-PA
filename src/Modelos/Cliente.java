@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
-@Table (name="Cliente")
+@Table (name="cliente")
 public class Cliente extends Usuario{
 
     private String apellido;

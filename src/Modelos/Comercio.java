@@ -1,5 +1,7 @@
 package Modelos;
 
+import Modelos.Producto;
+import Modelos.Rubro;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="Comercio")
+@Table (name="comercio")
 public class Comercio extends Usuario{
         
     @ManyToOne (targetEntity = Rubro.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)

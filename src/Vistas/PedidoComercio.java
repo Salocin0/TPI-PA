@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+//import Modelos.Usuarios.Comercio.Comercio.CambiarEstadoPedidoComercio;
+
 /**
  *
  * @author nicol
@@ -149,8 +151,8 @@ public class PedidoComercio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CambiarEstadoPedidoComercio c = new CambiarEstadoPedidoComercio();
-        c.setVisible(true);
+        //CambiarEstadoPedidoComercio c = new CambiarEstadoPedidoComercio();
+        //c.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

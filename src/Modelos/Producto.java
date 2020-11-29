@@ -16,11 +16,11 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table (name="Producto")
+@Table (name="producto")
 public class Producto implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
-    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_id_seq")
+    @SequenceGenerator(name = "producto_id_seq", sequenceName = "producto_id_seq", allocationSize = 1) 
     private long id;
     
     private int estado;
@@ -35,6 +35,9 @@ public class Producto implements Serializable{
     
     @OneToMany(mappedBy = "producto")
     private List<Comercio> comercios;
+
+    public Producto() {
+    }
     
     public Producto(int estado,String nombre,String descripcion,double precio,CategoriaProducto categoria, Comercio comercios/*,imagen imagen*/){
         this.estado=estado;

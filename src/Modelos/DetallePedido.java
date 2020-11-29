@@ -19,8 +19,8 @@ import javax.persistence.SequenceGenerator;
 @Table (name="detalle_pedido")
 public class DetallePedido implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_producto_id_seq")
-    @SequenceGenerator(name = "categoria_producto_id_seq", sequenceName = "categoria_producto_id_seq", allocationSize = 1) 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "detalle_pedido_id_seq")
+    @SequenceGenerator(name = "detalle_pedido_id_seq", sequenceName = "detalle_pedido_id_seq", allocationSize = 1) 
     private long id;
     
     private int estado;
@@ -31,23 +31,21 @@ public class DetallePedido implements Serializable {
     private int cantidad;
     @Column(name="subTotal", columnDefinition="Decimal(13,2) default '0.00'")
     private double subtotal;
-    
+
     @OneToOne (targetEntity = Pedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY) 
     private Pedido pedido;
 
     public DetallePedido() {
-        //this.estado=0;
-        //TO-DO??
     }
     
-    public DetallePedido(int estado,int cantidad, Pedido pedido, Producto producto,double subtotal){
+    /*public DetallePedido(int estado,int cantidad, Pedido pedido, Producto producto,double subtotal){
         this.estado=estado;
         this.cantidad=cantidad;
         this.pedido=pedido;
         this.producto=producto;
         this.subtotal=subtotal;
                                         
-    }
+    }*/
     public void setProducto(Producto producto) {
         this.producto = producto;
     }

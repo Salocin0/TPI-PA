@@ -1,20 +1,21 @@
 package Vistas;
-
-import Modelos.GestorRubro;
 import Modelos.Rubro;
+import Modelos.GestorRubro;
+import Vistas.ABMGn;
 import java.awt.HeadlessException;
-import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ABMCRubro extends ABMGn {
+public class VistaRubro extends ABMGn {
     DefaultTableModel modelo = new DefaultTableModel();
     private GestorRubro gr;
     
     //Metodos de seteo
+    
     public GestorRubro getGestorRubro() {
         if (gr == null) {
            synchronized (GestorRubro.class) {
@@ -25,12 +26,20 @@ public class ABMCRubro extends ABMGn {
         return gr;
     }
 
+    public JComboBox<String> getCbCantidad() {
+        return cbCantidad;
+    }
+
+    public void setCbCantidad(JComboBox<String> cbCantidad) {
+        this.cbCantidad = cbCantidad;
+    }
+
     public JTable getTableRubro() {
-        return tableRubro;
+        return tableDatos;
     }
 
     public void setTableRubro(JTable tableRubro) {
-        this.tableRubro = tableRubro;
+        this.tableDatos = tableRubro;
     }
 
     public JTextField getTxtBuscar() {
@@ -65,17 +74,17 @@ public class ABMCRubro extends ABMGn {
         this.txtNombre = TBNombre;
     }
 
+    //Metodos
+    
     public void cambiarEstadoPantalla(int num){
         switch(num){
-            case 1:{ //estado inicial
+            case 1 -> { //estado inicial
                 habilitacionBotones(true);
                 habilitacionExtras(true);
-                break;
             }
-            case 2:{ //en modificacion
+            case 2 -> { //en modificacion
                 habilitacionBotones(false);
                 habilitacionExtras(false);
-                break;
             } 
         }
     }
@@ -88,10 +97,10 @@ public class ABMCRubro extends ABMGn {
          btnGuardar.setEnabled(!valor);
          btnCancelar.setEnabled(!valor);
     }
-     
+
     public void habilitacionExtras(boolean valor){
         txtId.setEnabled(false);
-        tableRubro.setEnabled(valor);
+        tableDatos.setEnabled(valor);
         cbCantidad.setEnabled(valor);
     }
      
@@ -100,22 +109,24 @@ public class ABMCRubro extends ABMGn {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripcion");
+        
         traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
         cambiarEstadoPantalla(1);
     }
     
     public int cantidad(String str){
-        if(str == "Todos"){
+        if("Todos".equals(str)){
             return -1;
-        }else {
-            return Integer.parseInt(str);
+        }
+        else {
+            return strToInt(str);
         }
     }
     
     public void traerDatos(int max){
         limpiarTabla(modelo);
         getGestorRubro().listarDatos(modelo,txtBuscar.getText(),max);
-        this.tableRubro.setModel(modelo);
+        this.tableDatos.setModel(modelo);
     }
     
     public void limpiarPantalla(){
@@ -124,18 +135,16 @@ public class ABMCRubro extends ABMGn {
         txtDescripcion.setText("");
     }
     
-    public ABMCRubro() {
+    public VistaRubro() {
         initComponents();
         initializeTable();
     }
-//levar funcion al padre
+
     public boolean cuadrosVacios(){
-        if(txtNombre.getText()=="" || txtDescripcion.getText()==""/*mejorar condicion*/){
-            return false;
-        }else{
-            return true;
-        }
+        return esNulo(txtNombre)|| esNulo(txtDescripcion.getText());
     }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -150,7 +159,7 @@ public class ABMCRubro extends ABMGn {
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableRubro = new javax.swing.JTable();
+        tableDatos = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         btnCancelar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -214,7 +223,7 @@ public class ABMCRubro extends ABMGn {
             }
         });
 
-        tableRubro.setModel(new javax.swing.table.DefaultTableModel(
+        tableDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -230,8 +239,8 @@ public class ABMCRubro extends ABMGn {
                 return types [columnIndex];
             }
         });
-        tableRubro.setName("tableRubro"); // NOI18N
-        jScrollPane2.setViewportView(tableRubro);
+        tableDatos.setName("tableDatos"); // NOI18N
+        jScrollPane2.setViewportView(tableDatos);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -282,8 +291,7 @@ public class ABMCRubro extends ABMGn {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE,
- javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalir))
                             .addGroup(layout.createSequentialGroup()
@@ -372,7 +380,7 @@ public class ABMCRubro extends ABMGn {
                 JOptionPane.showMessageDialog(null, "Existen cuadros vacios, completelos para continuar");
             }
         }
-        catch(Exception e) {
+        catch(HeadlessException e) {
             System.out.println("Error al guardar:"+ e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al guardar");
         } 
@@ -381,12 +389,10 @@ public class ABMCRubro extends ABMGn {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
             getGestorRubro().setForm(this);
-            if(JOptionPane.showConfirmDialog(null, "Se eliminara la fila seleccionada, esta seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)==1){
-                    
-            }else{ 
-            getGestorRubro().eliminar((Rubro)modelo.getValueAt(tableRubro.getSelectedRow(), 0));
-            traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
-            };
+            if(JOptionPane.showConfirmDialog(null, "Se eliminara la fila seleccionada, esta seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)==0){
+                getGestorRubro().eliminar();
+                traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));  
+            }
         }
         catch(HeadlessException e) {
             System.out.println("Error al intentar eliminar la fila"+ e.getMessage());
@@ -397,9 +403,8 @@ public class ABMCRubro extends ABMGn {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
             getGestorRubro().setForm(this);
-            getGestorRubro().cargarDatos((Rubro) modelo.getValueAt(tableRubro.getSelectedRow(), 0));
+            getGestorRubro().cargarDatos((Rubro) modelo.getValueAt(tableDatos.getSelectedRow(), 0));
             cambiarEstadoPantalla(2);
-
         }
         catch(Exception e) {
             System.out.println("Error al cargar los datos de la tabla a los cuadros de texto"+ e.getMessage());
@@ -409,9 +414,8 @@ public class ABMCRubro extends ABMGn {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            //GUARDAR DESPUES DE HABER MODIFICADO
             getGestorRubro().setForm(this);
-            getGestorRubro().guardar(/*(Rubro) modelo.getValueAt(tableRubro.getSelectedRow(), 0)*/);
+            getGestorRubro().guardar();
             limpiarPantalla();
             traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
             cambiarEstadoPantalla(1);
@@ -425,7 +429,6 @@ public class ABMCRubro extends ABMGn {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limpiarPantalla();
         cambiarEstadoPantalla(1);
- 
    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -461,14 +464,22 @@ public class ABMCRubro extends ABMGn {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ABMCRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ABMCRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ABMCRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ABMCRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -501,12 +512,10 @@ public class ABMCRubro extends ABMGn {
     private javax.swing.JLabel lbDescripcion;
     private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbNombre;
-    private javax.swing.JTable tableRubro;
+    private javax.swing.JTable tableDatos;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
-
-
