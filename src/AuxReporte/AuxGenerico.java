@@ -5,7 +5,7 @@
  */
 package AuxReporte;
 
-import Modelos.Rubro;
+import Modelos.Rubros.Rubro;
 
 /**
  *

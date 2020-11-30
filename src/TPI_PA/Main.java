@@ -1,7 +1,7 @@
 package TPI_PA;
 
 import Hibernate.HibernateUtil;
-import Modelos.GestorRubro;
+import Modelos.Rubros.GestorRubro;
 
 public class Main {
    public static void main(String[] args) {

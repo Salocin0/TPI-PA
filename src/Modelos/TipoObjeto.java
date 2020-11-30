@@ -21,7 +21,7 @@ public class TipoObjeto implements Serializable, Comparable {
     @SequenceGenerator(name = "tipo_objeto_id_seq", sequenceName = "tipo_objeto_id_seq", allocationSize = 1) 
     private long id;
     
-    @Column
+    @Column(name = "estado", columnDefinition = "Boolean default 'false'")
     private boolean estado;
    
     @Column(columnDefinition = "TEXT")
