@@ -1,5 +1,6 @@
 package Modelos.Productos;
 
+import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.Usuarios.Comercios.Comercio;
 import java.io.Serializable;
 import java.util.List;

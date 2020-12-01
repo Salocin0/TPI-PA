@@ -1,4 +1,4 @@
-package Modelos.Productos;
+package Modelos.Categoria_Producto;
 
 import Modelos.TipoObjeto;
 import javax.persistence.Entity;

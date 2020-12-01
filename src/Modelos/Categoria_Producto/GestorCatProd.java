@@ -1,36 +1,33 @@
-package Modelos.Rubros;
-
-import AuxReporte.AuxGenerico;
+package Modelos.Categoria_Producto;
 import Modelos.GestorGn;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GestorRubro extends GestorGn{
-    private VistaRubro form;
-    private Rubro model;
+public class GestorCatProd extends GestorGn{
+    private VistaCatProd form;
+    private CategoriaProducto model;
 
-    public Rubro getModel() {
+    public CategoriaProducto getModel() {
         return model;
     }
 
-    public void setModel(Rubro model) {
+    public void setModel(CategoriaProducto model) {
         this.model = model;
     }
   
-    public VistaRubro getForm() {
+    public VistaCatProd getForm() {
         return form;
     }
     
-    public void setForm(VistaRubro form) {
+    public void setForm(VistaCatProd form) {
         this.form = form;
     }
     
     public void guardar(){
         if (this.getModel()== null){
-            this.setModel(new Rubro());
+            this.setModel(new CategoriaProducto());
         }
         setValores();
         this.guardarModelo();   
@@ -55,32 +52,33 @@ public class GestorRubro extends GestorGn{
         this.actualizarObjeto(this.getModel());        
     }
     
-    public void cargarDatos(Rubro rubro){
-        Rubro r = rubro;
-        this.setModel(rubro);
+    public void cargarDatos(CategoriaProducto cat){
+        CategoriaProducto r = cat;
+        this.setModel(cat);
         this.getForm().getTxtId().setText(String.valueOf((int) r.getId()));
         this.getForm().getTxtNombre().setText(r.getNombre());
         this.getForm().getTxtDescripcion().setText(r.getDescripcion());
     }
     
     public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
-        TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(Rubro.class,cadena, max);
-        Rubro auxModel;
+        TreeSet<CategoriaProducto> lista= new TreeSet();
+        List<CategoriaProducto> list = listar(CategoriaProducto.class,cadena, max);
+        CategoriaProducto auxModel;
         Iterator it = (Iterator) list.iterator();
         while (it.hasNext())  {
-            auxModel =(Rubro) it.next();
+            auxModel =(CategoriaProducto) it.next();
             lista.add(auxModel);
          }
        
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext())  {
-            auxModel =(Rubro) it2.next();
+            auxModel =(CategoriaProducto) it2.next();
             Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
             modelTabla.addRow(fila);  
         }
         return modelTabla;
     }
+    /*
     //revisar, no funcion remplazo del de arriba
     public DefaultTableModel listarDatos() {
         DefaultTableModel modelTabla = (DefaultTableModel) this.getForm().getTableRubro().getModel();
@@ -101,26 +99,26 @@ public class GestorRubro extends GestorGn{
         }
         return modelTabla;
     }
-     
-    public void imprimir() {
-        this.abrirListado("./Reportes/prueba.jasper");
-        this.agregarParametroListado("titulo", "Listado de rubros");
-//      this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
-        this.agregarDatosListado(this.convertTo(this.getForm().getTableRubro()));
-        this.imprimirListado();
-    }
-    
-    private TreeSet convertTo(JTable tbl) {
-        TreeSet<AuxGenerico> lista = new TreeSet();
-        DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
-        for(int i=0;i<modelo.getRowCount();i++){
-            lista.add(new AuxGenerico((Rubro) modelo.getValueAt(i, 0),i));
-        }
-        return lista;
-    }
+    */
+//    public void imprimir() {
+//        this.abrirListado("./Reportes/prueba.jasper");
+//        this.agregarParametroListado("titulo", "Listado de rubros");
+////      this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
+//        this.agregarDatosListado(this.convertTo(this.getForm().getTableDatos()));
+//        this.imprimirListado();
+//    }
+//    
+//    private TreeSet convertTo(JTable tbl) {
+//        TreeSet<AuxGenerico> lista = new TreeSet();
+//        DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
+//        for(int i=0;i<modelo.getRowCount();i++){
+//            lista.add(new AuxGenerico( (CategoriaProducto) modelo.getValueAt(i, 0),i));
+//        }
+//        return lista;
+//    }
 
     public void open() {
-        setForm(new VistaRubro());
+        setForm(new VistaCatProd());
         getForm().setVisible(true); 
     }
 }

@@ -1,4 +1,5 @@
-package Modelos.Rubros;
+package Modelos.Categoria_Producto;
+
 import Modelos.ABMGn;
 import java.awt.HeadlessException;
 import javax.swing.JComboBox;
@@ -8,20 +9,20 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class VistaRubro extends ABMGn {
+public class VistaCatProd extends ABMGn {
     DefaultTableModel modelo = new DefaultTableModel();
-    private GestorRubro gr;
+    private GestorCatProd gcp;
     
     //Metodos de seteo
     
-    public GestorRubro getGestorRubro() {
-        if (gr == null) {
-           synchronized (GestorRubro.class) {
-                gr = new GestorRubro();
-                gr.setForm(this);
+    public GestorCatProd getGestorCatProd() {
+        if (gcp == null) {
+           synchronized (GestorCatProd.class) {
+                gcp = new GestorCatProd();
+                gcp.setForm(this);
            }
         }
-        return gr;
+        return gcp;
     }
 
     public JComboBox<String> getCbCantidad() {
@@ -32,11 +33,11 @@ public class VistaRubro extends ABMGn {
         this.cbCantidad = cbCantidad;
     }
 
-    public JTable getTableRubro() {
+    public JTable getTableDatos() {
         return tableDatos;
     }
 
-    public void setTableRubro(JTable tableRubro) {
+    public void setTableDatos(JTable tableRubro) {
         this.tableDatos = tableRubro;
     }
 
@@ -123,7 +124,7 @@ public class VistaRubro extends ABMGn {
     
     public void traerDatos(int max){
         limpiarTabla(modelo);
-        getGestorRubro().listarDatos(modelo,txtBuscar.getText(),max);
+        getGestorCatProd().listarDatos(modelo,txtBuscar.getText(),max);
         this.tableDatos.setModel(modelo);
     }
     
@@ -133,52 +134,61 @@ public class VistaRubro extends ABMGn {
         txtDescripcion.setText("");
     }
     
-    public VistaRubro() {
+    public boolean cuadrosVacios(){
+        return esNulo(txtNombre)|| esNulo(txtDescripcion.getText());
+    }
+    public VistaCatProd() {
         initComponents();
         initializeTable();
     }
 
-    public boolean cuadrosVacios(){
-        return esNulo(txtNombre)|| esNulo(txtDescripcion.getText());
-    }
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
+        btnCancelar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
         lbNombre = new javax.swing.JLabel();
+        lbId = new javax.swing.JLabel();
         lbDescripcion = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         btnSalir = new javax.swing.JButton();
+        cbCantidad = new javax.swing.JComboBox<>();
         btnEliminar = new javax.swing.JButton();
+        btnReporte = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableDatos = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
-        btnCancelar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
-        lbId = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        cbCantidad = new javax.swing.JComboBox<>();
-        btnReporte = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setRows(5);
-        txtDescripcion.setName("txtDescripcion"); // NOI18N
-        jScrollPane1.setViewportView(txtDescripcion);
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         txtNombre.setName("txtNombre"); // NOI18N
 
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         lbNombre.setText("Nombre");
         lbNombre.setName("lbNombre"); // NOI18N
+
+        lbId.setText("ID");
 
         lbDescripcion.setText("Descripcion");
         lbDescripcion.setName("lbDescripcion"); // NOI18N
@@ -191,6 +201,13 @@ public class VistaRubro extends ABMGn {
             }
         });
 
+        cbCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "100", "Todos" }));
+        cbCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCantidadActionPerformed(evt);
+            }
+        });
+
         btnEliminar.setText("Eliminar");
         btnEliminar.setMaximumSize(new java.awt.Dimension(70, 23));
         btnEliminar.setMinimumSize(new java.awt.Dimension(70, 23));
@@ -198,6 +215,13 @@ public class VistaRubro extends ABMGn {
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnReporte.setText("Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
             }
         });
 
@@ -221,6 +245,13 @@ public class VistaRubro extends ABMGn {
             }
         });
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         tableDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -240,42 +271,10 @@ public class VistaRubro extends ABMGn {
         tableDatos.setName("tableDatos"); // NOI18N
         jScrollPane2.setViewportView(tableDatos);
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-
-        lbId.setText("ID");
-
-        cbCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "100", "Todos" }));
-        cbCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCantidadActionPerformed(evt);
-            }
-        });
-
-        btnReporte.setText("Reporte");
-        btnReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteActionPerformed(evt);
-            }
-        });
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        txtDescripcion.setName("txtDescripcion"); // NOI18N
+        jScrollPane1.setViewportView(txtDescripcion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -367,53 +366,15 @@ public class VistaRubro extends ABMGn {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try {
-            if (cuadrosVacios()==false){
-                getGestorRubro().setForm(this);
-                getGestorRubro().guardar();
-                limpiarPantalla();
-                traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
-            }else{
-                JOptionPane.showMessageDialog(null, "Existen cuadros vacios, completelos para continuar");
-            }
-        }
-        catch(HeadlessException e) {
-            System.out.println("Error al guardar:"+ e.getMessage());
-            JOptionPane.showMessageDialog(null, "Error al guardar");
-        } 
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        try {
-            getGestorRubro().setForm(this);
-            if(JOptionPane.showConfirmDialog(null, "Se eliminara la fila seleccionada, esta seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)==0){
-                getGestorRubro().eliminar();
-                traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));  
-            }
-        }
-        catch(HeadlessException e) {
-            System.out.println("Error al intentar eliminar la fila"+ e.getMessage());
-            JOptionPane.showMessageDialog(null, "no selecciono una fila de la tabla");
-        }  
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        try {
-            getGestorRubro().setForm(this);
-            getGestorRubro().cargarDatos((Rubro) modelo.getValueAt(tableDatos.getSelectedRow(), 0));
-            cambiarEstadoPantalla(2);
-        }
-        catch(Exception e) {
-            System.out.println("Error al cargar los datos de la tabla a los cuadros de texto"+ e.getMessage());
-            JOptionPane.showMessageDialog(null, "no selecciono una fila de la tabla");
-        }    
-    }//GEN-LAST:event_btnModificarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiarPantalla();
+        cambiarEstadoPantalla(1);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            getGestorRubro().setForm(this);
-            getGestorRubro().guardar();
+            getGestorCatProd().setForm(this);
+            getGestorCatProd().guardar();
             limpiarPantalla();
             traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
             cambiarEstadoPantalla(1);
@@ -424,26 +385,64 @@ public class VistaRubro extends ABMGn {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpiarPantalla();
-        cambiarEstadoPantalla(1);
-   }//GEN-LAST:event_btnCancelarActionPerformed
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void cbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCantidadActionPerformed
+        traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+    }//GEN-LAST:event_cbCantidadActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try {
+            getGestorCatProd().setForm(this);
+            if(JOptionPane.showConfirmDialog(null, "Se eliminara la fila seleccionada, esta seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)==0){
+                getGestorCatProd().eliminar();
+                traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+            }
+        }
+        catch(HeadlessException e) {
+            System.out.println("Error al intentar eliminar la fila"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "no selecciono una fila de la tabla");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-        this.gr.imprimir();
+        //this.gcp.imprimir();
     }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        try {
+            if (cuadrosVacios()==false){
+                getGestorCatProd().setForm(this);
+                getGestorCatProd().guardar();
+                limpiarPantalla();
+                traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+            }else{
+                JOptionPane.showMessageDialog(null, "Existen cuadros vacios, completelos para continuar");
+            }
+        }
+        catch(HeadlessException e) {
+            System.out.println("Error al guardar:"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al guardar");
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        try {
+            getGestorCatProd().setForm(this);
+            getGestorCatProd().cargarDatos((CategoriaProducto) modelo.getValueAt(tableDatos.getSelectedRow(), 0));
+            cambiarEstadoPantalla(2);
+        }
+        catch(Exception e) {
+            System.out.println("Error al cargar los datos de la tabla a los cuadros de texto"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "no selecciono una fila de la tabla");
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void cbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCantidadActionPerformed
-        traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
-    }//GEN-LAST:event_cbCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,35 +461,21 @@ public class VistaRubro extends ABMGn {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaRubro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {}
+            public void run() {
+                new VistaCatProd().setVisible(true);
+            }
         });
     }
 
