@@ -47,61 +47,44 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="btnSalir" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEntrar" min="-2" pref="140" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lbCampoObligatorio" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="cbTipoLogin" min="-2" pref="79" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnCrearCuentaU" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnCrearCuentaC" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtCorreo" min="-2" pref="223" max="-2" attributes="0"/>
-                                  <Component id="password" min="-2" pref="176" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtCorreo" max="32767" attributes="0"/>
+                          <Component id="txtContraseña" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="lblNoTienesCuenta" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lbSinCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnCrearCuentaUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnCrearCuentaComercio" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="BtnSalir" min="-2" pref="88" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblCampoObligatorio" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="BtnEntrar" min="-2" pref="140" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="Combo1" min="-2" pref="79" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jSeparator1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -109,67 +92,66 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="password" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="lblCampoObligatorio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="BtnEntrar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="Combo1" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Component id="lblNoTienesCuenta" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCrearCuentaU" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCrearCuentaC" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbTipoLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbCampoObligatorio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
-              <Component id="BtnSalir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEntrar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lbSinCuenta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnCrearCuentaUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCrearCuentaComercio" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="BtnSalir">
+    <Component class="javax.swing.JButton" name="btnSalir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSalirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="BtnEntrar">
+    <Component class="javax.swing.JButton" name="btnEntrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Entrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEntrarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEntrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCorreo">
+    <Component class="javax.swing.JLabel" name="lbCorreo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Correo Electronico * :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblContrase&#xf1;a">
+    <Component class="javax.swing.JLabel" name="lbContrase&#xf1;a">
       <Properties>
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a * :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnCrearCuentaU">
+    <Component class="javax.swing.JButton" name="btnCrearCuentaUsuario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Cuenta Usuario"/>
         <Property name="alignmentY" type="float" value="0.0"/>
@@ -180,36 +162,30 @@
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearCuentaUActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearCuentaUsuarioActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnCrearCuentaC">
+    <Component class="javax.swing.JButton" name="btnCrearCuentaComercio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Cuenta Comercio"/>
         <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearCuentaCActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearCuentaComercioActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblNoTienesCuenta">
+    <Component class="javax.swing.JLabel" name="lbSinCuenta">
       <Properties>
         <Property name="text" type="java.lang.String" value=" &#xbf;No Tienes Cuenta?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="password">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordActionPerformed"/>
-      </Events>
+    <Component class="javax.swing.JPasswordField" name="txtContrase&#xf1;a">
     </Component>
     <Component class="javax.swing.JTextField" name="txtCorreo">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCampoObligatorio">
+    <Component class="javax.swing.JLabel" name="lbCampoObligatorio">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -220,15 +196,16 @@
         <Property name="text" type="java.lang.String" value="(*) Campos Obligatorios"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="Combo1">
+    <Component class="javax.swing.JComboBox" name="cbTipoLogin">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="3">
+            <StringItem index="0" value="Usuario"/>
+            <StringItem index="1" value="Comercio"/>
+            <StringItem index="2" value="Administrador"/>
+          </StringArray>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Combo1ActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

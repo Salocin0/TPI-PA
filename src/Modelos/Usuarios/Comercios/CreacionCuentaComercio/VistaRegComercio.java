@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelos.Usuarios.Comercios;
+package Modelos.Usuarios.Comercios.CreacionCuentaComercio;
 
 /**
  *
  * @author nicol
  */
-public class RegComercio extends javax.swing.JFrame {
+public class VistaRegComercio extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmRegistroComercio
      */
-    public RegComercio() {
+    public VistaRegComercio() {
         initComponents();
     }
 
@@ -235,21 +235,23 @@ public class RegComercio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegComercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegComercio().setVisible(true);
+                new VistaRegComercio().setVisible(true);
             }
         });
     }

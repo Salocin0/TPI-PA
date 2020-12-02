@@ -1,8 +1,7 @@
 package TPI_PA;
 
 import Hibernate.HibernateUtil;
-import Modelos.Categoria_Producto.GestorCatProd;
-import Modelos.Rubros.GestorRubro;
+import Modelos.Login.GestorLogin;
 
 public class Main {
    public static void main(String[] args) {
@@ -11,7 +10,10 @@ public class Main {
         //GestorRubro gr = new GestorRubro();
         //gr.open();
         ///////////////////////CategoriaProducto/////////////
-        GestorCatProd gr = new GestorCatProd();
-        gr.open();
+        //GestorCatProd gr = new GestorCatProd();
+        //gr.open();
+        ///////////////////////Login////////////////////////
+        GestorLogin gl = new GestorLogin();
+        gl.open();
     }
 }
