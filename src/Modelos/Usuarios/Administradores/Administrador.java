@@ -2,7 +2,6 @@
 package Modelos.Usuarios.Administradores;
 
 import Modelos.Usuarios.Usuario;
-import Modelos.Usuarios.Usuario;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

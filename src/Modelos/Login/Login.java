@@ -182,8 +182,8 @@ public class Login extends ABMGn {
     }//GEN-LAST:event_btnCrearCuentaComercioActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        //FALTA VALIDAR USUARIO
         String item = (String)cbTipoLogin.getSelectedItem();
-        
         if (!cuadrosVasios()){
             
             if(existeUsuario()){
@@ -213,16 +213,7 @@ public class Login extends ABMGn {
             }
         }else{
             JOptionPane.showMessageDialog(this, "Complete los campos obligatorios");
-        }
-        
-        /*
-        String Correo= "mauroperelda10@gmail.com";
-        String Contraseña= "10133";
-        String Usuario;
-        String Comercio;
-        
-        String pass = new String(txtContraseña.getPassword()); // HAGO VALIDAR EL PASSWORD COMO STRING
-*/  
+        } 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

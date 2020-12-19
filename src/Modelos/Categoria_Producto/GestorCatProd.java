@@ -100,6 +100,7 @@ public class GestorCatProd extends GestorGn{
         return modelTabla;
     }
     */
+    /////ARREGLAR////////////////////////////////
 //    public void imprimir() {
 //        this.abrirListado("./Reportes/prueba.jasper");
 //        this.agregarParametroListado("titulo", "Listado de rubros");
