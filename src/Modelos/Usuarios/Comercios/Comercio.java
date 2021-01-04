@@ -1,7 +1,6 @@
 package Modelos.Usuarios.Comercios;
 
 import Modelos.Productos.Producto;
-import Modelos.Usuarios.Usuario;
 import Modelos.Rubros.Rubro;
 import Modelos.Usuarios.Usuario;
 import javax.persistence.CascadeType;

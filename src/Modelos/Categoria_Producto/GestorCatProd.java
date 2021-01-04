@@ -45,6 +45,7 @@ public class GestorCatProd extends GestorGn{
         }else{
             this.actualizarObjeto(this.getModel()); 
         }
+        this.model = null;
     }
         
     public void eliminar(){

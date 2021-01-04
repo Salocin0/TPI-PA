@@ -79,21 +79,23 @@ public class VistaRubro extends ABMGn {
             case 1: { //estado inicial
                 habilitacionBotones(true);
                 habilitacionExtras(true);
+                break;
             }
             case 2: { //en modificacion
                 habilitacionBotones(false);
                 habilitacionExtras(false);
+                break;
             } 
         }
     }
     
     public void habilitacionBotones(boolean valor){
-         btnAgregar.setEnabled(valor);
-         btnEliminar.setEnabled(valor);
-         btnModificar.setEnabled(valor);
-         btnReporte.setEnabled(valor);
-         btnGuardar.setEnabled(!valor);
-         btnCancelar.setEnabled(!valor);
+        btnAgregar.setEnabled(valor);
+        btnEliminar.setEnabled(valor);
+        btnModificar.setEnabled(valor);
+        btnReporte.setEnabled(valor);
+        btnGuardar.setEnabled(!valor);
+        btnCancelar.setEnabled(!valor);
     }
 
     public void habilitacionExtras(boolean valor){

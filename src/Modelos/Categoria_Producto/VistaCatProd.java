@@ -80,10 +80,12 @@ public class VistaCatProd extends ABMGn {
             case 1: { //estado inicial
                 habilitacionBotones(true);
                 habilitacionExtras(true);
+                break;
             }
             case 2: { //en modificacion
                 habilitacionBotones(false);
                 habilitacionExtras(false);
+                break;
             } 
         }
     }

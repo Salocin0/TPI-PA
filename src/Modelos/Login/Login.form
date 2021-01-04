@@ -55,11 +55,6 @@
                       <Component id="btnEntrar" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbCampoObligatorio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="cbTipoLogin" min="-2" pref="79" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lbContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -69,6 +64,11 @@
                           <Component id="txtCorreo" max="32767" attributes="0"/>
                           <Component id="txtContraseña" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lbCampoObligatorio" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="cbTipoLogin" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">

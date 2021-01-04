@@ -8,10 +8,10 @@ public class Main {
         HibernateUtil.inicializar();
         ///////////////////////Rubro/////////////////////////
         //GestorRubro gr = new GestorRubro();
-        //gr.open();
+        ///gr.open();
         ///////////////////////CategoriaProducto/////////////
-        //GestorCatProd gr = new GestorCatProd();
-        //gr.open();
+//        GestorCatProd gr = new GestorCatProd();
+//        gr.open();
         ///////////////////////Login////////////////////////
         GestorLogin gl = new GestorLogin();
         gl.open();

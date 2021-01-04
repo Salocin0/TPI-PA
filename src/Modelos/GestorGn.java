@@ -66,4 +66,16 @@ public class GestorGn extends GestorHibernate {
             }   
         return crit.list();
     }
+    public Object traerObjeto(Class clase,String cadena,int max){   
+       Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max);  
+        return crit.list().get(0);
+    }
+    public boolean buscarObjeto(Class clase,String cadena,int max){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.asc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("nombre",cadena)) ;
+        System.out.println(crit != null);
+        System.out.println(crit);
+        return crit != null;
+    }
 }

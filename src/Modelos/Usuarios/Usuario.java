@@ -1,5 +1,6 @@
 package Modelos.Usuarios;
 
+import Modelos.TipoObjeto;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name="usuario") 
-public class Usuario implements Serializable{
+public class Usuario /*extends TipoObjeto*/ implements Serializable,Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_seq")
     @SequenceGenerator(name = "usuario_id_seq", sequenceName = "usuario_id_seq", allocationSize = 1) 
@@ -68,10 +69,10 @@ public class Usuario implements Serializable{
        this.nombre = nombre;
     }
     //////Set & get ////// CORREO ELECTRONICO
-    public String getCorreoElectronico() {
+    public String getCorreo() {
         return correoElectronico;
     }
-    public void setCorreoElectronico(String correoElectronico) {
+    public void setCorreo(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
     //////Set & get ////// CONTRASEÑA
@@ -94,5 +95,18 @@ public class Usuario implements Serializable{
     }
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+    
+    public boolean isNuevo() {
+        return this.getId()==0;
+    }
+   
+    public void asEliminado() {
+        this.setEstado(false);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 1;
     }
 }
