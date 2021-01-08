@@ -6,16 +6,49 @@ import Modelos.Usuarios.Clientes.CreacionCuentaCliente.GestorRegCliente;
 import Modelos.Usuarios.Clientes.GestorVistaPrincipalCliente;
 import Modelos.Usuarios.Comercios.GestorVistaPrincipalComercio;
 import Modelos.Usuarios.Comercios.CreacionCuentaComercio.GestorRegComercio;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class Login extends ABMGn {
+    GestorLogin gl;
 
-    private boolean cuadrosVasios() {
-        return esNulo(txtCorreo.getText())|| esNulo(txtContraseña.getText());
+    public GestorLogin getGestorLogin() {
+        if (gl == null) {
+           synchronized (GestorLogin.class) {
+                gl = new GestorLogin();
+                gl.setForm(this);
+           }
+        }
+        return gl;
+    }
+    public JComboBox<String> getCbTipoLogin() {
+        return cbTipoLogin;
     }
 
-    private boolean existeUsuario() {
-        return true;
+    public void setCbTipoLogin(JComboBox<String> cbTipoLogin) {
+        this.cbTipoLogin = cbTipoLogin;
+    }
+
+    public JPasswordField getTxtContraseña() {
+        return txtContraseña;
+    }
+
+    public void setTxtContraseña(JPasswordField txtContraseña) {
+        this.txtContraseña = txtContraseña;
+    }
+
+    public JTextField getTxtCorreo() {
+        return txtCorreo;
+    }
+
+    public void setTxtCorreo(JTextField txtCorreo) {
+        this.txtCorreo = txtCorreo;
+    }
+    
+    private boolean cuadrosVasios() {
+        return esNulo(txtCorreo.getText())|| esNulo(txtContraseña.getText());
     }
     
     public Login() {
@@ -26,36 +59,75 @@ public class Login extends ABMGn {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        btnSalir = new javax.swing.JButton();
-        btnEntrar = new javax.swing.JButton();
-        lbCorreo = new javax.swing.JLabel();
-        lbContraseña = new javax.swing.JLabel();
-        btnCrearCuentaUsuario = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnCrearCuentaComercio = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        lbSinCuenta = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JPasswordField();
+        btnCrearCuentaUsuario = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lbCorreo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
+        lbContraseña = new javax.swing.JLabel();
+        txtContraseña = new javax.swing.JPasswordField();
         lbCampoObligatorio = new javax.swing.JLabel();
         cbTipoLogin = new javax.swing.JComboBox<>();
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jPasswordField1.setText("jPasswordField1");
+        btnSalir = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(" ¿No Tienes Cuenta?"));
+
+        btnCrearCuentaComercio.setText("Crear Cuenta Comercio");
+        btnCrearCuentaComercio.setBorderPainted(false);
+        btnCrearCuentaComercio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCuentaComercioActionPerformed(evt);
+            }
+        });
+
+        btnCrearCuentaUsuario.setText("Crear Cuenta Usuario");
+        btnCrearCuentaUsuario.setAlignmentY(0.0F);
+        btnCrearCuentaUsuario.setBorderPainted(false);
+        btnCrearCuentaUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCrearCuentaUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCrearCuentaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCuentaUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(btnCrearCuentaComercio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCrearCuentaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearCuentaComercio)
+                    .addComponent(btnCrearCuentaUsuario))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        lbCorreo.setText("Correo Electronico * :");
+
+        lbContraseña.setText("Contraseña * :");
+
+        lbCampoObligatorio.setBackground(new java.awt.Color(0, 0, 0));
+        lbCampoObligatorio.setForeground(new java.awt.Color(255, 0, 0));
+        lbCampoObligatorio.setText("(*) Campos Obligatorios");
+
+        cbTipoLogin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Comercio", "Administrador" }));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -71,36 +143,52 @@ public class Login extends ABMGn {
             }
         });
 
-        lbCorreo.setText("Correo Electronico * :");
-
-        lbContraseña.setText("Contraseña * :");
-
-        btnCrearCuentaUsuario.setText("Crear Cuenta Usuario");
-        btnCrearCuentaUsuario.setAlignmentY(0.0F);
-        btnCrearCuentaUsuario.setBorderPainted(false);
-        btnCrearCuentaUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnCrearCuentaUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCrearCuentaUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearCuentaUsuarioActionPerformed(evt);
-            }
-        });
-
-        btnCrearCuentaComercio.setText("Crear Cuenta Comercio");
-        btnCrearCuentaComercio.setBorderPainted(false);
-        btnCrearCuentaComercio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearCuentaComercioActionPerformed(evt);
-            }
-        });
-
-        lbSinCuenta.setText(" ¿No Tienes Cuenta?");
-
-        lbCampoObligatorio.setBackground(new java.awt.Color(0, 0, 0));
-        lbCampoObligatorio.setForeground(new java.awt.Color(255, 0, 0));
-        lbCampoObligatorio.setText("(*) Campos Obligatorios");
-
-        cbTipoLogin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Comercio", "Administrador" }));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbCorreo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCorreo))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbContraseña)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtContraseña))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbCampoObligatorio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                        .addComponent(cbTipoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCorreo)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbContraseña)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCampoObligatorio)
+                    .addComponent(cbTipoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(btnEntrar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,61 +197,17 @@ public class Login extends ABMGn {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbCorreo)
-                            .addComponent(lbContraseña))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCorreo)
-                            .addComponent(txtContraseña)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lbCampoObligatorio)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbTipoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbSinCuenta)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnCrearCuentaUsuario)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnCrearCuentaComercio)))
-                            .addGap(0, 0, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addComponent(jSeparator1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCorreo)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbContraseña)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTipoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbCampoObligatorio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnEntrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbSinCuenta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrearCuentaUsuario)
-                    .addComponent(btnCrearCuentaComercio))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -183,28 +227,22 @@ public class Login extends ABMGn {
     }//GEN-LAST:event_btnCrearCuentaComercioActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        //FALTA VALIDAR USUARIO
         String item = (String)cbTipoLogin.getSelectedItem();
-        if (!cuadrosVasios()){
-            
-            if(existeUsuario()){
-                
+        if (!cuadrosVasios()){    
+            if(getGestorLogin().existeUsuario()){ 
                 switch(item){
-                    
                     case "Usuario" -> {//hace referencia a cliente
                         GestorVistaPrincipalCliente gp = new GestorVistaPrincipalCliente();
                         gp.open();
                         dispose();
                         break;
                     }
-                    
                     case "Comercio" -> {  
                         GestorVistaPrincipalComercio gp = new GestorVistaPrincipalComercio();
                         gp.open();
                         dispose();
                         break;
                     }
-                    
                     case "Administrador" -> {
                         GestorVistaPrincipalAdmin gp = new GestorVistaPrincipalAdmin ();
                         gp.open();
@@ -256,20 +294,17 @@ public class Login extends ABMGn {
             }
         });
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCuentaComercio;
     private javax.swing.JButton btnCrearCuentaUsuario;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbTipoLogin;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbCampoObligatorio;
     private javax.swing.JLabel lbContraseña;
     private javax.swing.JLabel lbCorreo;
-    private javax.swing.JLabel lbSinCuenta;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables

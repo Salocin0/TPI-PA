@@ -66,16 +66,26 @@ public class GestorGn extends GestorHibernate {
             }   
         return crit.list();
     }
-    public Object traerObjeto(Class clase,String cadena,int max){   
+    public Object traerObjeto(Class clase){   
        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max);  
+            .add (Restrictions.eq("estado",true)).setMaxResults(1);  
         return crit.list().get(0);
     }
-    public boolean buscarObjeto(Class clase,String cadena,int max){   
+    public Object traerObjeto(Class clase,String cadena,int max){   
+       Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("nombre",cadena));  
+        return crit.list().get(0);
+    }
+    public Object traerUsuario(Class clase,String cadena,int max){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add(Restrictions.eq("correoElectronico", cadena));  
+        return crit.list().get(0);
+    }
+    
+    public boolean buscarUsuario(Class clase,String cadena){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.asc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("nombre",cadena)) ;
-        System.out.println(crit != null);
-        System.out.println(crit);
-        return crit != null;
+            .add (Restrictions.eq("estado",true)).add (Restrictions.eq("correoElectronico",cadena)) ;
+        return !crit.list().isEmpty();
+        
     }
 }
