@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AuxReporte;
 
 import Modelos.Categoria_Producto.CategoriaProducto;
-import Modelos.Rubros.Rubro;
+import Modelos.Productos.Producto;
+import Modelos.Usuarios.Comercios.Comercio;
 
-public class AuxGenerico implements Comparable{
+public class AuxGenericoProducto implements Comparable {
     
     private String nombre;
     private long id;
     private String descripcion;
+    private double precio;
+    CategoriaProducto categoria;
+    Comercio comercio;
     private int orden;
 
     public String getNombre() {
@@ -47,19 +46,16 @@ public class AuxGenerico implements Comparable{
         this.orden = orden;
     }
 
-    public AuxGenerico() {
+    public AuxGenericoProducto() {
     }
 
-    public AuxGenerico(Rubro rubro, int orden) {
-        this.descripcion= rubro.getDescripcion();
-        this.nombre= rubro.getNombre();
+    public AuxGenericoProducto(Producto producto, int orden) {
+        this.descripcion= producto.getDescripcion();
+        this.nombre= producto.getNombre();
         this.orden = orden;
-    }
-    
-    public AuxGenerico(CategoriaProducto catProd, int orden) {
-        this.descripcion= catProd.getDescripcion();
-        this.nombre= catProd.getNombre();
-        this.orden = orden;
+        this.precio= (float) producto.getPrecio();
+        this.categoria = producto.getCategoria();
+        this.comercio = (Comercio) producto.getComercios();
     }
     
     @Override

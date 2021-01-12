@@ -21,4 +21,9 @@ public class CategoriaProducto extends TipoObjeto {
         CategoriaProducto p=(CategoriaProducto) o;
         return this.getNombre().compareTo(p.getNombre());
     }
+    
+    @Override
+    public String toString(){
+        return this.getNombre();
+    }
 }

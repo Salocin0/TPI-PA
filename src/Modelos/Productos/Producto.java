@@ -109,4 +109,16 @@ public class Producto implements Serializable{
     public void setComercios(List<Comercio> comercios) {
         this.comercios = comercios;
     }
+    
+    public boolean isNuevo() {
+        return this.getId()==0;
+    }
+   
+    public void asEliminado() {
+        this.setEstado(false);
+    }
+    
+    public int compareTo(Object o) {
+        return 1;
+    }
 }

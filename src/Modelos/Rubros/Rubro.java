@@ -24,6 +24,6 @@ public class Rubro extends TipoObjeto {
     
     @Override
     public String toString(){
-    return this.getNombre();
+        return this.getNombre();
     }
 }

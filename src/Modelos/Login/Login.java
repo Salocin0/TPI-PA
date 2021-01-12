@@ -4,6 +4,7 @@ import Modelos.ABMGn;
 import Modelos.Usuarios.Administradores.GestorVistaPrincipalAdmin;
 import Modelos.Usuarios.Clientes.CreacionCuentaCliente.GestorRegCliente;
 import Modelos.Usuarios.Clientes.GestorVistaPrincipalCliente;
+import Modelos.Usuarios.Comercios.Comercio;
 import Modelos.Usuarios.Comercios.GestorVistaPrincipalComercio;
 import Modelos.Usuarios.Comercios.CreacionCuentaComercio.GestorRegComercio;
 import javax.swing.JComboBox;
@@ -240,6 +241,7 @@ public class Login extends ABMGn {
                     case "Comercio" -> {  
                         GestorVistaPrincipalComercio gp = new GestorVistaPrincipalComercio();
                         gp.open();
+                        gp.traerComercio(this.getTxtCorreo().getText());
                         dispose();
                         break;
                     }
