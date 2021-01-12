@@ -17,5 +17,4 @@ public class GestorVistaPrincipalAdmin extends GestorGn {
         setForm(new VistaPrincipalAdmin());
         getForm().setVisible(true); 
     }
-    
 }

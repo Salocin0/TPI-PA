@@ -51,4 +51,5 @@ public class GestorRegCliente extends GestorHibernate{
             this.actualizarObjeto(this.getModel()); 
         }
     }
+    
 }

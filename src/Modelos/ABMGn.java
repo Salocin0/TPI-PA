@@ -63,9 +63,7 @@ public class ABMGn extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ABMGn().setVisible(true);
-                
-                
+                new ABMGn().setVisible(true);  
             }
         });
     }

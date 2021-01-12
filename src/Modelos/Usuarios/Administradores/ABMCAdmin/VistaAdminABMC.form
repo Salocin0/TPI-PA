@@ -23,17 +23,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Component id="panBuscar" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="panDatosUsuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panBotones" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="panBuscar" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -185,23 +186,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCancelar" max="32767" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnModificar" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnReporte" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                              <Component id="btnEliminar" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                              <Component id="btnAgregar" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnAgregar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnEliminar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnReporte" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -214,8 +210,8 @@
                   <Component id="btnModificar" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnGuardar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnEliminar" min="-2" pref="40" max="-2" attributes="0"/>
@@ -371,11 +367,7 @@
             <Component class="javax.swing.JTable" name="tableDatos">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="0">
-                    <Column editable="true" title="ID" type="java.lang.Long"/>
-                    <Column editable="true" title="Nombre" type="java.lang.String"/>
-                    <Column editable="true" title="Descripcion" type="java.lang.String"/>
-                  </Table>
+                  <Table columnCount="0" rowCount="0"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="tableDatos" noResource="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

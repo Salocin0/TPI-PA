@@ -10,8 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-   
+ 
 @Entity
 @Table (name="tipo_objeto")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS) 
@@ -83,5 +82,4 @@ public class TipoObjeto implements Serializable, Comparable {
     public int compareTo(Object o) {
         return 1;
     }
-
 }

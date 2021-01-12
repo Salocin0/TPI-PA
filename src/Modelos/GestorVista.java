@@ -31,7 +31,6 @@ public class GestorVista implements GVista {
         this.UtilTable = UtilTable;
     }
     
-    
     public GestorDeReportes getGestorReportes() {
         return gestorReportes;
     }
@@ -104,7 +103,6 @@ public class GestorVista implements GVista {
     public  void setModoEditar() {
         this.setOpcABM(1);
     }
-/////////////////////////////////////////////////
    
 /////////////////////////////////////////////////      
     public boolean isEdit() {
@@ -123,7 +121,6 @@ public class GestorVista implements GVista {
         return (this.getOpcABM() ==10);
     }
     
-  
  ///////////////////////////////////////////////////
  
     /// Seccion Convertidores 

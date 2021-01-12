@@ -23,17 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="panBuscar" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="panBuscar" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="panDatosUsuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panBotones" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,9 +41,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panBotones" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="panDatosUsuario" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="panBotones" max="32767" attributes="0"/>
+                  <Component id="panDatosUsuario" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panBuscar" min="-2" max="-2" attributes="0"/>
@@ -94,12 +94,12 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="141" max="-2" attributes="0"/>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cbCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -125,11 +125,7 @@
             <Component class="javax.swing.JTable" name="tableDatos">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="0">
-                    <Column editable="true" title="ID" type="java.lang.Long"/>
-                    <Column editable="true" title="Nombre" type="java.lang.String"/>
-                    <Column editable="true" title="Descripcion" type="java.lang.String"/>
-                  </Table>
+                  <Table columnCount="0" rowCount="0"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="tableDatos" noResource="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -180,30 +176,30 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtCorreo" alignment="0" pref="200" max="32767" attributes="0"/>
-                      <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtId" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbId" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbRubro" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtCorreo" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbId" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lbContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtContraseña" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtContraseña" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="txtDireccion" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="lbTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTelefono" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="lbFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFechaNacimiento" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="lbContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbTelefono" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbRubro" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -213,44 +209,38 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbRubro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtContraseña" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -298,13 +288,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTelefono">
         </Component>
-        <Component class="javax.swing.JLabel" name="lbFechaNacimiento">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFechaNacimiento">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Rubro"/>
@@ -313,12 +296,7 @@
         <Component class="javax.swing.JComboBox" name="cbRubro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -341,23 +319,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnModificar" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnCancelar" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="btnModificar" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnReporte" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                              <Component id="btnEliminar" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                              <Component id="btnAgregar" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnReporte" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnEliminar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAgregar" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

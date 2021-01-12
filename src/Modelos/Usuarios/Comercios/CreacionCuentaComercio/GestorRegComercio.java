@@ -56,8 +56,7 @@ public class GestorRegComercio extends GestorGn{
         List list = listarClase(Rubro.class,true,-1);
         for(int i=0;i<list.size();i++){
             this.getForm().getCbRubro().addItem(list.get(i).toString());
-    }
-                
+        }
     }
     private void guardarModelo() {
         if (this.getModel().isNuevo()) {

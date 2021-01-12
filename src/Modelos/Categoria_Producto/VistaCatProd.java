@@ -1,6 +1,7 @@
 package Modelos.Categoria_Producto;
 
 import Modelos.ABMGn;
+import Modelos.Usuarios.Administradores.GestorVistaPrincipalAdmin;
 import java.awt.HeadlessException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -14,16 +15,6 @@ public class VistaCatProd extends ABMGn {
     private GestorCatProd gcp;
     
     //Metodos de seteo
-    
-    public GestorCatProd getGestorCatProd() {
-        if (gcp == null) {
-           synchronized (GestorCatProd.class) {
-                gcp = new GestorCatProd();
-                gcp.setForm(this);
-           }
-        }
-        return gcp;
-    }
 
     public JComboBox<String> getCbCantidad() {
         return cbCantidad;
@@ -74,6 +65,16 @@ public class VistaCatProd extends ABMGn {
     }
 
     //Metodos
+    
+    public GestorCatProd getGestorCatProd() {
+        if (gcp == null) {
+           synchronized (GestorCatProd.class) {
+                gcp = new GestorCatProd();
+                gcp.setForm(this);
+           }
+        }
+        return gcp;
+    }
     
     public void cambiarEstadoPantalla(int num){
         switch(num){
@@ -126,7 +127,7 @@ public class VistaCatProd extends ABMGn {
     
     public void traerDatos(int max){
         limpiarTabla(modelo);
-        getGestorCatProd().listarDatos(modelo,txtBuscar.getText(),max);
+        getTableDatos().setModel(getGestorCatProd().listarDatos(modelo,CategoriaProducto.class));
         this.tableDatos.setModel(modelo);
     }
     
@@ -259,17 +260,9 @@ public class VistaCatProd extends ABMGn {
 
             },
             new String [] {
-                "ID", "Nombre", "Descripcion"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         tableDatos.setName("tableDatos"); // NOI18N
         jScrollPane2.setViewportView(tableDatos);
 
@@ -389,6 +382,8 @@ public class VistaCatProd extends ABMGn {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
+        GestorVistaPrincipalAdmin gvpa= new GestorVistaPrincipalAdmin();
+        gvpa.open();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void cbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCantidadActionPerformed

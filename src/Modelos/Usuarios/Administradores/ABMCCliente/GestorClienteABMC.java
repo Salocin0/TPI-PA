@@ -73,45 +73,24 @@ public class GestorClienteABMC extends GestorGn{
         this.getForm().getTxtApellido().setText(this.getModel().getApellido());
         this.getForm().getTxtFechaNacimiento().setText(this.getModel().getFechaNacimiento());
     }
-    
-    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
+
+    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,Class clase) {
         TreeSet<Cliente> lista= new TreeSet();
-        List<Cliente> list = listar(Cliente.class,cadena, max);
+        List<Cliente> list = listar(clase,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
         Cliente auxModel;
         Iterator it = (Iterator) list.iterator();
-        while (it.hasNext())  {
+        while (it.hasNext()) {
             auxModel =(Cliente) it.next();
             lista.add(auxModel);
         }
-       
         Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
+        while (it2.hasNext()) {
             auxModel =(Cliente) it2.next();
             Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(), auxModel.getApellido(), auxModel.getCorreo(), auxModel.getContraseña(),auxModel.getDireccion(),auxModel.getTelefono(),auxModel.getFechaNacimiento()};
             modelTabla.addRow(fila);  
         }
         return modelTabla;
     }
-    //revisar, no funcion remplazo del de arriba
-    /*public DefaultTableModel listarDatos() {
-        DefaultTableModel modelTabla = (DefaultTableModel) this.getForm().getTableRubro().getModel();
-        TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(Class.class,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
-        Rubro auxModel;
-        Iterator it = (Iterator) list.iterator();
-        while (it.hasNext())  {
-            auxModel =(Rubro) it.next();
-            lista.add(auxModel);
-         }
-       
-        Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
-            auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
-            modelTabla.addRow(fila);  
-        }
-        return modelTabla;
-    }*/
      
     public void imprimir() {
         this.abrirListado("./Reportes/prueba.jasper");

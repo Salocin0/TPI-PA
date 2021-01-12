@@ -23,9 +23,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="panBuscar" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="panDatosUsuario" min="-2" max="-2" attributes="0"/>
@@ -33,7 +33,7 @@
                       <Component id="panBotones" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,9 +41,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panBotones" min="-2" max="-2" attributes="0"/>
-                  <Component id="panDatosUsuario" min="-2" pref="204" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="panBotones" max="32767" attributes="0"/>
+                  <Component id="panDatosUsuario" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="panBuscar" min="-2" max="-2" attributes="0"/>
@@ -68,29 +68,40 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCorreo" alignment="0" pref="200" max="32767" attributes="0"/>
-                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtId" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbApellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtCorreo" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtId" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lbApellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbId" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="lbDireccion" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbTelefono" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtDireccion" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="txtTelefono" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="lbFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtFechaNacimiento" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
-                      <Component id="lbNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbId" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbContraseña" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtContraseña" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbDireccion" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtContraseña" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="txtDireccion" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="lbTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTelefono" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="lbFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFechaNacimiento" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,44 +111,42 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lbCorreo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtCorreo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lbContraseña" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtContraseña" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -215,23 +224,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnModificar" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnCancelar" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="btnModificar" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnReporte" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                              <Component id="btnEliminar" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                              <Component id="btnAgregar" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnReporte" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnEliminar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAgregar" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -369,12 +373,12 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="141" max="-2" attributes="0"/>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cbCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -400,11 +404,7 @@
             <Component class="javax.swing.JTable" name="tableDatos">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="0">
-                    <Column editable="true" title="ID" type="java.lang.Long"/>
-                    <Column editable="true" title="Nombre" type="java.lang.String"/>
-                    <Column editable="true" title="Descripcion" type="java.lang.String"/>
-                  </Table>
+                  <Table columnCount="0" rowCount="0"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="tableDatos" noResource="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">

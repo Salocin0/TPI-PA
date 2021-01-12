@@ -39,5 +39,4 @@ public class Cliente extends Usuario{
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
 }

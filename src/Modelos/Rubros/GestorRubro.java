@@ -63,39 +63,18 @@ public class GestorRubro extends GestorGn{
         this.getForm().getTxtNombre().setText(r.getNombre());
         this.getForm().getTxtDescripcion().setText(r.getDescripcion());
     }
-    
-    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
+
+    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,Class clase) {
         TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(Rubro.class,cadena, max);
+        List<Rubro> list = listar(clase,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
         Rubro auxModel;
         Iterator it = (Iterator) list.iterator();
-        while (it.hasNext())  {
+        while (it.hasNext()) {
             auxModel =(Rubro) it.next();
             lista.add(auxModel);
         }
-       
         Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
-            auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
-            modelTabla.addRow(fila);  
-        }
-        return modelTabla;
-    }
-    //revisar, no funcion remplazo del de arriba
-    public DefaultTableModel listarDatos() {
-        DefaultTableModel modelTabla = (DefaultTableModel) this.getForm().getTableRubro().getModel();
-        TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(Class.class,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
-        Rubro auxModel;
-        Iterator it = (Iterator) list.iterator();
-        while (it.hasNext())  {
-            auxModel =(Rubro) it.next();
-            lista.add(auxModel);
-         }
-       
-        Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
+        while (it2.hasNext()) {
             auxModel =(Rubro) it2.next();
             Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
             modelTabla.addRow(fila);  

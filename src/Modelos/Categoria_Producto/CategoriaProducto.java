@@ -15,10 +15,10 @@ public class CategoriaProducto extends TipoObjeto {
     public CategoriaProducto(boolean estado,String nombre, String descripcion){
         super(estado,nombre,descripcion);
     } 
-    /*
+    
     @Override
     public int compareTo(Object o) {
-        Rubro p=(Rubro) o;
+        CategoriaProducto p=(CategoriaProducto) o;
         return this.getNombre().compareTo(p.getNombre());
-    }*/
+    }
 }

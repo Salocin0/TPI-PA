@@ -1,8 +1,10 @@
 package Modelos.Categoria_Producto;
+import AuxReporte.AuxGenerico;
 import Modelos.GestorGn;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class GestorCatProd extends GestorGn{
@@ -60,64 +62,41 @@ public class GestorCatProd extends GestorGn{
         this.getForm().getTxtNombre().setText(r.getNombre());
         this.getForm().getTxtDescripcion().setText(r.getDescripcion());
     }
-    
-    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
+
+    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,Class clase) {
         TreeSet<CategoriaProducto> lista= new TreeSet();
-        List<CategoriaProducto> list = listar(CategoriaProducto.class,cadena, max);
+        List<CategoriaProducto> list = listar(clase,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String)this.getForm().getCbCantidad().getSelectedItem()));
         CategoriaProducto auxModel;
         Iterator it = (Iterator) list.iterator();
         while (it.hasNext())  {
             auxModel =(CategoriaProducto) it.next();
             lista.add(auxModel);
-         }
-       
+        }
         Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
+        while (it2.hasNext()){
             auxModel =(CategoriaProducto) it2.next();
             Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
             modelTabla.addRow(fila);  
         }
         return modelTabla;
     }
-    /*
-    //revisar, no funcion remplazo del de arriba
-    public DefaultTableModel listarDatos() {
-        DefaultTableModel modelTabla = (DefaultTableModel) this.getForm().getTableRubro().getModel();
-        TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(Class.class,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
-        Rubro auxModel;
-        Iterator it = (Iterator) list.iterator();
-        while (it.hasNext())  {
-            auxModel =(Rubro) it.next();
-            lista.add(auxModel);
-         }
-       
-        Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
-            auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
-            modelTabla.addRow(fila);  
-        }
-        return modelTabla;
+    
+    public void imprimir() {
+        this.abrirListado("./Reportes/prueba.jasper");
+        this.agregarParametroListado("titulo", "Listado de rubros");
+//      this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
+        this.agregarDatosListado(this.convertTo(this.getForm().getTableDatos()));
+        this.imprimirListado();
     }
-    */
-    /////ARREGLAR////////////////////////////////
-//    public void imprimir() {
-//        this.abrirListado("./Reportes/prueba.jasper");
-//        this.agregarParametroListado("titulo", "Listado de rubros");
-////      this.agregarParametroListado("imagenReporte", this.pathImagenReporteLogo);
-//        this.agregarDatosListado(this.convertTo(this.getForm().getTableDatos()));
-//        this.imprimirListado();
-//    }
-//    
-//    private TreeSet convertTo(JTable tbl) {
-//        TreeSet<AuxGenerico> lista = new TreeSet();
-//        DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
-//        for(int i=0;i<modelo.getRowCount();i++){
-//            lista.add(new AuxGenerico( (CategoriaProducto) modelo.getValueAt(i, 0),i));
-//        }
-//        return lista;
-//    }
+    
+    private TreeSet convertTo(JTable tbl) {
+        TreeSet<AuxGenerico> lista = new TreeSet();
+        DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
+        for(int i=0;i<modelo.getRowCount();i++){
+            lista.add(new AuxGenerico((CategoriaProducto) modelo.getValueAt(i, 0),i));
+        }
+        return lista;
+    }
 
     public void open() {
         setForm(new VistaCatProd());

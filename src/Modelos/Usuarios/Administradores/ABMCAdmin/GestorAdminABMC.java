@@ -70,46 +70,26 @@ public class GestorAdminABMC extends GestorGn{
         this.getForm().getTxtTelefono().setText(String.valueOf((int) this.getModel().getTelefono()));
         this.getForm().getTxtNombre().setText(this.getModel().getNombre());
     }
-    
-    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,String cadena, int max) {
+
+    public DefaultTableModel listarDatos(DefaultTableModel modelTabla,Class clase) {
         TreeSet<Administrador> lista= new TreeSet();
-        List<Administrador> list = listar(Administrador.class,cadena, max);
+        List<Administrador> list = listar(Class.class,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
         Administrador auxModel;
         Iterator it = (Iterator) list.iterator();
         while (it.hasNext())  {
             auxModel =(Administrador) it.next();
             lista.add(auxModel);
-        }
-       
-        Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext())  {
-            auxModel =(Administrador) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(), auxModel.getCorreo(), auxModel.getContraseña(),auxModel.getDireccion(),auxModel.getTelefono()};
-            modelTabla.addRow(fila);  
-        }
-        return modelTabla;
-    }
-    //revisar, no funcion remplazo del de arriba
-    /*public DefaultTableModel listarDatos() {
-        DefaultTableModel modelTabla = (DefaultTableModel) this.getForm().getTableRubro().getModel();
-        TreeSet<Rubro> lista= new TreeSet();
-        List<Rubro> list = listar(Class.class,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
-        Rubro auxModel;
-        Iterator it = (Iterator) list.iterator();
-        while (it.hasNext())  {
-            auxModel =(Rubro) it.next();
-            lista.add(auxModel);
          }
        
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext())  {
-            auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
+            auxModel =(Administrador) it2.next();
+            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getCorreo(),auxModel.getContraseña(),auxModel.getDireccion(),auxModel.getTelefono()};
             modelTabla.addRow(fila);  
         }
         return modelTabla;
-    }*/
-     
+    }
+        
     public void imprimir() {
         this.abrirListado("./Reportes/prueba.jasper");
         this.agregarParametroListado("titulo", "Listado de rubros");

@@ -1,4 +1,3 @@
-
 package Modelos.Usuarios.Administradores;
 
 import Modelos.Usuarios.Usuario;

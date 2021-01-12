@@ -57,7 +57,6 @@ public class GestorGn extends GestorHibernate {
         gestorReportes.agregarParametro(nombre, objeto);
     } 
     
-    
      public List listar(Class clase,String cadena,int max){   
        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
             .add (Restrictions.eq("estado",true)).setMaxResults(max);
@@ -86,6 +85,5 @@ public class GestorGn extends GestorHibernate {
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.asc("id"))
             .add (Restrictions.eq("estado",true)).add (Restrictions.eq("correoElectronico",cadena)) ;
         return !crit.list().isEmpty();
-        
     }
 }

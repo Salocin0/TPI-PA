@@ -1,5 +1,6 @@
 package Modelos.Rubros;
 import Modelos.ABMGn;
+import Modelos.Usuarios.Administradores.GestorVistaPrincipalAdmin;
 import java.awt.HeadlessException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -125,7 +126,7 @@ public class VistaRubro extends ABMGn {
     
     public void traerDatos(int max){
         limpiarTabla(modelo);
-        getGestorRubro().listarDatos(modelo,txtBuscar.getText(),max);
+        getGestorRubro().listarDatos(modelo,Rubro.class);
         this.tableDatos.setModel(modelo);
     }
     
@@ -228,17 +229,9 @@ public class VistaRubro extends ABMGn {
 
             },
             new String [] {
-                "ID", "Nombre", "Descripcion"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         tableDatos.setName("tableDatos"); // NOI18N
         jScrollPane2.setViewportView(tableDatos);
 
@@ -433,6 +426,8 @@ public class VistaRubro extends ABMGn {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
+        GestorVistaPrincipalAdmin gvpa= new GestorVistaPrincipalAdmin();
+        gvpa.open();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed

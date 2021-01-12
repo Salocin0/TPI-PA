@@ -31,17 +31,19 @@ public class Comercio extends Usuario{
         this.producto=producto;
         this.calificacion=calificacion;
     }
-    //////Set & get ////// RUBRO
+    
     public Rubro getRubro() {
         return rubro;
     }
+    
     public void setRubro(Rubro rubro) {
         this.rubro = rubro;
     }
-    //////Set & get ////// PRODUCTO
+    
     public Producto getProducto() {
         return producto;
     }
+    
     public void setProducto(Producto producto) {
         this.producto = producto;
     }

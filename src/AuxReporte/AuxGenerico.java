@@ -5,12 +5,9 @@
  */
 package AuxReporte;
 
+import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.Rubros.Rubro;
 
-/**
- *
- * @author Mauro Perelda
- */
 public class AuxGenerico  implements Comparable{
     
     private String nombre;
@@ -57,11 +54,15 @@ public class AuxGenerico  implements Comparable{
 
     public AuxGenerico(Rubro rubro, int orden) {
         this.descripcion= rubro.getDescripcion();
-         this.nombre= rubro.getNombre();
+        this.nombre= rubro.getNombre();
         this.orden = orden;
     }
     
-  
+    public AuxGenerico(CategoriaProducto catProd, int orden) {
+        this.descripcion= catProd.getDescripcion();
+        this.nombre= catProd.getNombre();
+        this.orden = orden;
+    }
     
     @Override
     public int compareTo(Object o) {
