@@ -20,11 +20,12 @@ public class GestorLogin extends GestorGn {
         int item = this.getForm().getCbTipoLogin().getSelectedIndex();
         
         if(item == 0){
-            Cliente U;
+           return true;
+            /* Cliente U;
             if(buscarUsuario(Cliente.class,this.getForm().getTxtCorreo().getText())==true){
                 U = (Cliente) traerUsuario(Cliente.class,this.getForm().getTxtCorreo().getText(),1); 
                 return String.valueOf(this.getForm().getTxtContraseña().getPassword()).equals(U.getContraseña());
-            }
+            }*/
         }
         if(item == 1){
             Comercio U;

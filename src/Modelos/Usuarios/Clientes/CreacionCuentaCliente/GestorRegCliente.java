@@ -27,6 +27,7 @@ public class GestorRegCliente extends GestorHibernate{
         setForm(new VistaRegCliente());
         getForm().setVisible(true); 
     }
+    
     public void guardar(){
         if (this.getModel()== null){
             this.setModel(new Cliente());
@@ -36,12 +37,13 @@ public class GestorRegCliente extends GestorHibernate{
     }   
     
      public void setValores(){
-        this.getModel().setApellido(this.getForm().getTxtApellido().getText());
-        this.getModel().setContraseña(String.valueOf(this.getForm().getTxtContraseña().getPassword()));
-        this.getModel().setCorreo(this.getForm().getTxtCorreo().getText());
-        this.getModel().setDireccion(this.getForm().getTxtDireccion().getText());
         this.getModel().setNombre(this.getForm().getTxtNombre().getText());
+        this.getModel().setApellido(this.getForm().getTxtApellido().getText());
+        this.getModel().setDireccion(this.getForm().getTxtDireccion().getText());
         this.getModel().setTelefono(Integer.parseInt(this.getForm().getTxtTelefono().getText()));
+        this.getModel().setFechaNacimiento(this.getForm().getTxtFechaNacimiento().getText());
+        this.getModel().setCorreo(this.getForm().getTxtCorreo().getText());
+        this.getModel().setContraseña(String.valueOf(this.getForm().getTxtContraseña().getPassword()));
     }
      
     private void guardarModelo() {
@@ -51,5 +53,4 @@ public class GestorRegCliente extends GestorHibernate{
             this.actualizarObjeto(this.getModel()); 
         }
     }
-    
 }

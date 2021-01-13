@@ -148,7 +148,7 @@ public class VistaRegProd extends ABMGn {
     
     public void traerDatos(int max){
         limpiarTabla(modelo);
-        getGestorVistaRegProd().listarDatos(modelo,Comercio.class);
+        getGestorVistaRegProd().listarDatos(modelo,Producto.class);
         this.tableDatos.setModel(modelo);
     }
     
@@ -166,6 +166,7 @@ public class VistaRegProd extends ABMGn {
     
     public VistaRegProd() {
         initComponents();
+        initializeTable();
         getGestorVistaRegProd().iniciarCombo();
     }
 
@@ -453,8 +454,8 @@ public class VistaRegProd extends ABMGn {
     }//GEN-LAST:event_cbCantidadActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        /*GestorVistaPrincipalAdmin gvpa= new GestorVistaPrincipalAdmin();
-        gvpa.open();*/
+        GestorVistaRegProd gvpa= new GestorVistaRegProd();
+        gvpa.open();
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 

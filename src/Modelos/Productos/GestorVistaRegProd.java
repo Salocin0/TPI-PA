@@ -52,8 +52,12 @@ public class GestorVistaRegProd extends GestorGn {
         this.getModel().setNombre(this.getForm().getTxtNombre().getText());
         this.getModel().setDescripcion(this.getForm().getTxtDescripcion().getText());
         this.getModel().setPrecio(Float.valueOf(this.getForm().getTxtPrecio().getText()));
-        this.getModel().setCategoria((CategoriaProducto)this.getForm().getCbCategoria().getSelectedItem());
         this.getModel().setComercios((List<Comercio>)this.getComercio());
+        this.getModel().setCategoria(buscar());
+    }
+    public CategoriaProducto buscar() {
+        CategoriaProducto r = (CategoriaProducto) traerObjeto(CategoriaProducto.class,this.getForm().getCbCategoria().getSelectedItem().toString(),-1);
+    return r;
     }
      
     private void guardarModelo() {
@@ -76,6 +80,8 @@ public class GestorVistaRegProd extends GestorGn {
         this.getForm().getTxtId().setText(String.valueOf((int) r.getId()));
         this.getForm().getTxtNombre().setText(r.getNombre());
         this.getForm().getTxtDescripcion().setText(r.getDescripcion());
+        this.getForm().getTxtPrecio().setText(String.valueOf(r.getPrecio()));
+        this.getForm().getCbCategoria().setSelectedItem(r.getCategoria());//no funciona
     }
     
     public void iniciarCombo(){

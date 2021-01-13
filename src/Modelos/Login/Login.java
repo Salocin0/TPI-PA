@@ -233,9 +233,10 @@ public class Login extends ABMGn {
             if(getGestorLogin().existeUsuario()){ 
                 switch(item){
                     case "Usuario" -> {//hace referencia a cliente
+                        dispose();
                         GestorVistaPrincipalCliente gp = new GestorVistaPrincipalCliente();
                         gp.open();
-                        dispose();
+                        //gp.traerCliente(this.getTxtCorreo().getText());
                         break;
                     }
                     case "Comercio" -> {  

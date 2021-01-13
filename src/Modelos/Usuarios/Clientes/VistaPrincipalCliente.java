@@ -1,11 +1,23 @@
 package Modelos.Usuarios.Clientes;
 
 import Modelos.Login.GestorLogin;
-import Modelos.Pedidos.VistaCalificacion;
+import Modelos.Usuarios.Clientes.Cliente_Pedido.GestorVistaAgrePed;
+import Modelos.Usuarios.Clientes.Cliente_Pedido.VistaCalificacion;
+import Modelos.Usuarios.Comercios.GestorVistaPrincipalComercio;
 import Modelos.Usuarios.ModPedidoU;
 
 public class VistaPrincipalCliente extends javax.swing.JFrame {
+    private GestorVistaPrincipalCliente gr;
 
+    public GestorVistaPrincipalCliente getGestorVistaPrincipalCliente() {
+        if (gr == null) {
+           synchronized (GestorVistaPrincipalCliente.class) {
+                gr = new GestorVistaPrincipalCliente();
+                gr.setForm(this);
+           }
+        }
+        return gr;
+    }
     public VistaPrincipalCliente() {
         initComponents();
     }
@@ -55,6 +67,11 @@ public class VistaPrincipalCliente extends javax.swing.JFrame {
         btnNuevo.setText("Nuevo Pedido");
         btnNuevo.setMaximumSize(new java.awt.Dimension(70, 23));
         btnNuevo.setMinimumSize(new java.awt.Dimension(70, 23));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnPedido.setText("Ver Pedido");
         btnPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -103,10 +120,9 @@ public class VistaPrincipalCliente extends javax.swing.JFrame {
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panBotonesLayout.createSequentialGroup()
-                        .addGroup(panBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnModificar)
-                            .addComponent(btnDatosUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnModificar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnDatosUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panBotonesLayout.setVerticalGroup(
@@ -190,6 +206,13 @@ public class VistaPrincipalCliente extends javax.swing.JFrame {
         VistaPedidosCliente ped = new VistaPedidosCliente();
         ped.setVisible(true); 
     }//GEN-LAST:event_btnPedidoActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        GestorVistaAgrePed gvap= new GestorVistaAgrePed();
+        gvap.open();
+        gvap.setCliente(getGestorVistaPrincipalCliente().getCliente());
+        dispose();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

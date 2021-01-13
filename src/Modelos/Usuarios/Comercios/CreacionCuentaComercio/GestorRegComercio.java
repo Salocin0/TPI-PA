@@ -9,7 +9,6 @@ public class GestorRegComercio extends GestorGn{
     private VistaRegComercio form;
     private Comercio model;
 
-    
     public Comercio getModel() {
         return model;
     }
@@ -20,14 +19,14 @@ public class GestorRegComercio extends GestorGn{
     public void setForm(VistaRegComercio form) {
         this.form = form;
     }
+
+    public void setModel(Comercio model) {
+        this.model = model;
+    }
     
     public void open() {
         setForm(new VistaRegComercio());
         getForm().setVisible(true); 
-    }
-
-    public void setModel(Comercio model) {
-        this.model = model;
     }
     
     public void guardar(){
@@ -58,6 +57,7 @@ public class GestorRegComercio extends GestorGn{
             this.getForm().getCbRubro().addItem(list.get(i).toString());
         }
     }
+    
     private void guardarModelo() {
         if (this.getModel().isNuevo()) {
            this.guardarObjeto(this.getModel());

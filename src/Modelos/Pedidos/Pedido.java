@@ -2,7 +2,6 @@ package Modelos.Pedidos;
 
 import Modelos.Usuarios.Clientes.Cliente;
 import Modelos.Usuarios.Comercios.Comercio;
-import Modelos.Pedidos.DetallePedido;
 import Modelos.Usuarios.Usuario;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,7 +22,7 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table (name="pedido")
-public class Pedido implements Serializable {
+public class Pedido implements Serializable,Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_id_seq")
     @SequenceGenerator(name = "pedido_id_seq", sequenceName = "pedido_id_seq", allocationSize = 1) 
@@ -35,9 +34,6 @@ public class Pedido implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date hora;
-    
     @ManyToOne (targetEntity = Cliente.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Cliente cliente;
    
@@ -46,9 +42,6 @@ public class Pedido implements Serializable {
     
     @OneToMany (targetEntity = DetallePedido.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<DetallePedido> detallePedido = new HashSet();
-      
-    @Column(name="subTotal", columnDefinition="Decimal(13,2) default '0.00'") 
-    private double subtotal;
     
     @Column(name="total", columnDefinition="Decimal(13,2) default '0.00'")
     private double total;
@@ -61,19 +54,10 @@ public class Pedido implements Serializable {
         this.fecha = fecha;
     }
 
-    public Date getHora() {
-        return hora;
-    }
-
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
-
     public Set<DetallePedido> getDetallePedido() {
         return detallePedido;
     }
 
-    //////Set & get ////// ID
     public void setDetallePedido(Set<DetallePedido> detallePedido) {    
         this.detallePedido = detallePedido;
     }
@@ -81,38 +65,33 @@ public class Pedido implements Serializable {
     public long getId() {
         return id;
     }
+    
     public void setId(long id) {
         this.id = id;
     }
-    //////Set & get ////// ESTADO
+
     public boolean getEstado() {
         return estado;
     }
+    
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    //////Set & get ////// CLIENTE
+
     public Usuario getCliente() {
         return cliente;
     }
+    
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    //////Set & get ////// COMERCIO
+    
     public Comercio getComercio() {
         return comercio;
     }
+    
     public void setComercio(Comercio comercio) {
         this.comercio = comercio;
-    }
-    //////Set & get ////// DETALLE PEDIDO
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
     }
 
     public double getTotal() {
@@ -122,9 +101,21 @@ public class Pedido implements Serializable {
     public void setTotal(double total) {
         this.total = total;
     }
-
- 
+    
     public Pedido() {
+    }
+    
+    public boolean isNuevo() {
+        return this.getId()==0;
+    }
+   
+    public void asEliminado() {
+        this.setEstado(false);
+    }
+    
+    @Override
+    public int compareTo(Object o) {
+        return 1;
     }
 }
 

@@ -1,5 +1,5 @@
 
-package Modelos.Pedidos;
+package Modelos.Usuarios.Clientes.Cliente_Pedido;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

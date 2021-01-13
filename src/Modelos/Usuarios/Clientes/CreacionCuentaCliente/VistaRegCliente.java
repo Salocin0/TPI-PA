@@ -9,16 +9,6 @@ import javax.swing.JTextField;
 public class VistaRegCliente extends ABMGn {
     public GestorRegCliente grc;
     
-    public GestorRegCliente getGestorRegCliente() {
-        if (grc == null) {
-           synchronized (GestorRegCliente.class) {
-                grc = new GestorRegCliente();
-                grc.setForm(this);
-           }
-        }
-        return grc;
-    }
-    
     public JTextField getTxtApellido() {
         return txtApellido;
     }
@@ -73,6 +63,16 @@ public class VistaRegCliente extends ABMGn {
 
     public void setTxtFechaNacimiento(JTextField txtFechaNacimiento) {
         this.txtFechaNacimiento = txtFechaNacimiento;
+    }
+    
+    public GestorRegCliente getGestorRegCliente() {
+        if (grc == null) {
+           synchronized (GestorRegCliente.class) {
+                grc = new GestorRegCliente();
+                grc.setForm(this);
+           }
+        }
+        return grc;
     }
 
     public boolean CuadrosNulos(){

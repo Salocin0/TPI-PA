@@ -55,4 +55,11 @@ public class Comercio extends Usuario{
     public void setCalificacion(double calificacion) {
         this.calificacion = calificacion;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
+    
+    
 }
