@@ -4,12 +4,16 @@ import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.GestorGn;
 import Modelos.Pedidos.DetallePedido;
 import Modelos.Pedidos.Pedido;
+import Modelos.Productos.Producto;
 import Modelos.Rubros.Rubro;
 import Modelos.Usuarios.Clientes.Cliente;
 import Modelos.Usuarios.Comercios.Comercio;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
 
 public class GestorVistaAgrePed extends GestorGn{
     private VistaAgregarPedido form;
@@ -97,7 +101,7 @@ public class GestorVistaAgrePed extends GestorGn{
     }
     
     public void iniciarComboComercio(){
-        List list = listarComercio(Comercio.class, buscar() ,-1);
+        List list = listarComercio(Comercio.class, buscarR() ,-1);
         for(int i=0;i<list.size();i++){
             this.getForm().getCbComercio().addItem(list.get(i).toString());
         }
@@ -110,7 +114,7 @@ public class GestorVistaAgrePed extends GestorGn{
         }
     }
     
-    public Rubro buscar() {
+    public Rubro buscarR() {
         Rubro r = (Rubro) traerObjeto(Rubro.class,this.getForm().getCbRubro().getSelectedItem().toString(),-1);
     return r;
     }
@@ -123,23 +127,54 @@ public class GestorVistaAgrePed extends GestorGn{
         this.getForm().getTxtDescripcion().setText(r.getDescripcion());
     }*/
 
-    /*public DefaultTableModel listarDatos(DefaultTableModel modelTabla,Class clase) {
-        TreeSet<Pedido> lista= new TreeSet();
-        List<Pedido> list = listar(clase,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
-        Rubro auxModel;
-        Iterator it = (Iterator) list.iterator();
-        while (it.hasNext()) {
-            auxModel =(Rubro) it.next();
-            lista.add(auxModel);
-        }
-        Iterator it2 = (Iterator) lista.iterator();
-        while (it2.hasNext()) {
-            auxModel =(Rubro) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
-            modelTabla.addRow(fila);  
-        }
-        return modelTabla;
-    }*/
+    public DefaultTableModel listarDatosProducto(DefaultTableModel modelTabla) {
+        TreeSet<Producto> lista= new TreeSet();
+        
+        /*if(buscarProductosPedido(Producto.class,this.getForm().cantidad((String)this.getForm().getCbCantidad().getSelectedItem()),this.getForm().getCbComercio().getSelectedItem(), this.getForm().getCbCatProd().getSelectedItem())==true) {
+            List<Producto> list = listarProductosPedido(Producto.class, this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()),this.getForm().getCbComercio().getSelectedItem(), this.getForm().getCbCatProd().getSelectedItem());
+            Producto auxModel;
+            Iterator it = (Iterator) list.iterator();
+            while (it.hasNext()) {
+                auxModel =(Producto) it.next();
+                lista.add(auxModel);
+            }
+            Iterator it2 = (Iterator) lista.iterator();
+            while (it2.hasNext()) {
+                auxModel =(Producto) it2.next();
+                Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
+                modelTabla.addRow(fila);
+            }
+            return modelTabla;
+        }*/
+        List<Producto> list = listarProductosPedido(Producto.class, getCantidad() ,buscarComercio(), buscarCatProd());
+            Producto auxModel;
+            Iterator it = (Iterator) list.iterator();
+            while (it.hasNext()) {
+                auxModel =(Producto) it.next();
+                lista.add(auxModel);
+            }
+            Iterator it2 = (Iterator) lista.iterator();
+            while (it2.hasNext()) {
+                auxModel =(Producto) it2.next();
+                Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
+                modelTabla.addRow(fila);
+            }
+            return modelTabla;
+    }
+    
+    public Comercio buscarComercio() {
+        Comercio c = (Comercio) traerObjeto(Comercio.class,this.getForm().getCbComercio().getSelectedItem().toString(),1);
+        return c;
+    }
+    
+    public CategoriaProducto buscarCatProd() {
+        CategoriaProducto cp = (CategoriaProducto) traerObjeto(Comercio.class,this.getForm().getCbCatProd().getSelectedItem().toString(),1);
+        return cp;
+    }
+    
+    public int getCantidad(){
+        return this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem());
+    }
      
 //    public void imprimir() {
 //        this.abrirListado("./Reportes/prueba.jasper");

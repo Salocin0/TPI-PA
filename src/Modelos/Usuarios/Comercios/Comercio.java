@@ -58,10 +58,8 @@ public class Comercio extends Usuario{
         this.calificacion = calificacion;
     }
 
-//    @Override
-//    public String toString() {
-//        return this.getNombre();
-//    }
-    
-    
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

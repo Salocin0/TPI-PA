@@ -2,6 +2,7 @@ package Modelos;
 
 import Hibernate.GestorHibernate;
 import static Hibernate.HibernateUtil.getSession;
+import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.Usuarios.Comercios.Comercio;
 import ireport.GestorDeReportes;
 import java.util.HashSet;
@@ -66,13 +67,24 @@ public class GestorGn extends GestorHibernate {
             }   
         return crit.list();
     }
-    public List listarProductos(Class clase,String cadena,int max,Comercio comercio){   
+    public List listarProductos(Class clase,String cadena,int max,Object objeto){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio));
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",objeto));
             if (!cadena.contentEquals("")) {
                 crit.add (Restrictions.like("nombre",cadena+"%"));
             }   
         return crit.list();
+    }
+    
+    public List listarProductosPedido(Class clase,int max,Comercio comercio, CategoriaProducto catprod){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio)).add (Restrictions.eq("categoria",catprod));  
+        return crit.list();
+    }
+    public boolean buscarProductosPedido(Class clase,int max,Object comercio, Object catprod){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio)).add (Restrictions.eq("categoria",catprod));  
+        return !crit.list().isEmpty();
     }
      
     public Object traerObjeto(Class clase){   

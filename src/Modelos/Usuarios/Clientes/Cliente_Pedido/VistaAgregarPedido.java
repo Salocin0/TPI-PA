@@ -1,14 +1,58 @@
 package Modelos.Usuarios.Clientes.Cliente_Pedido;
 
 import Modelos.ABMGn;
-import Modelos.Rubros.Rubro;
+import Modelos.Productos.Producto;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class VistaAgregarPedido extends ABMGn {
+    DefaultTableModel modeloProducto = new DefaultTableModel();
+    DefaultTableModel modeloPedido = new DefaultTableModel();
     public GestorVistaAgrePed grc;
 
+    public JComboBox<String> getCbCantidad() {
+        return cbCantidad;
+    }
+
+    public void setCbCantidad(JComboBox<String> cbCantidad) {
+        this.cbCantidad = cbCantidad;
+    }
+    
+    public JButton getBtnAgregar() {
+        return btnAgregar;
+    }
+
+    public void setBtnAgregar(JButton btnAgregar) {
+        this.btnAgregar = btnAgregar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public void setBtnGuardar(JButton btnGuardar) {
+        this.btnGuardar = btnGuardar;
+    }
+
+    public JButton getBtnQuitar() {
+        return btnQuitar;
+    }
+
+    public void setBtnQuitar(JButton btnQuitar) {
+        this.btnQuitar = btnQuitar;
+    }
+    
     public JComboBox<String> getCbCatProd() {
         return cbCatProd;
     }
@@ -67,13 +111,104 @@ public class VistaAgregarPedido extends ABMGn {
     }
     
     public void limpiarComboComercio(){
-        while(this.cbComercio.getItemCount()>0){
-            this.cbComercio.removeItemAt(0);
+        while(this.getCbComercio().getItemCount()>0){
+            this.getCbComercio().removeItemAt(0);
         }
     }
     
+    public void limpiarComboCatProd(){
+        while(this.getCbCatProd().getItemCount()>0){
+            this.getCbCatProd().removeItemAt(0);
+        }
+    }
+    
+    public void estadoPantalla(int val){
+        switch(val){
+            case 1 -> {//estado inicial (selleccion rubro)
+                comboBoxs(true,false,false,false);
+                tbAndBtn(false,false,false,false);
+                this.getBtnGuardar().setEnabled(false);
+            }
+            case 2 -> {//(selleccion rubro+categoria producto)
+                comboBoxs(true,true,false,false);
+                tbAndBtn(false,false,false,false);
+                this.getBtnGuardar().setEnabled(false);
+            }
+            case 3->{//(selleccion rubro+categoria producto+comercio)
+                comboBoxs(true,true,true,false);
+                tbAndBtn(false,false,false,false);
+                this.getBtnGuardar().setEnabled(false);
+            }
+            case 4->{//(armado del pedido)
+                comboBoxs(true,true,true,true);
+                tbAndBtn(true,true,true,true);
+                this.getBtnGuardar().setEnabled(false);
+            }
+            case 5->{//pedido ya armado
+                comboBoxs(true,true,true,true);
+                tbAndBtn(true,true,true,true);
+                this.getBtnGuardar().setEnabled(true);
+            }
+        }
+    }
+    
+    public void comboBoxs(boolean rubro,boolean catprod,boolean comercio,boolean cantidad){
+        this.getCbRubro().setEnabled(rubro);
+        this.getCbCatProd().setEnabled(catprod);
+        this.getCbComercio().setEnabled(comercio);
+        this.getCbCantidad().setEnabled(cantidad);
+    }
+    
+    public void tbAndBtn(boolean tbPedido,boolean tbProductos,boolean btnAgregar,boolean btnQuitar){
+        this.getTbPedido().setEnabled(tbPedido);
+        this.getTbTableProductos().setEnabled(tbProductos);
+        this.getBtnAgregar().setEnabled(btnAgregar);
+        this.getBtnQuitar().setEnabled(btnQuitar);
+    }
+    
+    public void initializeTableProducto() {
+        //terminar
+        modeloProducto.addColumn("Objeto");
+        modeloProducto.addColumn("ID");
+        modeloProducto.addColumn("Nombre");
+        modeloProducto.addColumn("Descripcion");
+        modeloProducto.addColumn("Precio");
+        traerDatosProductos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+    }
+    public void initializeTablePedido() {
+        //terminar
+        modeloPedido.addColumn("Nombre");
+        modeloPedido.addColumn("Descripcion");
+        modeloPedido.addColumn("Precio");
+        modeloPedido.addColumn("Cantidad");
+        //traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+    }
+    
+    public int cantidad(String str){
+        if("Todos".equals(str)){
+            return -1;
+        }
+        else {
+            return strToInt(str);
+        }
+    }
+    
+    public void traerDatosProductos(int max){
+        limpiarTabla(modeloProducto);
+        getGestorVistaAgrePed().listarDatosProducto(modeloProducto);
+        this.getTbTableProductos().setModel(modeloPedido);
+    }
+    
+    /*public void traerDatosPedido(int max){
+        //terminar
+        limpiarTabla(modelo);
+        getGestorVistaRegProd().listarDatosProductos(modelo,Producto.class);
+        this.tableDatos.setModel(modelo);
+    }*/
+    
     public VistaAgregarPedido() {
         initComponents();
+        estadoPantalla(1);
         getGestorVistaAgrePed().iniciarComboRubro();
     }
 
@@ -104,6 +239,7 @@ public class VistaAgregarPedido extends ABMGn {
         lbProductos = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbPedido = new javax.swing.JTable();
+        cbCantidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +255,19 @@ public class VistaAgregarPedido extends ABMGn {
 
         lbCatProd.setText("Categoria Producto");
 
+        cbCatProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCatProdActionPerformed(evt);
+            }
+        });
+
         lbComercio.setText("Comercio");
+
+        cbComercio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbComercioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panFiltroLayout = new javax.swing.GroupLayout(panFiltro);
         panFiltro.setLayout(panFiltroLayout);
@@ -159,8 +307,18 @@ public class VistaAgregarPedido extends ABMGn {
         );
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panBotonesLayout = new javax.swing.GroupLayout(panBotones);
         panBotones.setLayout(panBotonesLayout);
@@ -211,7 +369,7 @@ public class VistaAgregarPedido extends ABMGn {
                 .addGroup(panPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbTotal)
                     .addComponent(lbPedido)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPedidoLayout.setVerticalGroup(
@@ -219,16 +377,26 @@ public class VistaAgregarPedido extends ABMGn {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPedidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbTotal)
                 .addContainerGap())
         );
 
         btnQuitar.setText("<--");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         btnAgregar.setText("-->");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panAgrQuitLayout = new javax.swing.GroupLayout(panAgrQuit);
         panAgrQuit.setLayout(panAgrQuitLayout);
@@ -266,6 +434,13 @@ public class VistaAgregarPedido extends ABMGn {
         ));
         jScrollPane2.setViewportView(tbPedido);
 
+        cbCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "100", "Todos" }));
+        cbCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCantidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panProductosLayout = new javax.swing.GroupLayout(panProductos);
         panProductos.setLayout(panProductosLayout);
         panProductosLayout.setHorizontalGroup(
@@ -273,10 +448,12 @@ public class VistaAgregarPedido extends ABMGn {
             .addGroup(panProductosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addGroup(panProductosLayout.createSequentialGroup()
-                        .addComponent(lbProductos)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                        .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbProductos)
+                            .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panProductosLayout.setVerticalGroup(
@@ -285,8 +462,10 @@ public class VistaAgregarPedido extends ABMGn {
                 .addContainerGap()
                 .addComponent(lbProductos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panPrincipalLayout = new javax.swing.GroupLayout(panPrincipal);
@@ -294,12 +473,13 @@ public class VistaAgregarPedido extends ABMGn {
         panPrincipalLayout.setHorizontalGroup(
             panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(panProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panAgrQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPrincipalLayout.setVerticalGroup(
             panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,11 +487,11 @@ public class VistaAgregarPedido extends ABMGn {
                 .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(panPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panPrincipalLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
+                        .addGap(80, 80, 80)
                         .addComponent(panAgrQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -348,9 +528,41 @@ public class VistaAgregarPedido extends ABMGn {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubroActionPerformed
+        limpiarComboCatProd();
+        getGestorVistaAgrePed().iniciarComboCategoria();
+        estadoPantalla(2);
+    }//GEN-LAST:event_cbRubroActionPerformed
+
+    private void cbCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCatProdActionPerformed
         limpiarComboComercio();
         getGestorVistaAgrePed().iniciarComboComercio();
-    }//GEN-LAST:event_cbRubroActionPerformed
+        estadoPantalla(3);
+    }//GEN-LAST:event_cbCatProdActionPerformed
+
+    private void cbComercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbComercioActionPerformed
+        estadoPantalla(4);
+        getGestorVistaAgrePed().listarDatosProducto((DefaultTableModel) this.getTbTableProductos().getModel());
+    }//GEN-LAST:event_cbComercioActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCantidadActionPerformed
+        traerDatosProductos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+    }//GEN-LAST:event_cbCantidadActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -392,6 +604,7 @@ public class VistaAgregarPedido extends ABMGn {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnQuitar;
+    public javax.swing.JComboBox<String> cbCantidad;
     private javax.swing.JComboBox<String> cbCatProd;
     private javax.swing.JComboBox<String> cbComercio;
     private javax.swing.JComboBox<String> cbRubro;
