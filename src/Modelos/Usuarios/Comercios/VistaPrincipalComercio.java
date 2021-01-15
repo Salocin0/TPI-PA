@@ -2,9 +2,28 @@ package Modelos.Usuarios.Comercios;
 
 import Modelos.Login.GestorLogin;
 import Modelos.Productos.GestorVistaRegProd;
+import javax.swing.JLabel;
 
 public class VistaPrincipalComercio extends javax.swing.JFrame {
     private GestorVistaPrincipalComercio gr;
+    private String correo;
+    Comercio comercio;
+
+    public Comercio getComercio() {
+        return comercio;
+    }
+
+    public void setComercio(Comercio comercio) {
+        this.comercio = comercio;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public GestorVistaPrincipalComercio getGestorVistaPrincipalComercio() {
         if (gr == null) {
@@ -18,6 +37,7 @@ public class VistaPrincipalComercio extends javax.swing.JFrame {
     
     public VistaPrincipalComercio() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -192,7 +212,7 @@ public class VistaPrincipalComercio extends javax.swing.JFrame {
     private void btnAdminProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminProductosActionPerformed
         GestorVistaRegProd gvrp = new GestorVistaRegProd();
         gvrp.open();
-        gvrp.setComercio(getGestorVistaPrincipalComercio().getComercio());
+        gvrp.datosLogin(this.getComercio());
         dispose();
     }//GEN-LAST:event_btnAdminProductosActionPerformed
 

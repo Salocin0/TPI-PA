@@ -4,16 +4,7 @@ import Modelos.GestorGn;
 
 public class GestorVistaPrincipalComercio extends GestorGn {
     private VistaPrincipalComercio form;
-    Comercio comercio = new Comercio();
-
-    public Comercio getComercio() {
-        return comercio;
-    }
-
-    public void setComercio(Comercio comercio) {
-        this.comercio = comercio;
-    }
-
+    
     public VistaPrincipalComercio getForm() {
         return form;
     }
@@ -22,12 +13,12 @@ public class GestorVistaPrincipalComercio extends GestorGn {
         this.form = form;
     }
     
-    public void open() {
-        setForm(new VistaPrincipalComercio());
-        getForm().setVisible(true); 
+    public void datosLogin(Comercio comercio){
+        this.getForm().setComercio(comercio);
     }
     
-    public void traerComercio(String correo){
-        this.comercio = (Comercio) traerUsuario(Comercio.class,correo,1);
+    public void open() {
+        setForm(new VistaPrincipalComercio());
+        getForm().setVisible(true);
     }
 }

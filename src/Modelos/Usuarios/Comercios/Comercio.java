@@ -3,11 +3,13 @@ package Modelos.Usuarios.Comercios;
 import Modelos.Productos.Producto;
 import Modelos.Rubros.Rubro;
 import Modelos.Usuarios.Usuario;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +18,8 @@ public class Comercio extends Usuario{
     @ManyToOne (targetEntity = Rubro.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
     private Rubro rubro;
 
-    @ManyToOne (targetEntity = Producto.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
-    private Producto producto;
+    @OneToMany(mappedBy = "comercio")
+    private List<Producto> producto;
     
     @Column(name="calificacion", columnDefinition="Decimal(13,2) default '0.00'")
     private double calificacion;
@@ -28,7 +30,7 @@ public class Comercio extends Usuario{
     public Comercio(String nombre, String correoElectronico,String contraseña,String direccion, int telefono,Rubro rubro,Producto producto,double calificacion){
         super(nombre, correoElectronico,contraseña,direccion, telefono);
         this.rubro=rubro;
-        this.producto=producto;
+        this.producto=(List<Producto>) producto;
         this.calificacion=calificacion;
     }
     
@@ -39,12 +41,12 @@ public class Comercio extends Usuario{
     public void setRubro(Rubro rubro) {
         this.rubro = rubro;
     }
-    
-    public Producto getProducto() {
+
+    public List<Producto> getProducto() {
         return producto;
     }
-    
-    public void setProducto(Producto producto) {
+
+    public void setProducto(List<Producto> producto) {
         this.producto = producto;
     }
     
@@ -56,10 +58,10 @@ public class Comercio extends Usuario{
         this.calificacion = calificacion;
     }
 
-    @Override
-    public String toString() {
-        return this.getNombre();
-    }
+//    @Override
+//    public String toString() {
+//        return this.getNombre();
+//    }
     
     
 }

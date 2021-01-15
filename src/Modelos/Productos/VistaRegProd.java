@@ -2,6 +2,7 @@ package Modelos.Productos;
 
 import Modelos.ABMGn;
 import Modelos.Usuarios.Comercios.Comercio;
+import Modelos.Usuarios.Comercios.GestorVistaPrincipalComercio;
 import java.awt.HeadlessException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -12,14 +13,14 @@ import javax.swing.table.DefaultTableModel;
 public class VistaRegProd extends ABMGn {
     DefaultTableModel modelo = new DefaultTableModel();
     private GestorVistaRegProd gvrp;
-    Comercio c = new Comercio();
+    Comercio comercio;
 
     public Comercio getComercio() {
-        return c;
+        return comercio;
     }
 
     public void setComercio(Comercio c) {
-        this.c = c;
+        this.comercio = c;
     }
 
     public JComboBox<String> getCbCategoria() {
@@ -132,7 +133,6 @@ public class VistaRegProd extends ABMGn {
         modelo.addColumn("Precio");
         modelo.addColumn("Categoria");
         modelo.addColumn("Comercio");
-        
         traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
         cambiarEstadoPantalla(1);
     }
@@ -454,7 +454,7 @@ public class VistaRegProd extends ABMGn {
     }//GEN-LAST:event_cbCantidadActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        GestorVistaRegProd gvpa= new GestorVistaRegProd();
+        GestorVistaPrincipalComercio gvpa= new GestorVistaPrincipalComercio();
         gvpa.open();
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed

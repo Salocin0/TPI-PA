@@ -55,7 +55,7 @@ public class AuxGenericoProducto implements Comparable {
         this.orden = orden;
         this.precio= (float) producto.getPrecio();
         this.categoria = producto.getCategoria();
-        this.comercio = (Comercio) producto.getComercios();
+        this.comercio = (Comercio) producto.getComercio();
     }
     
     @Override

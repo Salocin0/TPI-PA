@@ -13,16 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class GestorVistaRegProd extends GestorGn {
     private VistaRegProd form;
     private Producto model;
-    private Comercio comercio;
-
-    public Comercio getComercio() {
-        return comercio;
-    }
-
-    public void setComercio(Comercio comercio) {
-        this.comercio = comercio;
-    }
-
+    
     public VistaRegProd getForm() {
         return form;
     }
@@ -52,7 +43,7 @@ public class GestorVistaRegProd extends GestorGn {
         this.getModel().setNombre(this.getForm().getTxtNombre().getText());
         this.getModel().setDescripcion(this.getForm().getTxtDescripcion().getText());
         this.getModel().setPrecio(Float.valueOf(this.getForm().getTxtPrecio().getText()));
-        this.getModel().setComercios((List<Comercio>)this.getComercio());
+        this.getModel().setComercio(this.getForm().getComercio());
         this.getModel().setCategoria(buscar());
     }
     public CategoriaProducto buscar() {
@@ -93,7 +84,7 @@ public class GestorVistaRegProd extends GestorGn {
 
     public DefaultTableModel listarDatos(DefaultTableModel modelTabla,Class clase) {
         TreeSet<Producto> lista= new TreeSet();
-        List<Producto> list = listar(clase,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()));
+        List<Producto> list = listarProductos(clase,this.getForm().getTxtBuscar().getText(), this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()),this.getForm().getComercio());
         Producto auxModel;
         Iterator it = (Iterator) list.iterator();
         while (it.hasNext()) {
@@ -103,7 +94,7 @@ public class GestorVistaRegProd extends GestorGn {
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext()) {
             auxModel =(Producto) it2.next();
-            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion(),auxModel.getPrecio(),auxModel.getCategoria(),auxModel.getComercios()};
+            Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion(),auxModel.getPrecio(),auxModel.getCategoria(),auxModel.getComercio()};
             modelTabla.addRow(fila);  
         }
         return modelTabla;
@@ -125,10 +116,14 @@ public class GestorVistaRegProd extends GestorGn {
         }
         return lista;
     }
+    
+    public void datosLogin(Comercio comercio){
+        this.getForm().setComercio(comercio);
+    }
 
     public void open() {
         setForm(new VistaRegProd());
-        getForm().setVisible(true); 
+        getForm().setVisible(true);
     }
 }
 

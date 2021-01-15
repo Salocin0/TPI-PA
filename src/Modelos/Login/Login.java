@@ -236,13 +236,12 @@ public class Login extends ABMGn {
                         dispose();
                         GestorVistaPrincipalCliente gp = new GestorVistaPrincipalCliente();
                         gp.open();
-                        //gp.traerCliente(this.getTxtCorreo().getText());
                         break;
                     }
                     case "Comercio" -> {  
                         GestorVistaPrincipalComercio gp = new GestorVistaPrincipalComercio();
                         gp.open();
-                        gp.traerComercio(this.getTxtCorreo().getText());
+                        gp.datosLogin((Comercio) this.getGestorLogin().traerUsuario(Comercio.class, this.getTxtCorreo().getText(), 1));
                         dispose();
                         break;
                     }

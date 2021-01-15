@@ -3,7 +3,6 @@ package Modelos.Productos;
 import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.Usuarios.Comercios.Comercio;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -39,8 +38,8 @@ public class Producto implements Serializable, Comparable{
     @ManyToOne (targetEntity = CategoriaProducto.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY) 
     private CategoriaProducto categoria;
     
-    @OneToMany(mappedBy = "producto")
-    private List<Comercio> comercios;
+    @ManyToOne (targetEntity = Comercio.class, cascade= CascadeType.ALL,fetch=FetchType.LAZY)
+    private Comercio comercio;
 
     public Producto() {
     }
@@ -51,7 +50,7 @@ public class Producto implements Serializable, Comparable{
         this.descripcion=descripcion;
         this.precio=precio;
         this.categoria=categoria;
-        this.comercios=(List<Comercio>) comercios;
+        this.comercio= comercios;
     }
     
     public long getId() {
@@ -102,12 +101,12 @@ public class Producto implements Serializable, Comparable{
         this.estado = estado;
     }
 
-    public List<Comercio> getComercios() {
-        return comercios;
+    public Comercio getComercio() {
+        return comercio;
     }
 
-    public void setComercios(List<Comercio> comercios) {
-        this.comercios = comercios;
+    public void setComercio(Comercio comercio) {
+        this.comercio = comercio;
     }
     
     public boolean isNuevo() {

@@ -2,6 +2,7 @@ package Modelos;
 
 import Hibernate.GestorHibernate;
 import static Hibernate.HibernateUtil.getSession;
+import Modelos.Usuarios.Comercios.Comercio;
 import ireport.GestorDeReportes;
 import java.util.HashSet;
 import java.util.List;
@@ -57,14 +58,23 @@ public class GestorGn extends GestorHibernate {
         gestorReportes.agregarParametro(nombre, objeto);
     } 
     
-     public List listar(Class clase,String cadena,int max){   
-       Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+    public List listar(Class clase,String cadena,int max){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
             .add (Restrictions.eq("estado",true)).setMaxResults(max);
             if (!cadena.contentEquals("")) {
                 crit.add (Restrictions.like("nombre",cadena+"%"));
             }   
         return crit.list();
     }
+    public List listarProductos(Class clase,String cadena,int max,Comercio comercio){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio));
+            if (!cadena.contentEquals("")) {
+                crit.add (Restrictions.like("nombre",cadena+"%"));
+            }   
+        return crit.list();
+    }
+     
     public Object traerObjeto(Class clase){   
        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
             .add (Restrictions.eq("estado",true)).setMaxResults(1);  

@@ -210,7 +210,6 @@ public class VistaPrincipalCliente extends javax.swing.JFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         GestorVistaAgrePed gvap= new GestorVistaAgrePed();
         gvap.open();
-        gvap.setCliente(getGestorVistaPrincipalCliente().getCliente());
         dispose();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
