@@ -2,7 +2,6 @@ package Modelos;
 
 import Hibernate.GestorHibernate;
 import static Hibernate.HibernateUtil.getSession;
-import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.Usuarios.Comercios.Comercio;
 import ireport.GestorDeReportes;
 import java.util.HashSet;
@@ -76,14 +75,14 @@ public class GestorGn extends GestorHibernate {
         return crit.list();
     }
     
-    public List listarProductosPedido(Class clase,int max,Comercio comercio, CategoriaProducto catprod){   
+    public List listarProductosPedido(Class clase,int max,Comercio comercio){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio)).add (Restrictions.eq("categoria",catprod));  
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio));  
         return crit.list();
     }
-    public boolean buscarProductosPedido(Class clase,int max,Object comercio, Object catprod){   
+    public boolean buscarProductosPedido(Class clase,int max,Object comercio){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio)).add (Restrictions.eq("categoria",catprod));  
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("comercio",comercio));  
         return !crit.list().isEmpty();
     }
      
@@ -92,11 +91,19 @@ public class GestorGn extends GestorHibernate {
             .add (Restrictions.eq("estado",true)).setMaxResults(1);  
         return crit.list().get(0);
     }
+    
     public Object traerObjeto(Class clase,String cadena,int max){   
        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
             .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("nombre",cadena));  
         return crit.list().get(0);
     }
+    
+    public boolean buscarObjeto(Class clase,String cadena,int max){   
+       Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("estado",true)).setMaxResults(max).add (Restrictions.eq("nombre",cadena));  
+        return !crit.list().isEmpty();
+    }
+    
     public Object traerUsuario(Class clase,String cadena,int max){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
             .add (Restrictions.eq("estado",true)).setMaxResults(max).add(Restrictions.eq("correoElectronico", cadena));  

@@ -1,6 +1,5 @@
 package Modelos.Usuarios.Clientes.Cliente_Pedido;
 
-import Modelos.Categoria_Producto.CategoriaProducto;
 import Modelos.GestorGn;
 import Modelos.Pedidos.DetallePedido;
 import Modelos.Pedidos.Pedido;
@@ -20,6 +19,16 @@ public class GestorVistaAgrePed extends GestorGn{
     private Pedido model;
     private Cliente cliente;
     List<DetallePedido> detallePedido;
+    
+    DetallePedido modeldetalle;
+
+    public DetallePedido getModeldetalle() {
+        return modeldetalle;
+    }
+
+    public void setModeldetalle(DetallePedido modeldetalle) {
+        this.modeldetalle = modeldetalle;
+    }
 
     public Cliente getCliente() {
         return cliente;
@@ -54,38 +63,61 @@ public class GestorVistaAgrePed extends GestorGn{
     }
     
     public void guardar(){
+        this.guardarDetalles();
         if(this.getModel()== null){
             this.setModel(new Pedido());
         }
         setValores();
         this.guardarModelo();   
-    }   
-    
-    public void setValores(){
-        Date fecha = new Date();
-        this.getModel().setEstado(true);
-        this.getModel().setCliente(cliente);
-        this.getModel().setFecha(fecha);
-        this.getModel().setComercio((Comercio) this.getForm().getCbComercio().getSelectedItem());
-        this.getModel().setDetallePedido((Set<DetallePedido>) this.detallePedido);
-        this.getModel().setTotal(calcularTotal());
     }
     
-    private double calcularTotal(){
-        double total = 0;
-        for(int i=0;i>detallePedido.size();i++){
-            total += detallePedido.get(i).getSubtotal();
+    public void guardarDetalles(){
+        System.out.println(getDetallePedido().size());
+        for(int i=0;i<getDetallePedido().size();i++){
+            this.setModeldetalle(getDetallePedido().get(i));
+            this.guardarModeloDetalle();
         }
-        return total;
     }
-     
-    private void guardarModelo() {
+    
+    private void guardarModeloDetalle() {
         if (this.getModel().isNuevo()) {
            this.guardarObjeto(this.getModel());
         }else{
            this.actualizarObjeto(this.getModel()); 
         }
         this.model = null;
+    }
+    
+    public void setValores(){
+        Date fecha = new Date();
+        this.getModel().setEstado(true);
+        this.getModel().setCliente(cliente);
+        this.getModel().setFecha(fecha);
+        this.getModel().setComercio(buscar());
+        this.getModel().setDetallePedido((Set<DetallePedido>) this.detallePedido);
+        this.getModel().setTotal(calcularTotal());
+    }
+    
+    public Comercio buscar() {
+        Comercio c = (Comercio) traerObjeto(Comercio.class,this.getForm().getCbComercio().getSelectedItem().toString(),-1);
+    return c;
+    }
+    
+    private double calcularTotal(){
+        double total = 0;
+        for(int i=0;i>getDetallePedido().size();i++){
+            total += getDetallePedido().get(i).getSubtotal();
+        }
+        return total;
+    }
+     
+    private void guardarModelo() {
+        if (this.getModeldetalle().isNuevo()) {
+           this.guardarObjeto(this.getModeldetalle());
+        }else{
+           this.actualizarObjeto(this.getModeldetalle()); 
+        }
+        this.modeldetalle = null;
     }
         
     public void eliminar(){
@@ -107,16 +139,9 @@ public class GestorVistaAgrePed extends GestorGn{
         }
     }
     
-    public void iniciarComboCategoria(){
-        List list = listarClase(CategoriaProducto.class,true,-1);
-        for(int i=0;i<list.size();i++){
-            this.getForm().getCbCatProd().addItem(list.get(i).toString());
-        }
-    }
-    
     public Rubro buscarR() {
-        Rubro r = (Rubro) traerObjeto(Rubro.class,this.getForm().getCbRubro().getSelectedItem().toString(),-1);
-    return r;
+        Rubro r = (Rubro) traerObjeto(Rubro.class,this.getForm().getCbRubro().getSelectedItem().toString(),1);
+        return r;
     }
     
     /*public void cargarDatos(Pedido pedido){
@@ -129,9 +154,7 @@ public class GestorVistaAgrePed extends GestorGn{
 
     public DefaultTableModel listarDatosProducto(DefaultTableModel modelTabla) {
         TreeSet<Producto> lista= new TreeSet();
-        
-        /*if(buscarProductosPedido(Producto.class,this.getForm().cantidad((String)this.getForm().getCbCantidad().getSelectedItem()),this.getForm().getCbComercio().getSelectedItem(), this.getForm().getCbCatProd().getSelectedItem())==true) {
-            List<Producto> list = listarProductosPedido(Producto.class, this.getForm().cantidad((String) this.getForm().getCbCantidad().getSelectedItem()),this.getForm().getCbComercio().getSelectedItem(), this.getForm().getCbCatProd().getSelectedItem());
+        List<Producto> list = listarProductosPedido(Producto.class, getCantidad() ,buscarComercio());
             Producto auxModel;
             Iterator it = (Iterator) list.iterator();
             while (it.hasNext()) {
@@ -141,35 +164,18 @@ public class GestorVistaAgrePed extends GestorGn{
             Iterator it2 = (Iterator) lista.iterator();
             while (it2.hasNext()) {
                 auxModel =(Producto) it2.next();
-                Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
-                modelTabla.addRow(fila);
-            }
-            return modelTabla;
-        }*/
-        List<Producto> list = listarProductosPedido(Producto.class, getCantidad() ,buscarComercio(), buscarCatProd());
-            Producto auxModel;
-            Iterator it = (Iterator) list.iterator();
-            while (it.hasNext()) {
-                auxModel =(Producto) it.next();
-                lista.add(auxModel);
-            }
-            Iterator it2 = (Iterator) lista.iterator();
-            while (it2.hasNext()) {
-                auxModel =(Producto) it2.next();
-                Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion()};
+                Object[] fila = {auxModel,auxModel.getId(),auxModel.getNombre(),auxModel.getDescripcion(),auxModel.getCategoria(),auxModel.getPrecio()};
                 modelTabla.addRow(fila);
             }
             return modelTabla;
     }
     
     public Comercio buscarComercio() {
-        Comercio c = (Comercio) traerObjeto(Comercio.class,this.getForm().getCbComercio().getSelectedItem().toString(),1);
-        return c;
-    }
-    
-    public CategoriaProducto buscarCatProd() {
-        CategoriaProducto cp = (CategoriaProducto) traerObjeto(Comercio.class,this.getForm().getCbCatProd().getSelectedItem().toString(),1);
-        return cp;
+        if(buscarObjeto(Comercio.class,this.getForm().getCbComercio().getSelectedItem().toString(),1)==true){
+            Comercio c = (Comercio) traerObjeto(Comercio.class,this.getForm().getCbComercio().getSelectedItem().toString(),1);
+            return c;
+        } 
+        return null;
     }
     
     public int getCantidad(){

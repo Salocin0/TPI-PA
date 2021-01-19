@@ -11,7 +11,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -117,6 +116,7 @@ public class Producto implements Serializable, Comparable{
         this.setEstado(false);
     }
     
+    @Override
     public int compareTo(Object o) {
         return 1;
     }

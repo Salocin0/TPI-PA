@@ -1,10 +1,16 @@
 package Modelos.Usuarios.Clientes.Cliente_Pedido;
 
 import Modelos.ABMGn;
+import Modelos.Pedidos.DetallePedido;
+import Modelos.Pedidos.GestorPedido;
+import Modelos.Pedidos.Pedido;
 import Modelos.Productos.Producto;
+import Modelos.Usuarios.Clientes.GestorVistaPrincipalCliente;
+import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,14 +58,6 @@ public class VistaAgregarPedido extends ABMGn {
     public void setBtnQuitar(JButton btnQuitar) {
         this.btnQuitar = btnQuitar;
     }
-    
-    public JComboBox<String> getCbCatProd() {
-        return cbCatProd;
-    }
-
-    public void setCbCatProd(JComboBox<String> cbCatProd) {
-        this.cbCatProd = cbCatProd;
-    }
 
     public JComboBox<String> getCbComercio() {
         return cbComercio;
@@ -86,19 +84,19 @@ public class VistaAgregarPedido extends ABMGn {
     }
 
     public JTable getTbPedido() {
-        return tbPedido;
+        return tbPedidos;
     }
 
     public void setTbPedido(JTable tbPedido) {
-        this.tbPedido = tbPedido;
+        this.tbPedidos = tbPedido;
     }
 
-    public JTable getTbTableProductos() {
-        return tbTableProductos;
+    public JTable getTbProductos() {
+        return tbProductos;
     }
 
-    public void setTbTableProductos(JTable tbTableProductos) {
-        this.tbTableProductos = tbTableProductos;
+    public void setTbProductos(JTable tbProductos) {
+        this.tbProductos = tbProductos;
     }
     public GestorVistaAgrePed getGestorVistaAgrePed() {
         if (grc == null) {
@@ -116,71 +114,60 @@ public class VistaAgregarPedido extends ABMGn {
         }
     }
     
-    public void limpiarComboCatProd(){
-        while(this.getCbCatProd().getItemCount()>0){
-            this.getCbCatProd().removeItemAt(0);
-        }
-    }
-    
     public void estadoPantalla(int val){
         switch(val){
             case 1 -> {//estado inicial (selleccion rubro)
-                comboBoxs(true,false,false,false);
+                comboBoxs(true,false,false);
                 tbAndBtn(false,false,false,false);
                 this.getBtnGuardar().setEnabled(false);
             }
-            case 2 -> {//(selleccion rubro+categoria producto)
-                comboBoxs(true,true,false,false);
+            case 2->{//(selleccion rubro+categoria producto+comercio)
+                comboBoxs(true,true,false);
                 tbAndBtn(false,false,false,false);
                 this.getBtnGuardar().setEnabled(false);
             }
-            case 3->{//(selleccion rubro+categoria producto+comercio)
-                comboBoxs(true,true,true,false);
-                tbAndBtn(false,false,false,false);
-                this.getBtnGuardar().setEnabled(false);
-            }
-            case 4->{//(armado del pedido)
-                comboBoxs(true,true,true,true);
+            case 3->{//(armado del pedido)
+                comboBoxs(true,true,true);
                 tbAndBtn(true,true,true,true);
                 this.getBtnGuardar().setEnabled(false);
             }
-            case 5->{//pedido ya armado
-                comboBoxs(true,true,true,true);
+            case 4->{//pedido ya armado
+                comboBoxs(true,true,true);
                 tbAndBtn(true,true,true,true);
                 this.getBtnGuardar().setEnabled(true);
             }
         }
     }
     
-    public void comboBoxs(boolean rubro,boolean catprod,boolean comercio,boolean cantidad){
+    public void comboBoxs(boolean rubro,boolean comercio,boolean cantidad){
         this.getCbRubro().setEnabled(rubro);
-        this.getCbCatProd().setEnabled(catprod);
         this.getCbComercio().setEnabled(comercio);
         this.getCbCantidad().setEnabled(cantidad);
     }
     
     public void tbAndBtn(boolean tbPedido,boolean tbProductos,boolean btnAgregar,boolean btnQuitar){
         this.getTbPedido().setEnabled(tbPedido);
-        this.getTbTableProductos().setEnabled(tbProductos);
+        this.getTbProductos().setEnabled(tbProductos);
         this.getBtnAgregar().setEnabled(btnAgregar);
         this.getBtnQuitar().setEnabled(btnQuitar);
     }
     
     public void initializeTableProducto() {
-        //terminar
         modeloProducto.addColumn("Objeto");
         modeloProducto.addColumn("ID");
         modeloProducto.addColumn("Nombre");
         modeloProducto.addColumn("Descripcion");
+        modeloProducto.addColumn("Categoria");
         modeloProducto.addColumn("Precio");
-        traerDatosProductos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
+        this.getTbProductos().setModel(modeloProducto);
     }
     public void initializeTablePedido() {
-        //terminar
         modeloPedido.addColumn("Nombre");
         modeloPedido.addColumn("Descripcion");
         modeloPedido.addColumn("Precio");
         modeloPedido.addColumn("Cantidad");
+        modeloPedido.addColumn("SubTotal");
+        this.getTbPedido().setModel(modeloPedido);
         //traerDatos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
     }
     
@@ -196,20 +183,19 @@ public class VistaAgregarPedido extends ABMGn {
     public void traerDatosProductos(int max){
         limpiarTabla(modeloProducto);
         getGestorVistaAgrePed().listarDatosProducto(modeloProducto);
-        this.getTbTableProductos().setModel(modeloPedido);
+        this.getTbProductos().setModel(modeloProducto);
     }
     
-    /*public void traerDatosPedido(int max){
-        //terminar
-        limpiarTabla(modelo);
-        getGestorVistaRegProd().listarDatosProductos(modelo,Producto.class);
-        this.tableDatos.setModel(modelo);
-    }*/
+    public void inicioVentana(){
+        initializeTablePedido();
+        initializeTableProducto();
+        estadoPantalla(1);
+        getGestorVistaAgrePed().iniciarComboRubro();
+    }
     
     public VistaAgregarPedido() {
         initComponents();
-        estadoPantalla(1);
-        getGestorVistaAgrePed().iniciarComboRubro();
+        inicioVentana();
     }
 
     @SuppressWarnings("unchecked")
@@ -219,8 +205,6 @@ public class VistaAgregarPedido extends ABMGn {
         panFiltro = new javax.swing.JPanel();
         lbRubro = new javax.swing.JLabel();
         cbRubro = new javax.swing.JComboBox<>();
-        lbCatProd = new javax.swing.JLabel();
-        cbCatProd = new javax.swing.JComboBox<>();
         lbComercio = new javax.swing.JLabel();
         cbComercio = new javax.swing.JComboBox<>();
         panBotones = new javax.swing.JPanel();
@@ -230,16 +214,16 @@ public class VistaAgregarPedido extends ABMGn {
         panPedido = new javax.swing.JPanel();
         lbTotal = new javax.swing.JLabel();
         lbPedido = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbTableProductos = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbPedidos = new javax.swing.JTable();
         panAgrQuit = new javax.swing.JPanel();
         btnQuitar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         panProductos = new javax.swing.JPanel();
         lbProductos = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbPedido = new javax.swing.JTable();
         cbCantidad = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -250,14 +234,6 @@ public class VistaAgregarPedido extends ABMGn {
         cbRubro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbRubroActionPerformed(evt);
-            }
-        });
-
-        lbCatProd.setText("Categoria Producto");
-
-        cbCatProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCatProdActionPerformed(evt);
             }
         });
 
@@ -276,18 +252,12 @@ public class VistaAgregarPedido extends ABMGn {
             .addGroup(panFiltroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panFiltroLayout.createSequentialGroup()
-                        .addComponent(cbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbCatProd, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panFiltroLayout.createSequentialGroup()
-                        .addComponent(lbRubro)
-                        .addGap(97, 97, 97)
-                        .addComponent(lbCatProd)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbRubro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbComercio)
-                    .addComponent(cbComercio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbComercio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbComercio))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panFiltroLayout.setVerticalGroup(
@@ -296,12 +266,10 @@ public class VistaAgregarPedido extends ABMGn {
                 .addContainerGap()
                 .addGroup(panFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbRubro)
-                    .addComponent(lbCatProd)
                     .addComponent(lbComercio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCatProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbComercio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -347,7 +315,7 @@ public class VistaAgregarPedido extends ABMGn {
 
         lbPedido.setText("Pedido");
 
-        tbTableProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -358,7 +326,7 @@ public class VistaAgregarPedido extends ABMGn {
 
             }
         ));
-        jScrollPane1.setViewportView(tbTableProductos);
+        jScrollPane2.setViewportView(tbPedidos);
 
         javax.swing.GroupLayout panPedidoLayout = new javax.swing.GroupLayout(panPedido);
         panPedido.setLayout(panPedidoLayout);
@@ -369,7 +337,7 @@ public class VistaAgregarPedido extends ABMGn {
                 .addGroup(panPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbTotal)
                     .addComponent(lbPedido)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPedidoLayout.setVerticalGroup(
@@ -377,11 +345,11 @@ public class VistaAgregarPedido extends ABMGn {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPedidoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTotal)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
 
         btnQuitar.setText("<--");
@@ -421,7 +389,14 @@ public class VistaAgregarPedido extends ABMGn {
 
         lbProductos.setText("Productos");
 
-        tbPedido.setModel(new javax.swing.table.DefaultTableModel(
+        cbCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "100", "Todos" }));
+        cbCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCantidadActionPerformed(evt);
+            }
+        });
+
+        tbProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -432,14 +407,7 @@ public class VistaAgregarPedido extends ABMGn {
 
             }
         ));
-        jScrollPane2.setViewportView(tbPedido);
-
-        cbCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "100", "Todos" }));
-        cbCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCantidadActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tbProductos);
 
         javax.swing.GroupLayout panProductosLayout = new javax.swing.GroupLayout(panProductos);
         panProductos.setLayout(panProductosLayout);
@@ -448,12 +416,12 @@ public class VistaAgregarPedido extends ABMGn {
             .addGroup(panProductosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                    .addGroup(panProductosLayout.createSequentialGroup()
-                        .addGroup(panProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbProductos)
-                            .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lbProductos)
+                    .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panProductosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panProductosLayout.setVerticalGroup(
@@ -462,7 +430,7 @@ public class VistaAgregarPedido extends ABMGn {
                 .addContainerGap()
                 .addComponent(lbProductos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -487,9 +455,9 @@ public class VistaAgregarPedido extends ABMGn {
                 .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(panPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panPrincipalLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(panAgrQuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -519,7 +487,7 @@ public class VistaAgregarPedido extends ABMGn {
                 .addComponent(panFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(panBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -528,36 +496,49 @@ public class VistaAgregarPedido extends ABMGn {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubroActionPerformed
-        limpiarComboCatProd();
-        getGestorVistaAgrePed().iniciarComboCategoria();
         estadoPantalla(2);
+        getGestorVistaAgrePed().iniciarComboComercio();
     }//GEN-LAST:event_cbRubroActionPerformed
 
-    private void cbCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCatProdActionPerformed
-        limpiarComboComercio();
-        getGestorVistaAgrePed().iniciarComboComercio();
-        estadoPantalla(3);
-    }//GEN-LAST:event_cbCatProdActionPerformed
-
     private void cbComercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbComercioActionPerformed
-        estadoPantalla(4);
-        getGestorVistaAgrePed().listarDatosProducto((DefaultTableModel) this.getTbTableProductos().getModel());
+        estadoPantalla(3);
+        traerDatosProductos(cantidad(cbCantidad.getItemAt(cbCantidad.getSelectedIndex())));
     }//GEN-LAST:event_cbComercioActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        // TODO add your handling code here:
+        //falta eliminar del vector detalle
+        //pasar al gestor de la ventata
+        if(this.getTbPedido().getSelectedRow()!=-1){
+            DefaultTableModel modelopedido = (DefaultTableModel) getTbPedido().getModel();
+            modelopedido.removeRow(this.getTbPedido().getSelectedRow());
+            this.getTbPedido().setModel(modelopedido);
+        }
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        //pasar al gestor de la ventata
+        if(this.getTbProductos().getSelectedRow()!=-1){
+            String cantidad = JOptionPane.showInputDialog("Ingrese Cantidad:");
+            GestorPedido gp = new GestorPedido();
+            //crear detalle pedido
+            gp.crearDetalle(Integer.parseInt(cantidad), gp.getPedido(), (Producto)this.getTbProductos().getValueAt(this.getTbProductos().getSelectedRow(), 0));
+            //agregar detalle pedido a la tabla de pedido
+            modeloPedido.addRow(new Object[]{gp.getDp().getProducto().getNombre(),gp.getDp().getProducto().getDescripcion(),gp.getDp().getProducto().getPrecio(),cantidad,gp.getDp().getSubtotal()});
+            //habilitar boton para guardar pedido
+            estadoPantalla(4);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        //guardar pedido con sus detalles
+        getGestorVistaAgrePed().guardar();
+        //pasar al gestor de la ventata
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        GestorVistaPrincipalCliente gvpc = new GestorVistaPrincipalCliente();
+        gvpc.open();
+        dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCantidadActionPerformed
@@ -598,19 +579,16 @@ public class VistaAgregarPedido extends ABMGn {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnQuitar;
     public javax.swing.JComboBox<String> cbCantidad;
-    private javax.swing.JComboBox<String> cbCatProd;
     private javax.swing.JComboBox<String> cbComercio;
     private javax.swing.JComboBox<String> cbRubro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbCatProd;
     private javax.swing.JLabel lbComercio;
     private javax.swing.JLabel lbPedido;
     private javax.swing.JLabel lbProductos;
@@ -622,8 +600,7 @@ public class VistaAgregarPedido extends ABMGn {
     private javax.swing.JPanel panPedido;
     private javax.swing.JPanel panPrincipal;
     private javax.swing.JPanel panProductos;
-    private javax.swing.JTable tbPedido;
-    private javax.swing.JTable tbTableProductos;
+    private javax.swing.JTable tbPedidos;
+    private javax.swing.JTable tbProductos;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-
 @Entity
 @Table (name="detalle_pedido")
 public class DetallePedido implements Serializable {
@@ -42,14 +41,14 @@ public class DetallePedido implements Serializable {
     public DetallePedido() {
     }
     
-    /*public DetallePedido(int estado,int cantidad, Pedido pedido, Producto producto,double subtotal){
-        this.estado=estado;
+    public DetallePedido(int cantidad, Pedido pedido, Producto producto,double subtotal){
+        this.estado=true;
         this.cantidad=cantidad;
         this.pedido=pedido;
         this.producto=producto;
         this.subtotal=subtotal;
                                         
-    }*/
+    }
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
@@ -98,4 +97,15 @@ public class DetallePedido implements Serializable {
         this.pedido = pedido;
     }
     
+    public boolean isNuevo() {
+        return this.getId()==0;
+    }
+    
+    public void asEliminado() {
+        this.setEstado(false);
+    }
+    
+    public int compareTo(Object o) {
+        return 1;
+    }
 }
