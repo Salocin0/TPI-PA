@@ -235,6 +235,7 @@ public class VistaAgregarPedido extends ABMGn {
         lbTotal = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbPedidos = new javax.swing.JTable();
+        lbPedido = new javax.swing.JLabel();
         panAgrQuit = new javax.swing.JPanel();
         btnQuitar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
@@ -330,8 +331,6 @@ public class VistaAgregarPedido extends ABMGn {
 
         panPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        panPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
-
         lbTotal.setText("Total:");
 
         tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -347,6 +346,8 @@ public class VistaAgregarPedido extends ABMGn {
         ));
         jScrollPane2.setViewportView(tbPedidos);
 
+        lbPedido.setText("Pedido");
+
         javax.swing.GroupLayout panPedidoLayout = new javax.swing.GroupLayout(panPedido);
         panPedido.setLayout(panPedidoLayout);
         panPedidoLayout.setHorizontalGroup(
@@ -355,14 +356,17 @@ public class VistaAgregarPedido extends ABMGn {
                 .addContainerGap()
                 .addGroup(panPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbTotal)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbPedido))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPedidoLayout.setVerticalGroup(
             panPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPedidoLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lbPedido)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTotal)
                 .addGap(16, 16, 16))
@@ -589,6 +593,7 @@ public class VistaAgregarPedido extends ABMGn {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbComercio;
+    private javax.swing.JLabel lbPedido;
     private javax.swing.JLabel lbProductos;
     private javax.swing.JLabel lbRubro;
     private javax.swing.JLabel lbTotal;
