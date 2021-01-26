@@ -7,8 +7,8 @@ import java.util.TreeSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GestorCatProd extends GestorGn{
-    private VistaCatProd form;
+public class GestorCategoriaProducto extends GestorGn{
+    private VistaCategoriaProducto form;
     private CategoriaProducto model;
 
     public CategoriaProducto getModel() {
@@ -19,11 +19,11 @@ public class GestorCatProd extends GestorGn{
         this.model = model;
     }
   
-    public VistaCatProd getForm() {
+    public VistaCategoriaProducto getForm() {
         return form;
     }
     
-    public void setForm(VistaCatProd form) {
+    public void setForm(VistaCategoriaProducto form) {
         this.form = form;
     }
     
@@ -99,7 +99,7 @@ public class GestorCatProd extends GestorGn{
     }
 
     public void open() {
-        setForm(new VistaCatProd());
+        setForm(new VistaCategoriaProducto());
         getForm().setVisible(true); 
     }
 }

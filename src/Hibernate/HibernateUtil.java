@@ -26,7 +26,7 @@ public class HibernateUtil  {
             conf.setProperty("hibernate.hbm2ddl.auto","update");
             conf.addPackage("Modelos");
             
-            conf.addAnnotatedClass(Modelos.Usuarios.Clientes.Cliente_Pedido.Calificacion.class);
+            conf.addAnnotatedClass(Modelos.Usuarios.Clientes.ClientePedido.Calificacion.class);
             conf.addAnnotatedClass(Modelos.Categoria_Producto.CategoriaProducto.class);
             conf.addAnnotatedClass(Modelos.Usuarios.Clientes.Cliente.class);
             conf.addAnnotatedClass(Modelos.Rubros.Rubro.class);

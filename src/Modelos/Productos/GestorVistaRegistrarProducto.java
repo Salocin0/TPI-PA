@@ -10,15 +10,15 @@ import java.util.TreeSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GestorVistaRegProd extends GestorGn {
-    private VistaRegProd form;
+public class GestorVistaRegistrarProducto extends GestorGn {
+    private VistaRegistrarProducto form;
     private Producto model;
     
-    public VistaRegProd getForm() {
+    public VistaRegistrarProducto getForm() {
         return form;
     }
 
-    public void setForm(VistaRegProd form) {
+    public void setForm(VistaRegistrarProducto form) {
         this.form = form;
     }
 
@@ -122,7 +122,7 @@ public class GestorVistaRegProd extends GestorGn {
     }
 
     public void open() {
-        setForm(new VistaRegProd());
+        setForm(new VistaRegistrarProducto());
         getForm().setVisible(true);
     }
 }

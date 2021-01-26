@@ -10,9 +10,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class VistaCatProd extends ABMGn {
+public class VistaCategoriaProducto extends ABMGn {
     DefaultTableModel modelo = new DefaultTableModel();
-    private GestorCatProd gcp;
+    private GestorCategoriaProducto gcp;
     
     //Metodos de seteo
 
@@ -66,10 +66,10 @@ public class VistaCatProd extends ABMGn {
 
     //Metodos
     
-    public GestorCatProd getGestorCatProd() {
+    public GestorCategoriaProducto getGestorCatProd() {
         if (gcp == null) {
-           synchronized (GestorCatProd.class) {
-                gcp = new GestorCatProd();
+           synchronized (GestorCategoriaProducto.class) {
+                gcp = new GestorCategoriaProducto();
                 gcp.setForm(this);
            }
         }
@@ -140,7 +140,7 @@ public class VistaCatProd extends ABMGn {
     public boolean cuadrosVacios(){
         return esNulo(txtNombre)|| esNulo(txtDescripcion.getText());
     }
-    public VistaCatProd() {
+    public VistaCategoriaProducto() {
         initComponents();
         initializeTable();
     }
@@ -458,20 +458,21 @@ public class VistaCatProd extends ABMGn {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCategoriaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCategoriaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCategoriaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaCatProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaCategoriaProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaCatProd().setVisible(true);
+                new VistaCategoriaProducto().setVisible(true);
             }
         });
     }

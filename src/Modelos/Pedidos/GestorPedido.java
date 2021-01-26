@@ -1,71 +1,50 @@
 package Modelos.Pedidos;
 
+import static Hibernate.HibernateUtil.getSession;
 import Modelos.GestorGn;
 import Modelos.Productos.Producto;
-import java.util.ArrayList;
+import Modelos.Rubros.GestorRubro;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 public class GestorPedido extends GestorGn {
-    Pedido pedido;
-    List<DetallePedido> listDetallePedido = new ArrayList();
-    DetallePedido dp;
-
-    public DetallePedido getDp() {
-        if (dp == null) {
-           synchronized (DetallePedido.class) {
-                dp = new DetallePedido();
-           }
-        }
+    
+    private GestorRubro gestorRubro= new GestorRubro();
+    
+    public DetallePedido crearDetalle(int cantidad, Pedido pedido, Producto producto){
+        DetallePedido dp = new DetallePedido();
+        dp.setCantidad(cantidad);
+        dp.setId(0);
+        dp.setEstado(true);
+        dp.setPedido(pedido);
+        dp.setProducto(producto);
+        dp.setSubtotal(this.calcularSubtotal(producto, cantidad));
         return dp;
     }
-
-    public void setDp(DetallePedido dp) {
-        this.dp = dp;
-    }
-
-    public List<DetallePedido> getListDetallePedido() {
-        return listDetallePedido;
-    }
-
-    public void setListDetallePedido(List<DetallePedido> listDetallePedido) {
-        this.listDetallePedido = listDetallePedido;
-    }
-
-    public Pedido getPedido() {
-        if (pedido == null) {
-           synchronized (Pedido.class) {
-                pedido = new Pedido();
-           }
-        }
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    
+    public void guardarDetalle(DetallePedido dp) {
+        this.guardarObjeto(dp);
     }
     
-    public void crearDetalle(int cantidad, Pedido pedido, Producto producto){
-        //getListDetallePedido().add(this.getDp());
-        this.getDp().setCantidad(cantidad);
-        this.getDp().setId(0);
-        this.getDp().setEstado(true);
-        this.getDp().setPedido(pedido);
-        this.getDp().setProducto(producto);
-        this.getDp().setSubtotal(this.calcularSubtotal(producto, cantidad));
-        //this.guardarModelo();
-        System.out.println(this.getDp().getId());
-        getListDetallePedido().add(this.getDp());
-    }
-    
-    private void guardarModelo() {
-        if (this.getDp().isNuevo()) {
-           this.guardarObjeto(this.getDp());
-        }else{
-           this.actualizarObjeto(this.getDp()); 
-        }
+    public void guardarPedido(Pedido p) {
+           this.guardarObjeto(p);
     }
     
     public float calcularSubtotal(Producto producto, int cantidad){
         return (float) (producto.getPrecio() * cantidad);
     }
+    
+    public List <Pedido> listar(String fase){   
+        return this.listarPedido(Pedido.class,true,-1,fase);
+    }
+    
+    public List listarPedido(Class clase, boolean estado,int max,String fase){
+        Criteria crit = getSession().createCriteria(clase).add (Restrictions.eq("estado",estado)).add (Restrictions.eq("fase",fase)).setMaxResults(max);
+        return crit.list();
+    }
+
+    /*public DefaultComboBoxModel getComboModelRubro() {
+         return gestorRubrothrow new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 }

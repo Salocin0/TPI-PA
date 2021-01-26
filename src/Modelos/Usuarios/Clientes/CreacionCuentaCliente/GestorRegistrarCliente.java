@@ -3,8 +3,8 @@ package Modelos.Usuarios.Clientes.CreacionCuentaCliente;
 import Hibernate.GestorHibernate;
 import Modelos.Usuarios.Clientes.Cliente;
 
-public class GestorRegCliente extends GestorHibernate{
-    private VistaRegCliente form;
+public class GestorRegistrarCliente extends GestorHibernate{
+    private VistaRegistrarCliente form;
     private Cliente model;
 
     public Cliente getModel() {
@@ -15,16 +15,16 @@ public class GestorRegCliente extends GestorHibernate{
         this.model = model;
     }
   
-    public VistaRegCliente getForm() {
+    public VistaRegistrarCliente getForm() {
         return form;
     }
     
-    public void setForm(VistaRegCliente form) {
+    public void setForm(VistaRegistrarCliente form) {
         this.form = form;
     }
     
     public void open() {
-        setForm(new VistaRegCliente());
+        setForm(new VistaRegistrarCliente());
         getForm().setVisible(true); 
     }
     

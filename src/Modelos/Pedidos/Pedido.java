@@ -1,5 +1,6 @@
 package Modelos.Pedidos;
 
+import static Hibernate.HibernateUtil.getSession;
 import Modelos.Usuarios.Clientes.Cliente;
 import Modelos.Usuarios.Comercios.Comercio;
 import Modelos.Usuarios.Usuario;
@@ -19,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table (name="pedido")
@@ -30,6 +33,11 @@ public class Pedido implements Serializable,Comparable {
     
     @Column(name = "estado", columnDefinition = "Boolean default 'false'")
     private boolean estado;
+    
+    @Column(columnDefinition = "TEXT")
+    private String fase;
+//    private static int RECIBIDO=1;
+    
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
@@ -45,6 +53,14 @@ public class Pedido implements Serializable,Comparable {
     
     @Column(name="total", columnDefinition="Decimal(13,2) default '0.00'")
     private double total;
+
+    public String getFase() {
+        return fase;
+    }
+
+    public void setFase(String fase) {
+        this.fase = fase;
+    }
     
     public Date getFecha() {
         return fecha;
@@ -116,6 +132,10 @@ public class Pedido implements Serializable,Comparable {
     @Override
     public int compareTo(Object o) {
         return 1;
+    }
+    public Comercio listarPedido(Class clase,Comercio comercio){
+        Criteria crit = getSession().createCriteria(clase).add (Restrictions.eq("comercio",comercio)).setMaxResults(1);
+        return (Comercio) crit.list().get(0);
     }
 }
 

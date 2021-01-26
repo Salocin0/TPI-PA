@@ -1,10 +1,8 @@
 package Modelos.Usuarios.Clientes;
 
 import Modelos.Login.GestorLogin;
-import Modelos.Usuarios.Clientes.Cliente_Pedido.GestorVistaAgrePed;
-import Modelos.Usuarios.Clientes.Cliente_Pedido.VistaCalificacion;
-import Modelos.Usuarios.Comercios.GestorVistaPrincipalComercio;
-import Modelos.Usuarios.ModPedidoU;
+import Modelos.Usuarios.Clientes.ClientePedido.GestorVistaAgregarPedido;
+import Modelos.Usuarios.Clientes.ClientePedido.VistaCalificacion;
 
 public class VistaPrincipalCliente extends javax.swing.JFrame {
     private GestorVistaPrincipalCliente gr;
@@ -185,8 +183,8 @@ public class VistaPrincipalCliente extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // modificar
-        ModPedidoU pe = new ModPedidoU();
-        pe.setVisible(true);
+        //ModPedidoU pe = new ModPedidoU();
+        //pe.setVisible(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -208,7 +206,7 @@ public class VistaPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPedidoActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        GestorVistaAgrePed gvap= new GestorVistaAgrePed();
+        GestorVistaAgregarPedido gvap= new GestorVistaAgregarPedido();
         gvap.open();
         dispose();
     }//GEN-LAST:event_btnNuevoActionPerformed

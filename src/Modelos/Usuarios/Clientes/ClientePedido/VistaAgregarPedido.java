@@ -1,24 +1,35 @@
-package Modelos.Usuarios.Clientes.Cliente_Pedido;
+package Modelos.Usuarios.Clientes.ClientePedido;
 
 import Modelos.ABMGn;
-import Modelos.Pedidos.DetallePedido;
-import Modelos.Pedidos.GestorPedido;
-import Modelos.Pedidos.Pedido;
-import Modelos.Productos.Producto;
 import Modelos.Usuarios.Clientes.GestorVistaPrincipalCliente;
-import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class VistaAgregarPedido extends ABMGn {
     DefaultTableModel modeloProducto = new DefaultTableModel();
     DefaultTableModel modeloPedido = new DefaultTableModel();
-    public GestorVistaAgrePed grc;
+    public GestorVistaAgregarPedido grc;
 
+    public DefaultTableModel getModeloProducto() {
+        return modeloProducto;
+    }
+
+    public void setModeloProducto(DefaultTableModel modeloProducto) {
+        this.modeloProducto = modeloProducto;
+    }
+
+    public DefaultTableModel getModeloPedido() {
+        return modeloPedido;
+    }
+
+    public void setModeloPedido(DefaultTableModel modeloPedido) {
+        this.modeloPedido = modeloPedido;
+    }
+
+    
     public JComboBox<String> getCbCantidad() {
         return cbCantidad;
     }
@@ -98,20 +109,27 @@ public class VistaAgregarPedido extends ABMGn {
     public void setTbProductos(JTable tbProductos) {
         this.tbProductos = tbProductos;
     }
-    public GestorVistaAgrePed getGestorVistaAgrePed() {
+    public GestorVistaAgregarPedido getGestorVistaAgrePed() {
         if (grc == null) {
-           synchronized (GestorVistaAgrePed.class) {
-                grc = new GestorVistaAgrePed();
+           synchronized (GestorVistaAgregarPedido.class) {
+                grc = new GestorVistaAgregarPedido();
                 grc.setForm(this);
            }
         }
         return grc;
     }
     
-    public void limpiarComboComercio(){
-        while(this.getCbComercio().getItemCount()>0){
-            this.getCbComercio().removeItemAt(0);
-        }
+//    public void limpiarComboComercio(){
+//        while(this.getCbComercio().getItemCount()>0){
+//            this.getCbComercio().removeItemAt(0);
+//        }
+//    }
+//    
+    public void enbledPedido() {
+        this.getCbRubro().setEnabled(true);
+        this.getCbComercio().setEnabled(false);
+        this.getCbCantidad().setEnabled(false);
+        
     }
     
     public void estadoPantalla(int val){
@@ -159,9 +177,11 @@ public class VistaAgregarPedido extends ABMGn {
         modeloProducto.addColumn("Descripcion");
         modeloProducto.addColumn("Categoria");
         modeloProducto.addColumn("Precio");
+        
         this.getTbProductos().setModel(modeloProducto);
     }
     public void initializeTablePedido() {
+        modeloPedido.addColumn("Objeto");
         modeloPedido.addColumn("Nombre");
         modeloPedido.addColumn("Descripcion");
         modeloPedido.addColumn("Precio");
@@ -213,7 +233,6 @@ public class VistaAgregarPedido extends ABMGn {
         panPrincipal = new javax.swing.JPanel();
         panPedido = new javax.swing.JPanel();
         lbTotal = new javax.swing.JLabel();
-        lbPedido = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbPedidos = new javax.swing.JTable();
         panAgrQuit = new javax.swing.JPanel();
@@ -311,9 +330,9 @@ public class VistaAgregarPedido extends ABMGn {
 
         panPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        lbTotal.setText("Total:");
+        panPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
 
-        lbPedido.setText("Pedido");
+        lbTotal.setText("Total:");
 
         tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -336,16 +355,13 @@ public class VistaAgregarPedido extends ABMGn {
                 .addContainerGap()
                 .addGroup(panPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbTotal)
-                    .addComponent(lbPedido)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPedidoLayout.setVerticalGroup(
             panPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPedidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTotal)
@@ -506,33 +522,16 @@ public class VistaAgregarPedido extends ABMGn {
     }//GEN-LAST:event_cbComercioActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        //falta eliminar del vector detalle
-        //pasar al gestor de la ventata
-        if(this.getTbPedido().getSelectedRow()!=-1){
-            DefaultTableModel modelopedido = (DefaultTableModel) getTbPedido().getModel();
-            modelopedido.removeRow(this.getTbPedido().getSelectedRow());
-            this.getTbPedido().setModel(modelopedido);
-        }
+        this.getGestorVistaAgrePed().quitar();
+        this.getGestorVistaAgrePed().cambiarEstado();
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        //pasar al gestor de la ventata
-        if(this.getTbProductos().getSelectedRow()!=-1){
-            String cantidad = JOptionPane.showInputDialog("Ingrese Cantidad:");
-            GestorPedido gp = new GestorPedido();
-            //crear detalle pedido
-            gp.crearDetalle(Integer.parseInt(cantidad), gp.getPedido(), (Producto)this.getTbProductos().getValueAt(this.getTbProductos().getSelectedRow(), 0));
-            //agregar detalle pedido a la tabla de pedido
-            modeloPedido.addRow(new Object[]{gp.getDp().getProducto().getNombre(),gp.getDp().getProducto().getDescripcion(),gp.getDp().getProducto().getPrecio(),cantidad,gp.getDp().getSubtotal()});
-            //habilitar boton para guardar pedido
-            estadoPantalla(4);
-        }
+        this.getGestorVistaAgrePed().agregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        //guardar pedido con sus detalles
         getGestorVistaAgrePed().guardar();
-        //pasar al gestor de la ventata
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -590,7 +589,6 @@ public class VistaAgregarPedido extends ABMGn {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbComercio;
-    private javax.swing.JLabel lbPedido;
     private javax.swing.JLabel lbProductos;
     private javax.swing.JLabel lbRubro;
     private javax.swing.JLabel lbTotal;

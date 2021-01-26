@@ -5,6 +5,7 @@ import Modelos.GestorGn;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -102,5 +103,18 @@ public class GestorRubro extends GestorGn{
     public void open() {
         setForm(new VistaRubro());
         getForm().setVisible(true); 
+    }
+    
+    public List <Rubro> listar(){   
+        return this.listarClase(Rubro.class,true,-1);
+    }
+       
+    public DefaultComboBoxModel getComboModel() {      
+        DefaultComboBoxModel auxModel= new DefaultComboBoxModel();
+        auxModel.addElement("");
+        for (Rubro auxTipo : this.listar()) {
+            auxModel.addElement(auxTipo);
+        }
+         return auxModel;
     }
 }

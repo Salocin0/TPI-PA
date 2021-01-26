@@ -1,13 +1,25 @@
 package Modelos.Usuarios.Comercios;
 
 import Modelos.Login.GestorLogin;
-import Modelos.Productos.GestorVistaRegProd;
-import javax.swing.JLabel;
+import Modelos.Pedidos.GestorPedido;
+import Modelos.Pedidos.Pedido;
+import Modelos.Productos.GestorVistaRegistrarProducto;
+import javax.swing.JComboBox;
 
 public class VistaPrincipalComercio extends javax.swing.JFrame {
     private GestorVistaPrincipalComercio gr;
+    private GestorPedido gp = new GestorPedido();
     private String correo;
     Comercio comercio;
+    Pedido pedido;
+
+    public JComboBox<String> getCbEstado() {
+        return cbEstado;
+    }
+
+    public void setCbEstado(JComboBox<String> cbEstado) {
+        this.cbEstado = cbEstado;
+    }
 
     public Comercio getComercio() {
         return comercio;
@@ -35,9 +47,22 @@ public class VistaPrincipalComercio extends javax.swing.JFrame {
         return gr;
     }
     
+    public void initCombo(){
+        this.getCbEstado().addItem("Recibido");
+        this.getCbEstado().addItem("En Preparacion");
+        this.getCbEstado().addItem("Preparado");
+        this.getCbEstado().addItem("En Envio");
+        this.getCbEstado().addItem("Entregado");
+    }
+    
+    public void init(){
+        initCombo();
+        gp.listar( (String) this.getCbEstado().getSelectedItem());
+    }
+    
     public VistaPrincipalComercio() {
         initComponents();
-        
+        init();
     }
 
     @SuppressWarnings("unchecked")
@@ -137,7 +162,7 @@ public class VistaPrincipalComercio extends javax.swing.JFrame {
 
         lbEstado.setText("Estado");
 
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En preparacion", "Enviado", "Entregado", " " }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -156,7 +181,7 @@ public class VistaPrincipalComercio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbEstado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,7 +235,7 @@ public class VistaPrincipalComercio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAdminProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminProductosActionPerformed
-        GestorVistaRegProd gvrp = new GestorVistaRegProd();
+        GestorVistaRegistrarProducto gvrp = new GestorVistaRegistrarProducto();
         gvrp.open();
         gvrp.datosLogin(this.getComercio());
         dispose();

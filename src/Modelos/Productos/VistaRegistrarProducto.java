@@ -10,9 +10,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class VistaRegProd extends ABMGn {
+public class VistaRegistrarProducto extends ABMGn {
     DefaultTableModel modelo = new DefaultTableModel();
-    private GestorVistaRegProd gvrp;
+    private GestorVistaRegistrarProducto gvrp;
     Comercio comercio;
 
     public Comercio getComercio() {
@@ -87,10 +87,10 @@ public class VistaRegProd extends ABMGn {
         this.cbCantidad = cbCantidad;
     }
 
-    public GestorVistaRegProd getGestorVistaRegProd() {
+    public GestorVistaRegistrarProducto getGestorVistaRegProd() {
         if (gvrp == null) {
-           synchronized (GestorVistaRegProd.class) {
-                gvrp = new GestorVistaRegProd();
+           synchronized (GestorVistaRegistrarProducto.class) {
+                gvrp = new GestorVistaRegistrarProducto();
                 gvrp.setForm(this);
            }
         }
@@ -164,7 +164,7 @@ public class VistaRegProd extends ABMGn {
         return esNulo(txtNombre)  || esNulo(txtDescripcion.getText()) || esNulo(txtPrecio.getText());
     }
     
-    public VistaRegProd() {
+    public VistaRegistrarProducto() {
         initComponents();
         initializeTable();
         getGestorVistaRegProd().iniciarCombo();
@@ -542,14 +542,18 @@ public class VistaRegProd extends ABMGn {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaRegProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaRegProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaRegProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaRegProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -558,7 +562,7 @@ public class VistaRegProd extends ABMGn {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaRegProd().setVisible(true);
+                new VistaRegistrarProducto().setVisible(true);
             }
         });
     }

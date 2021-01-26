@@ -1,6 +1,6 @@
 package Modelos.Usuarios.Administradores;
 
-import Modelos.Categoria_Producto.GestorCatProd;
+import Modelos.Categoria_Producto.GestorCategoriaProducto;
 import Modelos.Login.GestorLogin;
 import Modelos.Rubros.GestorRubro;
 import Modelos.Usuarios.Administradores.ABMCAdmin.GestorAdminABMC;
@@ -160,7 +160,7 @@ public class VistaPrincipalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRubroActionPerformed
 
     private void btnCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatProdActionPerformed
-        GestorCatProd gcp = new GestorCatProd();
+        GestorCategoriaProducto gcp = new GestorCategoriaProducto();
         gcp.open();
         this.dispose();
     }//GEN-LAST:event_btnCatProdActionPerformed

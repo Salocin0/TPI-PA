@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class VistaRegCliente extends ABMGn {
-    public GestorRegCliente grc;
+public class VistaRegistrarCliente extends ABMGn {
+    public GestorRegistrarCliente grc;
     
     public JTextField getTxtApellido() {
         return txtApellido;
@@ -65,10 +65,10 @@ public class VistaRegCliente extends ABMGn {
         this.txtFechaNacimiento = txtFechaNacimiento;
     }
     
-    public GestorRegCliente getGestorRegCliente() {
+    public GestorRegistrarCliente getGestorRegCliente() {
         if (grc == null) {
-           synchronized (GestorRegCliente.class) {
-                grc = new GestorRegCliente();
+           synchronized (GestorRegistrarCliente.class) {
+                grc = new GestorRegistrarCliente();
                 grc.setForm(this);
            }
         }
@@ -79,7 +79,7 @@ public class VistaRegCliente extends ABMGn {
         return !(esNulo(txtContraseña)||esNulo(txtDireccion)||esNulo(txtTelefono)||esNulo(txtCorreo)||esNulo(txtNombre)||esNulo(txtApellido)||esNulo(txtFechaNacimiento)); 
     }
     
-    public VistaRegCliente() {
+    public VistaRegistrarCliente() {
         initComponents();
     }
 
@@ -290,14 +290,18 @@ public class VistaRegCliente extends ABMGn {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaRegCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaRegistrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -306,7 +310,7 @@ public class VistaRegCliente extends ABMGn {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaRegCliente().setVisible(true);
+                new VistaRegistrarCliente().setVisible(true);
             }
         });
     }

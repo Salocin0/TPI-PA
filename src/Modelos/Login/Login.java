@@ -2,7 +2,7 @@ package Modelos.Login;
 
 import Modelos.ABMGn;
 import Modelos.Usuarios.Administradores.GestorVistaPrincipalAdmin;
-import Modelos.Usuarios.Clientes.CreacionCuentaCliente.GestorRegCliente;
+import Modelos.Usuarios.Clientes.CreacionCuentaCliente.GestorRegistrarCliente;
 import Modelos.Usuarios.Clientes.GestorVistaPrincipalCliente;
 import Modelos.Usuarios.Comercios.Comercio;
 import Modelos.Usuarios.Comercios.GestorVistaPrincipalComercio;
@@ -216,7 +216,7 @@ public class Login extends ABMGn {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCuentaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaUsuarioActionPerformed
-        GestorRegCliente gp = new GestorRegCliente();
+        GestorRegistrarCliente gp = new GestorRegistrarCliente();
         gp.open();
         dispose();
     }//GEN-LAST:event_btnCrearCuentaUsuarioActionPerformed

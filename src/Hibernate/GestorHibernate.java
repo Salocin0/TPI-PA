@@ -75,11 +75,6 @@ public class GestorHibernate extends HibernateUtil {
         return crit.list();
     }
     
-    public List listarComercio(Class clase,Rubro rubro,int max){
-        Criteria crit = getSession().createCriteria(clase).add (Restrictions.eq("rubro",rubro)).setMaxResults(max);
-        return crit.list();
-    }
-    
     public List listarClase(Class clase, boolean estado,int max){
         Criteria crit = getSession().createCriteria(clase).add (Restrictions.eq("estado",estado)).setMaxResults(max);
         return crit.list();
