@@ -134,22 +134,22 @@ public class VistaAgregarPedido extends ABMGn {
     
     public void estadoPantalla(int val){
         switch(val){
-            case 1 -> {//estado inicial (selleccion rubro)
+            case 1 : {//estado inicial (selleccion rubro)
                 comboBoxs(true,false,false);
                 tbAndBtn(false,false,false,false);
                 this.getBtnGuardar().setEnabled(false);
             }
-            case 2->{//(selleccion rubro+categoria producto+comercio)
+            case 2: {//(selleccion rubro+categoria producto+comercio)
                 comboBoxs(true,true,false);
                 tbAndBtn(false,false,false,false);
                 this.getBtnGuardar().setEnabled(false);
             }
-            case 3->{//(armado del pedido)
+            case 3:{//(armado del pedido)
                 comboBoxs(true,true,true);
                 tbAndBtn(true,true,true,true);
                 this.getBtnGuardar().setEnabled(false);
             }
-            case 4->{//pedido ya armado
+            case 4:{//pedido ya armado
                 comboBoxs(true,true,true);
                 tbAndBtn(true,true,true,true);
                 this.getBtnGuardar().setEnabled(true);

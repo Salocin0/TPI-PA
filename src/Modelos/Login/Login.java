@@ -232,20 +232,20 @@ public class Login extends ABMGn {
         if (!cuadrosVasios()){    
             if(getGestorLogin().existeUsuario()){ 
                 switch(item){
-                    case "Usuario" -> {//hace referencia a cliente
+                    case "Usuario" : {//hace referencia a cliente
                         dispose();
                         GestorVistaPrincipalCliente gp = new GestorVistaPrincipalCliente();
                         gp.open();
                         break;
                     }
-                    case "Comercio" -> {  
+                    case "Comercio" : {  
                         GestorVistaPrincipalComercio gp = new GestorVistaPrincipalComercio();
                         gp.open();
                         gp.datosLogin((Comercio) this.getGestorLogin().traerUsuario(Comercio.class, this.getTxtCorreo().getText(), 1));
                         dispose();
                         break;
                     }
-                    case "Administrador" -> {
+                    case "Administrador" : {
                         GestorVistaPrincipalAdmin gp = new GestorVistaPrincipalAdmin ();
                         gp.open();
                         dispose();

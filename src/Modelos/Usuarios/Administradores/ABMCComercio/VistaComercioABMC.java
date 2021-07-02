@@ -107,11 +107,11 @@ public class VistaComercioABMC extends ABMGn {
     
     public void cambiarEstadoPantalla(int num){
         switch(num){
-            case 1 ->  { //estado inicial
+            case 1 :  { //estado inicial
                 habilitacionBotones(true);
                 habilitacionExtras(true);
             }
-            case 2 ->  { //en modificacion
+            case 2 :  { //en modificacion
                 habilitacionBotones(false);
                 habilitacionExtras(false);
             } 
